@@ -1,0 +1,20 @@
+const DB='https://kingshot-cards-default-rtdb.europe-west1.firebasedatabase.app';
+const PROJECT='kingshot-cards';
+export const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store'}});
+const b64=x=>btoa(String.fromCharCode(...new Uint8Array(x))).replace(/=/g,'').replace(/\+/g,'-').replace(/\//g,'_');
+const un64=x=>Uint8Array.from(atob(x.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-x.length%4)%4)),c=>c.charCodeAt(0));
+const parse=x=>JSON.parse(new TextDecoder().decode(un64(x)));
+export async function token(request){
+ const raw=(request.headers.get('authorization')||'').replace(/^Bearer\s+/i,'');const parts=raw.split('.');if(parts.length!==3)throw Error('Connexion Google obligatoire');
+ const [h,p,s]=parts,head=parse(h),body=parse(p);if(head.alg!=='RS256'||body.aud!==PROJECT||body.iss!==`https://securetoken.google.com/${PROJECT}`||!body.sub||body.exp<=Date.now()/1000||body.iat>Date.now()/1000||body.firebase?.sign_in_provider!=='google.com')throw Error('Compte Google invalide');
+ const certs=await fetch('https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com').then(r=>{if(!r.ok)throw Error('Vérification Google indisponible');return r.json()});const jwk=certs.keys.find(k=>k.kid===head.kid);if(!jwk)throw Error('Clé de signature Google introuvable');const key=await crypto.subtle.importKey('jwk',jwk,{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['verify']);if(!await crypto.subtle.verify('RSASSA-PKCS1-v1_5',key,un64(s),new TextEncoder().encode(h+'.'+p)))throw Error('Signature Google invalide');return body.sub;
+}
+async function access(env){
+ const service=JSON.parse(env.FIREBASE_SERVICE_ACCOUNT_JSON||'null');if(!service?.client_email||!service?.private_key)throw Error('FIREBASE_SERVICE_ACCOUNT_JSON manquante');
+ const now=Math.floor(Date.now()/1000),header=b64(new TextEncoder().encode(JSON.stringify({alg:'RS256',typ:'JWT'}))),payload=b64(new TextEncoder().encode(JSON.stringify({iss:service.client_email,scope:'https://www.googleapis.com/auth/firebase.database https://www.googleapis.com/auth/userinfo.email',aud:'https://oauth2.googleapis.com/token',iat:now,exp:now+3600})));
+ const pem=service.private_key.replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\s/g,'');const key=await crypto.subtle.importKey('pkcs8',Uint8Array.from(atob(pem),c=>c.charCodeAt(0)),{name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['sign']);const sig=b64(await crypto.subtle.sign('RSASSA-PKCS1-v1_5',key,new TextEncoder().encode(header+'.'+payload)));
+ const r=await fetch('https://oauth2.googleapis.com/token',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'urn:ietf:params:oauth:grant-type:jwt-bearer',assertion:header+'.'+payload+'.'+sig})});if(!r.ok)throw Error('Accès Firebase refusé');return (await r.json()).access_token;
+}
+export async function db(env,path,method='GET',value,etag){const auth=await access(env);const headers={'authorization':'Bearer '+auth};if(value!==undefined)headers['content-type']='application/json';if(etag===true)headers['X-Firebase-ETag']='true';else if(typeof etag==='string')headers['if-match']=etag;const r=await fetch(DB+'/'+path+'.json',{method,headers,body:value===undefined?undefined:JSON.stringify(value)});if(r.status===412)return {conflict:true};if(!r.ok)throw Error('Firebase HTTP '+r.status);return {value:await r.json(),etag:r.headers.get('etag')};}
+export async function atomic(env,path,mutate){for(let i=0;i<8;i++){const old=await db(env,path,'GET',undefined,true);const next=mutate(old.value);if(next===undefined)return {committed:false,value:old.value};const res=await db(env,path,'PUT',next,old.etag||'null_etag');if(!res.conflict)return {committed:true,value:next};}throw Error('Conflit Firebase : réessayez');}
+export const error=e=>json({error:e.message||'Service indisponible'},/Google|Signature|Connexion/.test(e.message)?401:503);
