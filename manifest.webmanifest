@@ -1,6 +1,6 @@
 {
-  "name": "Kingshot Cards",
-  "short_name": "Kingshot Cards",
+  "name": "KardShot",
+  "short_name": "KardShot",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
