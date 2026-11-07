@@ -104,7 +104,7 @@ function shufflePack(){
  const uniqueInfos=selectedPack==='100'?[...boosterPool]:[...OFFICIAL_CARDS];
  for(let i=uniqueInfos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[uniqueInfos[i],uniqueInfos[j]]=[uniqueInfos[j],uniqueInfos[i]];}
  packCards.forEach((c,i)=>{
-   c.visible=true;c.position.set(0,.28,-.006+i*(packCount===30?.001:.008));
+   c.visible=true;c.position.set(0,.28,-.006+i*.001);
    const info=uniqueInfos[i];
    const face=c.children[1];face.material.dispose();face.material=makeCardFront(info);
  });
@@ -187,7 +187,7 @@ for(let i=0;i<30;i++){
  const front=new THREE.Mesh(new THREE.PlaneGeometry(2.12,3.22),makeCardFront(OFFICIAL_CARDS[i]));
  front.rotation.y=Math.PI;
  back.position.z=.001;front.position.z=-.001;
- pivot.add(back,front);pivot.position.set(0,.28,-.006+i*.008);
+ pivot.add(back,front);pivot.position.set(0,.28,-.006+i*.001);
  cardGroup.add(pivot);cards.push(pivot);
 }
 if(selectedPack==='100'){
@@ -456,7 +456,7 @@ function slideSleeve(q){
     ? 'Les cartes sont dégagées. Double-tape pour retourner la première carte.'
     : 'Glisse vers le bas ou vers le haut pour déplacer le sachet librement.';
 }
-function resetTear(){stopStackSound();stopSleeveSound();stopTearSound();panX=panY=panTargetX=panTargetY=0;revealed=0;cardZoomMode=false;cardPhase='ready';activeCard=null;cardSwipeId=null;rotateId=null;cards.forEach((c,i)=>{c.rotation.y=0;c.rotation.z=0;c.scale.x=1;c.children[0].visible=true;c.children[1].visible=true;c.children[1].rotation.y=Math.PI;c.children.forEach(face=>face.renderOrder=0);c.position.set(0,.28,-.006+i*.008)});sleeveProgress=0;sleeveRemoved=false;lower.visible=true;lower.position.set(0,0,0);lower.rotation.set(0,0,0);tearProgress=0;tearDone=false;topThrown=false;upper.visible=true;upper.position.set(0,0,0);upper.rotation.set(0,0,0);lipLow.visible=false;lipTop.visible=false;cardGroup.visible=false;cardGroup.position.y=0;if(selectedPack==='100'&&!boosterReady){loadBoosterPool();}else{shufflePack();document.getElementById('tearHint').textContent='Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.';}}
+function resetTear(){stopStackSound();stopSleeveSound();stopTearSound();panX=panY=panTargetX=panTargetY=0;revealed=0;cardZoomMode=false;cardPhase='ready';activeCard=null;cardSwipeId=null;rotateId=null;cards.forEach((c,i)=>{c.rotation.y=0;c.rotation.z=0;c.scale.x=1;c.children[0].visible=true;c.children[1].visible=true;c.children[1].rotation.y=Math.PI;c.children.forEach(face=>face.renderOrder=0);c.position.set(0,.28,-.006+i*.001)});sleeveProgress=0;sleeveRemoved=false;lower.visible=true;lower.position.set(0,0,0);lower.rotation.set(0,0,0);tearProgress=0;tearDone=false;topThrown=false;upper.visible=true;upper.position.set(0,0,0);upper.rotation.set(0,0,0);lipLow.visible=false;lipTop.visible=false;cardGroup.visible=false;cardGroup.position.y=0;if(selectedPack==='100'&&!boosterReady){loadBoosterPool();}else{shufflePack();document.getElementById('tearHint').textContent='Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.';}}
 // Swap front/back illustrations without modifying the geometry.
 function upload(id,mat){document.getElementById(id).addEventListener('change',e=>{let file=e.target.files?.[0];if(!file)return;let url=URL.createObjectURL(file);new THREE.TextureLoader().load(url,t=>{t.colorSpace=THREE.SRGBColorSpace;t.anisotropy=Math.min(16,renderer.capabilities.getMaxAnisotropy());let old=mat.map;mat.map=t;mat.needsUpdate=true;old?.dispose();URL.revokeObjectURL(url)},undefined,()=>URL.revokeObjectURL(url))})}upload('frontFile',fMat);upload('backFile',bMat);
 let targetX=0,targetY=0,rx=0,ry=0,desiredZoom=zoom;const pointers=new Map();let pinch=null,holdId=null,tearId=null,tearStart=null;let sleeveId=null,sleeveStartY=0,sleeveStartProgress=0;let lastTap=0;let panX=0,panY=0,panTargetX=0,panTargetY=0,panId=null,panStartX=0,panStartY=0,panMoved=false,rotateId=null,rotateMoved=false,rotateStartX=0,rotateStartY=0;const CARD_NORMAL_ZOOM=13.5;const CARD_PAN_LIMIT=12.7;
