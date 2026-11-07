@@ -4477,7 +4477,7 @@ html:has(#ksCardViewer:not([hidden])) #ksCollectionPortrait .ks-card-number{visi
 import {getApps} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js';
 import {getAuth,onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js';
 import {getDatabase,ref,onValue} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js';
-const KS_TEST_UID='NlYgDB1LpLWCQxgnEyLpTXsAgKB2';
+const KS_TEST_UID='RBevqzyMiBWB1NLCRU5AX4n6FTx2';
 let ksTestUserUid=null;
 const waitForApp=async()=>{for(let i=0;i<80;i++){if(getApps().length)return getApps()[0];await new Promise(r=>setTimeout(r,100))}throw Error('Firebase non initialisé')};
 function show(message,unlocked=false){
