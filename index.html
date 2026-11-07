@@ -1,4 +1,12 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>KardShot — Jeu officiel</title><link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png"><link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#101725"><style>:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#101725;color:#f4f5f9;font:14px system-ui,Arial,sans-serif}main{max-width:780px;margin:auto;padding:10px}header,.between{display:flex;align-items:center;justify-content:space-between;gap:8px}h1{font-size:17px;margin:0;text-align:center}.score{font-size:24px;font-weight:900}.blue{color:#69a8ff}.red{color:#ff7777}.sub{font-size:11px;color:#b9c1d1}.board,.hand{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin:9px 0}.slot,.card{min-width:0;border:2px solid #3b4558;border-radius:7px;background:#1c2839;color:white;padding:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;overflow:hidden}.slot,.card{aspect-ratio:.55;min-height:0;justify-content:flex-start;gap:2px;padding:2px}.slot .mini,.card .mini{flex:0 0 auto}.slot .name,.card .name{font-size:clamp(8px,2.15vw,12px);line-height:1.05;min-height:2.1em;display:flex;align-items:center;justify-content:center}.slot .meta,.card .meta{font-size:clamp(7px,2vw,10px);line-height:1.05}.slot .cost,.card .cost{font-size:clamp(8px,2vw,10px);line-height:1}.slot .power,.card .power{font-size:clamp(10px,2.5vw,13px);line-height:1.1;margin-top:auto}.slot.blueborder{border-color:#448dff;border-width:3px}.slot.redborder{border-color:#f26c70;border-width:3px}.slot .rarity,.card .rarity{position:absolute;bottom:3px;right:3px;font-size:clamp(8px,1.8vw,11px);font-weight:900;line-height:1;padding:3px 4px;border-radius:3px;background:#101725;border:1px solid #ffffff55;z-index:1;letter-spacing:-.3px}.slot .power,.card .power{padding-right:27px}.slot,.card{position:relative}.slot.blueborder{border-color:#448dff}.slot.valid{border:3px solid #38e17e;box-shadow:0 0 0 1px #146337 inset}.card.selected{border:3px solid #ffdf70}.slot:active,.card:active{filter:brightness(1.2)}.name{font-size:clamp(8px,2.6vw,13px);font-weight:750;text-align:center;overflow-wrap:anywhere}.meta{font-size:clamp(8px,2.3vw,11px);text-align:center}.meta{font-weight:800;text-shadow:0 1px 2px #0009}.cost{font-size:clamp(8px,2.2vw,11px);font-weight:800;color:#fff;text-shadow:0 1px 3px #000}.power{font-size:13px;font-weight:900}.mini{width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:#1b2030;padding:2px;border-radius:3px}.pixel{aspect-ratio:1;background:#586073;display:grid;place-items:center;font-size:clamp(5px,1.6vw,10px);font-weight:900;color:#272421;line-height:1}.pixel.center{background:#ffdd73}.pixel.inf{background:#f69b56}.pixel.buff{background:#a8f3b8}.pixel.enemy{background:#ff858b}.pixel.ally{background:#87baff}.pixel.all{background:#d7a2f5}.pip{font-size:30px;font-weight:900}.levels{font-size:15px;font-weight:900}.rows{display:flex;justify-content:space-around;gap:6px;background:#1c2839;border-radius:6px;padding:7px}button{cursor:pointer}button.action{padding:11px 16px;border-radius:8px;background:#293c59;border:1px solid #6780a7;color:white;font-weight:700;flex:1}button.action:disabled{opacity:.45}.actions{display:flex;gap:8px;margin:12px 0}.status{font-size:12px;min-height:32px}.legend{font-size:11px;color:#b9c1d1;line-height:1.6}.turnbar{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;margin-top:10px;background:#23354c;border-radius:8px}.turnbar strong:last-child{font-size:19px;color:#ffdf70}.penaltybar{font-size:12px;color:#ffd29a;padding:5px 10px}.turnbar #timer{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:30px;box-sizing:border-box;padding:3px 8px;border-radius:8px;font-variant-numeric:tabular-nums;white-space:nowrap}.turnbar.ks-clock-warning #timer{outline:3px solid #ff2727;outline-offset:1px;animation:ksClockFlash .65s steps(2,start) infinite}@keyframes ksClockFlash{0%,49%{outline-color:#ff2727;box-shadow:0 0 14px #ff2525}50%,100%{outline-color:transparent;box-shadow:none}}.log{font-size:12px;color:#d4dbe7;max-height:200px;overflow-y:auto;background:#182334;border-radius:8px;padding:9px;line-height:1.6}.log div{padding:3px 0;border-bottom:1px solid #ffffff16}.log div:last-child{border:0}footer{font-size:10px;color:#8795ad;text-align:center;padding:12px} .setup{position:fixed;inset:0;background:#0b1220f5;z-index:20;display:grid;place-items:center;padding:18px;overflow:auto}.setup.hidden{display:none}.setup-panel{width:min(100%,430px);background:#1c2839;border:1px solid #6d819e;border-radius:14px;padding:22px;box-shadow:0 15px 70px #0009}.setup-panel h2{margin:0 0 9px}.setup-panel label{display:block;padding:10px 0}.setup-panel select{width:100%;padding:11px;background:#111d2f;color:white;border:1px solid #6d819e;border-radius:7px;font-size:16px}.setup-panel input{accent-color:#68a5ff}.setup-panel button{width:100%;padding:14px;border:0;border-radius:8px;background:#3d86ee;color:white;font-weight:800;font-size:16px;margin-top:12px}.setup-note{font-size:12px;color:#b9c1d1;line-height:1.5}.modeinfo{font-size:12px;color:#b9c1d1;margin:6px 0}.lesson{background:#213b40;border:1px solid #70bcb0;border-radius:9px;padding:12px;margin:9px 0}.lesson.hidden{display:none}.lesson h2{font-size:16px;margin:0 0 6px}.lesson p{margin:6px 0;line-height:1.45}.lesson button{padding:10px 15px;background:#247d72;color:white;border:0;border-radius:7px;font-weight:700}.lesson button:disabled{opacity:.45}.tilebonus{font-size:clamp(10px,2.5vw,15px);font-weight:900;color:#b7ffc5;background:#215338;border:1px solid #63c887;border-radius:5px;padding:2px 5px;margin-top:4px}.slot.tutorial-target{outline:3px solid #ffdf70;outline-offset:-5px} .result-overlay{position:fixed;inset:0;z-index:30;background:#070c19d9;display:flex;align-items:center;justify-content:center;padding:20px}.result-overlay.hidden{display:none}.result-panel{width:min(95vw,450px);padding:34px 20px;text-align:center;background:#1c2839;border:2px solid #8496b4;border-radius:18px;box-shadow:0 16px 90px #000d}.result-heading{font-size:clamp(42px,11vw,70px);font-weight:1000;line-height:1.1;letter-spacing:1px}.result-heading.win{color:#80f0a7}.result-heading.lose{color:#ff828b}.result-heading.draw{color:#ffdd82}.result-detail{font-size:19px;font-weight:800;margin:18px 0 24px}.result-panel button{padding:13px 20px;font-size:16px;font-weight:800;border:0;border-radius:9px;background:#3d86ee;color:white;width:100%}.slot .animal-art,.card .animal-art{position:absolute;bottom:3px;right:3px;font-size:clamp(9px,1.8vw,12px);font-weight:900;line-height:1;padding:3px 4px;border-radius:3px;background:#101725;border:1px solid #ffffff55;z-index:1;display:grid;place-items:center;min-width:20px;min-height:19px}.slot .power.bonused{color:#7df2a0}.slot .mini{opacity:1}.quickturn{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#26364a;border:1px solid #6486ae;border-radius:8px;padding:8px 12px;margin:7px 0;font-weight:800}.quickturn strong{font-size:22px;color:#ffdc72}.quickturn.urgent strong{color:#ff7777}.quickturn.hidden{display:none}
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><script id="ks-local-assets-fallback">/* Local HTML preview: resolve relative assets from the published game. Online hosting keeps its original relative paths. */
+(function(){
+  if (location.protocol === 'file:' || location.protocol === 'content:') {
+    var base = document.createElement('base');
+    base.href = 'https://sweet-halva-c9f3fa.pages.dev/';
+    document.head.appendChild(base);
+  }
+})();
+</script><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><title>KardShot — Jeu officiel</title><link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png"><link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#101725"><style>:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#101725;color:#f4f5f9;font:14px system-ui,Arial,sans-serif}main{max-width:780px;margin:auto;padding:10px}header,.between{display:flex;align-items:center;justify-content:space-between;gap:8px}h1{font-size:17px;margin:0;text-align:center}.score{font-size:24px;font-weight:900}.blue{color:#69a8ff}.red{color:#ff7777}.sub{font-size:11px;color:#b9c1d1}.board,.hand{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin:9px 0}.slot,.card{min-width:0;border:2px solid #3b4558;border-radius:7px;background:#1c2839;color:white;padding:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;overflow:hidden}.slot,.card{aspect-ratio:.55;min-height:0;justify-content:flex-start;gap:2px;padding:2px}.slot .mini,.card .mini{flex:0 0 auto}.slot .name,.card .name{font-size:clamp(8px,2.15vw,12px);line-height:1.05;min-height:2.1em;display:flex;align-items:center;justify-content:center}.slot .meta,.card .meta{font-size:clamp(7px,2vw,10px);line-height:1.05}.slot .cost,.card .cost{font-size:clamp(8px,2vw,10px);line-height:1}.slot .power,.card .power{font-size:clamp(10px,2.5vw,13px);line-height:1.1;margin-top:auto}.slot.blueborder{border-color:#448dff;border-width:3px}.slot.redborder{border-color:#f26c70;border-width:3px}.slot .rarity,.card .rarity{position:absolute;bottom:3px;right:3px;font-size:clamp(8px,1.8vw,11px);font-weight:900;line-height:1;padding:3px 4px;border-radius:3px;background:#101725;border:1px solid #ffffff55;z-index:1;letter-spacing:-.3px}.slot .power,.card .power{padding-right:27px}.slot,.card{position:relative}.slot.blueborder{border-color:#448dff}.slot.valid{border:3px solid #38e17e;box-shadow:0 0 0 1px #146337 inset}.card.selected{border:3px solid #ffdf70}.slot:active,.card:active{filter:brightness(1.2)}.name{font-size:clamp(8px,2.6vw,13px);font-weight:750;text-align:center;overflow-wrap:anywhere}.meta{font-size:clamp(8px,2.3vw,11px);text-align:center}.meta{font-weight:800;text-shadow:0 1px 2px #0009}.cost{font-size:clamp(8px,2.2vw,11px);font-weight:800;color:#fff;text-shadow:0 1px 3px #000}.power{font-size:13px;font-weight:900}.mini{width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:#1b2030;padding:2px;border-radius:3px}.pixel{aspect-ratio:1;background:#586073;display:grid;place-items:center;font-size:clamp(5px,1.6vw,10px);font-weight:900;color:#272421;line-height:1}.pixel.center{background:#ffdd73}.pixel.inf{background:#f69b56}.pixel.buff{background:#a8f3b8}.pixel.enemy{background:#ff858b}.pixel.ally{background:#87baff}.pixel.all{background:#d7a2f5}.pip{font-size:30px;font-weight:900}.levels{font-size:15px;font-weight:900}.rows{display:flex;justify-content:space-around;gap:6px;background:#1c2839;border-radius:6px;padding:7px}button{cursor:pointer}button.action{padding:11px 16px;border-radius:8px;background:#293c59;border:1px solid #6780a7;color:white;font-weight:700;flex:1}button.action:disabled{opacity:.45}.actions{display:flex;gap:8px;margin:12px 0}.status{font-size:12px;min-height:32px}.legend{font-size:11px;color:#b9c1d1;line-height:1.6}.turnbar{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;margin-top:10px;background:#23354c;border-radius:8px}.turnbar strong:last-child{font-size:19px;color:#ffdf70}.penaltybar{font-size:12px;color:#ffd29a;padding:5px 10px}.turnbar #timer{display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:30px;box-sizing:border-box;padding:3px 8px;border-radius:8px;font-variant-numeric:tabular-nums;white-space:nowrap}.turnbar.ks-clock-warning #timer{outline:3px solid #ff2727;outline-offset:1px;animation:ksClockFlash .65s steps(2,start) infinite}@keyframes ksClockFlash{0%,49%{outline-color:#ff2727;box-shadow:0 0 14px #ff2525}50%,100%{outline-color:transparent;box-shadow:none}}.log{font-size:12px;color:#d4dbe7;max-height:200px;overflow-y:auto;background:#182334;border-radius:8px;padding:9px;line-height:1.6}.log div{padding:3px 0;border-bottom:1px solid #ffffff16}.log div:last-child{border:0}footer{font-size:10px;color:#8795ad;text-align:center;padding:12px} .setup{position:fixed;inset:0;background:#0b1220f5;z-index:20;display:grid;place-items:center;padding:18px;overflow:auto}.setup.hidden{display:none}.setup-panel{width:min(100%,430px);background:#1c2839;border:1px solid #6d819e;border-radius:14px;padding:22px;box-shadow:0 15px 70px #0009}.setup-panel h2{margin:0 0 9px}.setup-panel label{display:block;padding:10px 0}.setup-panel select{width:100%;padding:11px;background:#111d2f;color:white;border:1px solid #6d819e;border-radius:7px;font-size:16px}.setup-panel input{accent-color:#68a5ff}.setup-panel button{width:100%;padding:14px;border:0;border-radius:8px;background:#3d86ee;color:white;font-weight:800;font-size:16px;margin-top:12px}.setup-note{font-size:12px;color:#b9c1d1;line-height:1.5}.modeinfo{font-size:12px;color:#b9c1d1;margin:6px 0}.lesson{background:#213b40;border:1px solid #70bcb0;border-radius:9px;padding:12px;margin:9px 0}.lesson.hidden{display:none}.lesson h2{font-size:16px;margin:0 0 6px}.lesson p{margin:6px 0;line-height:1.45}.lesson button{padding:10px 15px;background:#247d72;color:white;border:0;border-radius:7px;font-weight:700}.lesson button:disabled{opacity:.45}.tilebonus{font-size:clamp(10px,2.5vw,15px);font-weight:900;color:#b7ffc5;background:#215338;border:1px solid #63c887;border-radius:5px;padding:2px 5px;margin-top:4px}.slot.tutorial-target{outline:3px solid #ffdf70;outline-offset:-5px} .result-overlay{position:fixed;inset:0;z-index:30;background:#070c19d9;display:flex;align-items:center;justify-content:center;padding:20px}.result-overlay.hidden{display:none}.result-panel{width:min(95vw,450px);padding:34px 20px;text-align:center;background:#1c2839;border:2px solid #8496b4;border-radius:18px;box-shadow:0 16px 90px #000d}.result-heading{font-size:clamp(42px,11vw,70px);font-weight:1000;line-height:1.1;letter-spacing:1px}.result-heading.win{color:#80f0a7}.result-heading.lose{color:#ff828b}.result-heading.draw{color:#ffdd82}.result-detail{font-size:19px;font-weight:800;margin:18px 0 24px}.result-panel button{padding:13px 20px;font-size:16px;font-weight:800;border:0;border-radius:9px;background:#3d86ee;color:white;width:100%}.slot .animal-art,.card .animal-art{position:absolute;bottom:3px;right:3px;font-size:clamp(9px,1.8vw,12px);font-weight:900;line-height:1;padding:3px 4px;border-radius:3px;background:#101725;border:1px solid #ffffff55;z-index:1;display:grid;place-items:center;min-width:20px;min-height:19px}.slot .power.bonused{color:#7df2a0}.slot .mini{opacity:1}.quickturn{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#26364a;border:1px solid #6486ae;border-radius:8px;padding:8px 12px;margin:7px 0;font-weight:800}.quickturn strong{font-size:22px;color:#ffdc72}.quickturn.urgent strong{color:#ff7777}.quickturn.hidden{display:none}
 /* ANDROID LANDSCAPE - CASTLE UI */
 :root{color-scheme:dark}html,body{width:100%;height:100%;overflow:hidden}body{background:radial-gradient(ellipse at 50% 20%,#53616a 0,#202a32 42%,#0c111b 100%);font-family:system-ui,sans-serif}main{max-width:none;width:100vw;height:100dvh;margin:0;padding:5px max(7px,env(safe-area-inset-right)) 5px max(7px,env(safe-area-inset-left));display:grid;grid-template-columns:minmax(95px,14%) minmax(0,1fr) minmax(98px,14%);grid-template-rows:clamp(39px,9vh,64px) minmax(0,1fr) clamp(90px,24vh,155px);grid-template-areas:'head head head' 'left board right' 'left hand right';gap:5px;background:radial-gradient(ellipse at 50% 30%,#55565a55,transparent 70%),repeating-linear-gradient(0deg,transparent 0 41px,#00000019 42px 44px),linear-gradient(135deg,#27313b,#111b29 60%,#262a31)}
 main>header{grid-area:head;background:linear-gradient(90deg,#0e417a 0%,#0a2546 29%,#1c222c 42%,#27201b 58%,#63211d 72%,#9a2924 100%);border:2px solid #b28b4e;border-radius:9px;box-shadow:inset 0 0 0 2px #0008,0 3px 12px #0009;padding:2px 18px;min-width:0}header h1{font-family:Georgia,serif;font-size:clamp(14px,3.6vh,29px);color:#f3ce7a;text-shadow:0 2px 2px #000;letter-spacing:.1em}header .score{font-size:clamp(20px,5vh,38px);text-shadow:0 2px 5px #000}header .sub{font-size:clamp(8px,1.7vh,12px);text-align:center}
@@ -1516,7 +1524,68 @@ main>header{grid-area:1/1 / 2/3!important}
 #arena #board .slot .tilebonus.malus, #board .slot .tilebonus.malus{
  color:#c38aff!important;text-shadow:0 1px 2px #160b25!important;
 }
-</style></head><body><div id="ksCornerBlue" aria-label="Avatar joueur"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="21" r="13" fill="currentColor"/><path d="M9 59v-8c0-13 10-21 23-21s23 8 23 21v8Z" fill="currentColor"/></svg></div><div id="ksCornerRed" aria-label="Avatar adversaire"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="15" width="40" height="37" rx="7" fill="#cbd1d6" stroke="#4b4e5b" stroke-width="3"/><rect x="28" y="7" width="8" height="9" rx="2" fill="#cbd1d6"/><circle cx="32" cy="5" r="4" fill="#e4575b"/><circle cx="23" cy="29" r="5" fill="#e65760"/><circle cx="41" cy="29" r="5" fill="#e65760"/><rect x="22" y="39" width="20" height="7" rx="2" fill="#455060"/><path d="M27 39v7m10-7v7" stroke="#cbd1d6" stroke-width="2"/><path d="M8 26H3v15h5m48-15h5v15h-5" fill="none" stroke="#cbd1d6" stroke-width="4"/></svg></div><div id="ksCardZoom" role="dialog" aria-modal="true" aria-label="Carte agrandie"><div class="ks-zoom-inner"><div id="ksZoomCard" class="ks-zoom-card"></div><button class="ks-zoom-close" id="ksZoomClose" type="button" aria-label="Fermer">×</button></div></div><div id="kcPortraitWelcome" aria-label="Tourner le téléphone en paysage pour jouer"><div class="kc-title">KardShot</div><div class="kc-divider"></div><div class="kc-device" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 13.5-5.7M20 15a8 8 0 0 1-13.5 5.7"/><path d="M17 1v4h-4M7 23v-4h4"/></svg></div><div class="kc-heading">Passe en mode paysage pour jouer</div><div id="kcPortraitStatus" role="status" aria-live="polite">Tourne ton téléphone en paysage.</div></div><button id="fullscreenBtn" type="button" aria-label="Activer le plein écran">⛶ Plein écran</button><div id="resultOverlay" class="result-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="resultHeading"><div class="result-panel"><div id="resultHeading" class="result-heading"></div><div id="resultDetail" class="result-detail"></div><button id="resultClose" type="button">Voir le plateau</button></div></div><div id="setup" class="setup"><div id="ksVersionBadge" aria-label="Version du jeu">V363</div><div class="setup-panel"><h2>⚔️ KardShot </h2><label for="gameMode">Mode de jeu</label><select id="gameMode"><option value="training">⚔️ Entraînement contre l’IA</option><option value="tutorial">📚 Apprentissage guidé (5 étapes)</option><option value="multiplayer">🌐 Multijoueur en ligne</option></select><div id="multiplayerPanel" style="display:none;margin:10px 0;padding:14px;border:1px solid #a98b50;border-radius:12px;background:linear-gradient(135deg,#1b3044,#111c2d);text-align:center"><h3 style="color:#f5d595;margin:0 0 8px">⚔️ Duel entre amis</h3><p style="font-size:13px;color:#d4deec;margin:0 0 12px">Invite un ami à rejoindre ton arène.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button type="button" id="mpCreate" style="flex:1;min-width:120px">⚔️ Créer une partie</button><button type="button" id="mpJoin" style="flex:1;min-width:120px">🔗 Rejoindre une partie</button></div><div id="mpJoinForm" style="display:none;margin-top:12px"><label for="mpCode">Code de la partie</label><input id="mpCode" maxlength="6" autocomplete="off" placeholder="Ex. KS7X42" style="width:150px;max-width:80%;padding:9px;text-transform:uppercase;letter-spacing:3px;text-align:center;background:#0d1724;color:white;border:1px solid #b99b65;border-radius:6px"><button type="button" id="mpConnect">Rejoindre</button></div><p id="mpMessage" role="status" style="font-size:12px;color:#e4c88d;margin:12px 0 0">Connexion à Firebase en cours…</p></div><p id="tutorialChoiceNote" class="setup-note" style="display:none">Le tutoriel utilise des situations préparées, sans IA ni chronomètre. Tu apprendras à poser, influencer, renforcer, remplacer et compter les points.</p><p class="setup-note">Choisis ton adversaire avant de commencer. L’IA joue uniquement avec ses propres cartes.</p><label for="difficulty">Difficulté de l’IA</label><select id="difficulty"><option value="easy">Facile — joue sans anticiper</option><option value="hard" selected>Difficile — anticipe et bloque</option></select><label><input id="useTimer" type="checkbox"> Activer le chronomètre (60 s, alerte rouge à 15 s)</label><input id="customDeck" type="checkbox" hidden aria-hidden="true"><div id="deckBuilder" style="display:none;max-height:35vh;overflow:auto;border:1px solid #6d819e;padding:8px;border-radius:8px"></div><p id="deckCount" class="setup-note"></p><p class="setup-note" id="timerHelp">Sans chronomètre, aucun passage automatique lié au temps. Avec chronomètre : passage automatique après 60 s. En multijoueur, les deux joueurs doivent choisir le même mode.</p><button id="startGame">Commencer la partie</button></div></div><main><div class="modeinfo" id="modeinfo"></div><section id="lesson" class="lesson hidden"><h2 id="lessonTitle"></h2><p id="lessonText"></p><p id="lessonFeedback" style="color:#9ff5bb"></p><button id="lessonNext" disabled>Étape suivante</button></section><header><div class="score blue" id="sb">0</div><div><h1>KardShot</h1><div class="sub" id="gameNumber" style="text-align:center"></div></div><div class="score red" id="sr">0</div></header><div class="turnbar"><strong id="turnlabel">🔵 À toi de jouer</strong><strong id="timer">∞</strong></div><div id="penaltybar" class="penaltybar">Chronomètre : 60 s par tour · alerte rouge pendant les 15 dernières secondes</div><div id="quickturn" class="quickturn hidden"><span>🤖 L’IA réfléchit avant de jouer</span><strong id="quickseconds">5 s</strong></div><div id="arena" class="arena"><div class="total-score blue" id="totalBlue">0</div><div class="row-rail blue" id="railBlue"></div><section id="board" class="board" aria-label="Plateau"></section><div class="row-rail red" id="railRed"></div><div class="total-score red" id="totalRed">0</div></div><div id="rows" class="rows"></div><div class="between" style="margin-top:15px"><strong>Mes cartes 🔵</strong><span class="sub" id="deck"></span></div><section id="hand" class="hand" aria-label="Main"></section><p class="setup-note" style="background:#26364a;border-radius:7px;padding:9px;margin:8px 0"><strong>🏆 Règle des lignes :</strong> sur chaque ligne (A, B ou C), seul le joueur qui possède le plus de points remporte <strong>la totalité de ses propres points</strong> sur cette ligne. Le perdant marque 0 point pour cette ligne. En cas d’égalité, personne ne marque. Exemple : 🔵 9 contre 🔴 6 → 🔵 gagne 9 points, 🔴 gagne 0.</p><div class="legend">🟧 Influence · 🟩 Bonus cumulable : les +1/+2/+3 se totalisent sur la case et disparaissent si leur source est détruite · 🟥 Détruit ennemi · 🟦 Détruit allié · 🟪 Détruit tous · 🟨 Centre · R/SR/SSR/REM = rareté des héros (les animaux ont un pictogramme) · ● = coût de pose (1 à 3)</div><p id="status" class="status"></p><div class="actions"><button class="action" id="pass" aria-label="Passer" title="Passer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2f5fb" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 5 7 7-7 7"/><path d="m12 5 7 7-7 7"/></svg></button></div><button id="quickHelp" type="button" aria-label="Notices" title="Notices"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2f5fb" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 13.8 4l2.2-.5.9 2.2 2.2.9-.5 2.2 1.5 1.8-1.5 1.8.5 2.2-2.2.9-.9 2.2-2.2-.5-1.8 1.5-1.8-1.5-2.2.5-.9-2.2-2.2-.9.5-2.2L3.9 10.6l1.5-1.8-.5-2.2 2.2-.9L8 3.5l2.2.5z" transform="translate(0 1.4)"/><circle cx="12" cy="12" r="3"/></svg></button><div id="helpOverlay" class="help-overlay hidden"><div class="help-panel"><button id="closeHelp" type="button" aria-label="Fermer les notices" title="Fermer">×</button><section id="kardshot-support" style="margin:10px 0 16px;padding:14px;border:1px solid #bd8a99;border-radius:12px;background:rgba(115,38,69,.16)"><h2 style="margin:0 0 8px">🩷 Soutenir KardShot</h2><p>KardShot est un jeu gratuit, développé avec passion.</p><p>Pour continuer à faire vivre et évoluer le jeu, votre soutien est précieux ! Vos contributions, entièrement libres et facultatives, aident à financer les serveurs, l’hébergement, la maintenance et le développement de nouvelles fonctionnalités.</p><p>Chaque contribution, même modeste, nous aide à améliorer KardShot et à enrichir votre expérience de jeu.</p><p class="ks-don-row"><a class="ks-don-button" href="https://ko-fi.com/kardshot" target="_blank" rel="noopener noreferrer">Faire un don sur Ko-fi — Merci pour votre générosité et votre soutien !</a><span class="ks-pink-mascot"><img width="60" height="60" alt="Petite mascotte rose" src="images/mascotte.gif"></span></p></section>
+</style><style id="ks-collection-portrait-orientation-exception">
+/* Portrait mode is reserved for the Collection while it is open. */
+@media (orientation:portrait){
+ html.ks-collection-open body > #kcPortraitWelcome{display:none!important;visibility:hidden!important;pointer-events:none!important}
+ html.ks-collection-open body > #ksCollectionPortrait:not([hidden]){display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;position:fixed!important;inset:0!important;z-index:2147483647!important}
+ html.ks-collection-open body > #ksCollectionPortrait:not([hidden]) *{visibility:visible!important}
+}
+</style>
+<style id="ks-collection-starter-booster-style">
+.ks-collection-booster-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;align-content:start;width:100%;min-height:0;padding:3px 0;box-sizing:border-box}
+.ks-collection-booster{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;min-width:0;width:100%;padding:5px 2px;border:1px solid #b89a68;border-radius:9px;background:linear-gradient(145deg,#2b3c52,#172438);color:#f5dfb0;text-align:center}
+.ks-collection-booster img{display:block;width:100%;height:auto;aspect-ratio:0.48;object-fit:contain;filter:drop-shadow(0 4px 5px #0009)}
+.ks-collection-booster strong{font-size:clamp(10px,1.4vw,15px);line-height:1.15}.ks-collection-booster small{color:#c9d4e2;font-size:clamp(9px,1.2vw,13px)}
+#ksCollectionPortrait [data-portrait-pane="boosters"],#ksOptionsModal [data-collection-pane="boosters"]{overflow-y:auto;overscroll-behavior:contain;min-height:0;max-height:100%;}
+#ksCollectionPortrait [data-portrait-pane="boosters"] .ks-collection-booster{margin:0}
+</style><style>
+/* Booster Pack Démarrage : tampon discret sur la vignette uniquement */
+#ksBoosterGallery .ks-starter-thumb{position:relative;width:100%;height:clamp(110px,36dvh,255px);display:flex;align-items:center;justify-content:center;overflow:hidden}
+#ksBoosterGallery .ks-starter-thumb img{width:100%;height:100%;object-fit:contain}
+#ksBoosterGallery .ks-starter-soldout{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:clamp(15px,2.6vw,26px);font-weight:900;letter-spacing:.06em;color:#ff0000;opacity:.2;white-space:nowrap;pointer-events:none;user-select:none}
+</style><style id="ks-starter-soldout-full-css">
+/* Tampon sur la totalité de la première case, dimensionné selon la case. */
+#ksBoosterGallery .ks-booster-item.ks-starter-soldout-tile{position:relative!important;overflow:hidden!important;isolation:isolate;container-type:inline-size}
+#ksBoosterGallery .ks-booster-item.ks-starter-soldout-tile::after{
+ content:"ÉPUISÉ"!important;
+ position:absolute!important;left:50%!important;top:50%!important;
+ width:220%!important;height:auto!important;
+ transform:translate(-50%,-50%) rotate(-64deg)!important;
+ transform-origin:center center!important;
+ z-index:99!important;display:block!important;
+ font-family:Arial,sans-serif!important;font-size:clamp(48px,48cqw,180px)!important;
+ font-weight:900!important;letter-spacing:.025em!important;
+ line-height:1!important;text-align:center!important;
+ color:#ff253e!important;opacity:.60!important;
+ white-space:nowrap!important;pointer-events:none!important;
+ visibility:visible!important;text-shadow:none!important;
+}
+</style><style id="ks-card-numbering-v1">
+/* Numéro discret dans l'angle inférieur droit de la zone noire, sans modifier les images. */
+#ksCollectionPortrait .ks-owned-art .ks-card-number{position:absolute;right:3px;bottom:2px;z-index:3;color:#ddc18a;font:600 clamp(7px,1.8vw,9px)/1 Arial,sans-serif;letter-spacing:.1px;text-shadow:0 1px 2px #000;pointer-events:none}
+#ksCardViewer .ksv-name::after{content:attr(data-number);position:absolute;right:4px;bottom:2px;font:600 9px/1 Arial,sans-serif;color:#ddc18a;pointer-events:none}
+</style><style id="ks-collection-viewer-stacking-fix">
+/* When the collection card viewer is open, its overlay must cover the
+   collection (including every numbered card and its pseudo-elements). */
+html:has(#ksCardViewer:not([hidden])) body > #ksCollectionPortrait:not([hidden]) {
+  z-index: 2147483645 !important;
+}
+html:has(#ksCardViewer:not([hidden])) body > #ksCardViewer:not([hidden]) {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483647 !important;
+  isolation: isolate;
+}
+</style>
+
+<style id="ks-number-size-minus-70-percent">
+/* Réduction réservée aux petites cartes de jeu : la Collection et les zooms conservent leur taille initiale. */
+#hand .ks-unified-number, #board .ks-unified-number, #mulliganOverlay .ks-unified-number,
+#deckBuilder .ks-unified-number, .ks-mulligan-card .ks-unified-number,
+.ks-deck-card .ks-unified-number {font-size:clamp(1.5px,1.89cqw,3.6px)!important}
+</style>
+</head><body><div id="ksCornerBlue" aria-label="Avatar joueur"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="21" r="13" fill="currentColor"/><path d="M9 59v-8c0-13 10-21 23-21s23 8 23 21v8Z" fill="currentColor"/></svg></div><div id="ksCornerRed" aria-label="Avatar adversaire"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="15" width="40" height="37" rx="7" fill="#cbd1d6" stroke="#4b4e5b" stroke-width="3"/><rect x="28" y="7" width="8" height="9" rx="2" fill="#cbd1d6"/><circle cx="32" cy="5" r="4" fill="#e4575b"/><circle cx="23" cy="29" r="5" fill="#e65760"/><circle cx="41" cy="29" r="5" fill="#e65760"/><rect x="22" y="39" width="20" height="7" rx="2" fill="#455060"/><path d="M27 39v7m10-7v7" stroke="#cbd1d6" stroke-width="2"/><path d="M8 26H3v15h5m48-15h5v15h-5" fill="none" stroke="#cbd1d6" stroke-width="4"/></svg></div><div id="ksCardZoom" role="dialog" aria-modal="true" aria-label="Carte agrandie"><div class="ks-zoom-inner"><div id="ksZoomCard" class="ks-zoom-card"></div><button class="ks-zoom-close" id="ksZoomClose" type="button" aria-label="Fermer">×</button></div></div><div id="kcPortraitWelcome" aria-label="Tourner le téléphone en paysage pour jouer"><div class="kc-title">KardShot</div><div class="kc-divider"></div><div class="kc-device" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9a8 8 0 0 1 13.5-5.7M20 15a8 8 0 0 1-13.5 5.7"/><path d="M17 1v4h-4M7 23v-4h4"/></svg></div><div class="kc-heading">Passe en mode paysage pour jouer</div><div id="kcPortraitStatus" role="status" aria-live="polite">Tourne ton téléphone en paysage.</div></div><button id="fullscreenBtn" type="button" aria-label="Activer le plein écran">⛶ Plein écran</button><div id="resultOverlay" class="result-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="resultHeading"><div class="result-panel"><div id="resultHeading" class="result-heading"></div><div id="resultDetail" class="result-detail"></div><button id="resultClose" type="button">Voir le plateau</button></div></div><div id="setup" class="setup"><div id="ksVersionBadge" aria-label="Version du jeu">V363</div><div class="setup-panel"><h2>⚔️ KardShot </h2><label for="gameMode">Mode de jeu</label><select id="gameMode"><option value="training">⚔️ Entraînement contre l’IA</option><option value="tutorial">📚 Apprentissage guidé (5 étapes)</option><option value="multiplayer">🌐 Multijoueur en ligne</option></select><div id="multiplayerPanel" style="display:none;margin:10px 0;padding:14px;border:1px solid #a98b50;border-radius:12px;background:linear-gradient(135deg,#1b3044,#111c2d);text-align:center"><h3 style="color:#f5d595;margin:0 0 8px">⚔️ Duel entre amis</h3><p style="font-size:13px;color:#d4deec;margin:0 0 12px">Invite un ami à rejoindre ton arène.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button type="button" id="mpCreate" style="flex:1;min-width:120px">⚔️ Créer une partie</button><button type="button" id="mpJoin" style="flex:1;min-width:120px">🔗 Rejoindre une partie</button></div><div id="mpJoinForm" style="display:none;margin-top:12px"><label for="mpCode">Code de la partie</label><input id="mpCode" maxlength="6" autocomplete="off" placeholder="Ex. KS7X42" style="width:150px;max-width:80%;padding:9px;text-transform:uppercase;letter-spacing:3px;text-align:center;background:#0d1724;color:white;border:1px solid #b99b65;border-radius:6px"><button type="button" id="mpConnect">Rejoindre</button></div><p id="mpMessage" role="status" style="font-size:12px;color:#e4c88d;margin:12px 0 0">Connexion à Firebase en cours…</p></div><p id="tutorialChoiceNote" class="setup-note" style="display:none">Le tutoriel utilise des situations préparées, sans IA ni chronomètre. Tu apprendras à poser, influencer, renforcer, remplacer et compter les points.</p><p class="setup-note">Choisis ton adversaire avant de commencer. L’IA joue uniquement avec ses propres cartes.</p><label for="difficulty">Difficulté de l’IA</label><select id="difficulty"><option value="easy">Facile — joue sans anticiper</option><option value="hard" selected>Difficile — anticipe et bloque</option></select><label><input id="useTimer" type="checkbox"> Activer le chronomètre (60 s, alerte rouge à 15 s)</label><input id="customDeck" type="checkbox" hidden aria-hidden="true"><div id="deckBuilder" style="display:none;max-height:35vh;overflow:auto;border:1px solid #6d819e;padding:8px;border-radius:8px"></div><p id="deckCount" class="setup-note"></p><p class="setup-note" id="timerHelp">Sans chronomètre, aucun passage automatique lié au temps. Avec chronomètre : passage automatique après 60 s. En multijoueur, les deux joueurs doivent choisir le même mode.</p><button id="startGame">Commencer la partie</button></div></div><main><div class="modeinfo" id="modeinfo"></div><section id="lesson" class="lesson hidden"><h2 id="lessonTitle"></h2><p id="lessonText"></p><p id="lessonFeedback" style="color:#9ff5bb"></p><button id="lessonNext" disabled>Étape suivante</button></section><header><div class="score blue" id="sb">0</div><div><h1>KardShot</h1><div class="sub" id="gameNumber" style="text-align:center"></div></div><div class="score red" id="sr">0</div></header><div class="turnbar"><strong id="turnlabel">🔵 À toi de jouer</strong><strong id="timer">∞</strong></div><div id="penaltybar" class="penaltybar">Chronomètre : 60 s par tour · alerte rouge pendant les 15 dernières secondes</div><div id="quickturn" class="quickturn hidden"><span>🤖 L’IA réfléchit avant de jouer</span><strong id="quickseconds">5 s</strong></div><div id="arena" class="arena"><div class="total-score blue" id="totalBlue">0</div><div class="row-rail blue" id="railBlue"></div><section id="board" class="board" aria-label="Plateau"></section><div class="row-rail red" id="railRed"></div><div class="total-score red" id="totalRed">0</div></div><div id="rows" class="rows"></div><div class="between" style="margin-top:15px"><strong>Mes cartes 🔵</strong><span class="sub" id="deck"></span></div><section id="hand" class="hand" aria-label="Main"></section><p class="setup-note" style="background:#26364a;border-radius:7px;padding:9px;margin:8px 0"><strong>🏆 Règle des lignes :</strong> sur chaque ligne (A, B ou C), seul le joueur qui possède le plus de points remporte <strong>la totalité de ses propres points</strong> sur cette ligne. Le perdant marque 0 point pour cette ligne. En cas d’égalité, personne ne marque. Exemple : 🔵 9 contre 🔴 6 → 🔵 gagne 9 points, 🔴 gagne 0.</p><div class="legend">🟧 Influence · 🟩 Bonus cumulable : les +1/+2/+3 se totalisent sur la case et disparaissent si leur source est détruite · 🟥 Détruit ennemi · 🟦 Détruit allié · 🟪 Détruit tous · 🟨 Centre · R/SR/SSR/REM = rareté des héros (les animaux ont un pictogramme) · ● = coût de pose (1 à 3)</div><p id="status" class="status"></p><div class="actions"><button class="action" id="pass" aria-label="Passer" title="Passer"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2f5fb" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 5 7 7-7 7"/><path d="m12 5 7 7-7 7"/></svg></button></div><button id="quickHelp" type="button" aria-label="Notices" title="Notices"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f2f5fb" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 13.8 4l2.2-.5.9 2.2 2.2.9-.5 2.2 1.5 1.8-1.5 1.8.5 2.2-2.2.9-.9 2.2-2.2-.5-1.8 1.5-1.8-1.5-2.2.5-.9-2.2-2.2-.9.5-2.2L3.9 10.6l1.5-1.8-.5-2.2 2.2-.9L8 3.5l2.2.5z" transform="translate(0 1.4)"/><circle cx="12" cy="12" r="3"/></svg></button><div id="helpOverlay" class="help-overlay hidden"><div class="help-panel"><button id="closeHelp" type="button" aria-label="Fermer les notices" title="Fermer">×</button><section id="kardshot-support" style="margin:10px 0 16px;padding:14px;border:1px solid #bd8a99;border-radius:12px;background:rgba(115,38,69,.16)"><h2 style="margin:0 0 8px">🩷 Soutenir KardShot</h2><p>KardShot est un jeu gratuit, développé avec passion.</p><p>Pour continuer à faire vivre et évoluer le jeu, votre soutien est précieux ! Vos contributions, entièrement libres et facultatives, aident à financer les serveurs, l’hébergement, la maintenance et le développement de nouvelles fonctionnalités.</p><p>Chaque contribution, même modeste, nous aide à améliorer KardShot et à enrichir votre expérience de jeu.</p><p class="ks-don-row"><a class="ks-don-button" href="https://ko-fi.com/kardshot" target="_blank" rel="noopener noreferrer">Faire un don sur Ko-fi — Merci pour votre générosité et votre soutien !</a><span class="ks-pink-mascot"><img width="60" height="60" alt="Petite mascotte rose" src="images/mascotte.gif"></span></p></section>
 <section id="kardshot-contact" style="margin:0 0 18px;padding:10px 14px;border:1px solid rgba(255,255,255,.22);border-radius:10px"><h2 style="margin:0 0 8px">✉️ Assistance et contact</h2><p>Une idée, un conseil ou un bug à signaler ? N’hésitez pas à nous contacter !</p><p>Pour les bugs, pensez à joindre une capture d’écran afin de faciliter leur correction.</p><p>📧 <a href="mailto:kscards.support@gmail.com" style="color:#8bd9ff;text-decoration:underline">kscards.support@gmail.com</a></p><p>🩷 Merci de nous aider à améliorer KardShot !</p></section>
 <h2>📖 Guide complet — KardShot</h2>
 <h3>1. But du jeu et plateau</h3><p>Le plateau comporte 3 lignes de 5 cases. Chaque camp pose ses cartes pour contrôler les lignes. À la fin, le camp ayant le plus de points sur une ligne remporte les points de cette ligne ; en cas d'égalité sur une ligne, personne ne marque ses points. Le total des trois lignes détermine la victoire, la défaite ou l'égalité.</p>
@@ -1534,6 +1603,8 @@ main>header{grid-area:1/1 / 2/3!important}
 const raw=[["Ravik",1,2,[[0,1],[-1,0]],[],0,[],"","R"],["Kaelan",1,1,[[0,1],[1,0]],[[1,0]],1,[],"","R"],["Nerya",1,2,[[0,1],[-1,1]],[],0,[],"","R"],["Durnak",1,3,[[0,1],[0,-1]],[],0,[],"","R"],["Loup gris",1,2,[[0,1],[-2,0]],[],0,[],"","R"],["Lynx",1,3,[[-1,0],[1,0]],[],0,[],"","R"],["Bison",1,2,[[0,1],[1,1]],[],0,[],"","R"],["Guépard",1,1,[[0,1],[-1,1],[1,1]],[],0,[],"","R"],["Élan",1,2,[[0,1],[0,2]],[],0,[],"","R"],["Ours grizzly",1,2,[[0,1],[2,0]],[],0,[],"","R"],["Lion",3,6,[[0,1],[-1,0]],[],0,[],"","R"],["Rhinocéros géant",2,4,[[0,1],[1,0]],[],0,[],"","R"],["Bison puissant",1,2,[[0,1],[-1,0]],[],0,[[0,1,"enemy"]],"","R"],["Grand élan",1,1,[[0,1],[-2,0],[2,0]],[],0,[],"","R"],["Panthère noire alpha",2,5,[[0,1],[0,-1]],[],0,[],"","R"],["Lion blanc royal",2,3,[[0,1],[-1,1],[1,1]],[],0,[],"","R"],["Ryokan",1,1,[[0,1],[-1,1],[1,1]],[[1,1]],2,[],"","SR"],["Astrid",1,2,[[0,1],[-1,0],[-2,0]],[[0,1]],2,[],"","SR"],["Zahir",1,2,[[0,1],[1,0],[2,0]],[[0,1]],1,[],"","SR"],["Meiyun",2,4,[[0,1],[-1,0]],[],0,[],"","SR"],["Brogmar",1,2,[[0,1],[-1,-1]],[],0,[],"","SR"],["Zalika",1,1,[[0,1],[0,2]],[[0,1]],2,[],"","SR"],["Temür",2,3,[[0,1],[-2,1]],[],0,[[0,1,"enemy"]],"","SR"],["Eldric",2,4,[[0,1],[1,0],[0,2]],[],0,[],"","SR"],["Eryndra",2,5,[[0,1],[-2,0]],[],0,[],"","SSR"],["Sayuri",2,4,[[0,1],[0,-1],[-1,0],[1,0]],[],0,[],"","SSR"],["Indira",3,7,[[0,1],[2,0]],[],0,[],"","SSR"],["Argan",0,4,[[0,1],[-1,0]],[],0,[],"ally","REM"],["Thalor",0,2,[[0,1],[1,0]],[[0,1]],3,[],"enemy","REM"],["Takoda",0,1,[[0,1],[0,-1]],[],0,[[0,-1,"all"]],"all","REM"]];
 const cards=Object.fromEntries(raw.map(a=>[a[0],{n:a[0],r:a[1],cost:a[1],p:a[2],inf:a[3],buff:a[4],plus:a[5],kill:a[6],rep:a[7],rarity:a[8]}]));
 const pool=raw.map(a=>a[0]); // catalogue de 30 modèles
+// Numéros permanents du catalogue actuel ; les futurs modèles continueront à 0031.
+const KS_CARD_NUMBERS=Object.freeze(Object.fromEntries(pool.map((name,index)=>[name,String(index+1).padStart(4,"0")])));
 const KS_RELEASE_CARDS_30=Object.freeze([...pool]);
 
 const KS261={
@@ -2265,6 +2336,58 @@ function el(tag,cls,text){let x=document.createElement(tag);x.className=cls;if(t
   const originals=[source,...source.querySelectorAll('*')],clones=[copy,...copy.querySelectorAll('*')];
   const props=['background','background-image','background-color','background-size','background-position','color','font','font-size','font-weight','font-family','line-height','border','border-radius','box-shadow','opacity','display','position','top','right','bottom','left','width','height','padding','margin','transform','text-align','align-items','justify-content','grid-template-columns','grid-template-rows','gap','overflow','z-index'];
   originals.forEach((o,i)=>{const c=clones[i],cs=getComputedStyle(o);for(const prop of props){if(prop==='transform')continue;c.style.setProperty(prop,cs.getPropertyValue(prop));}});
+  // Harmonisation du bandeau sur la copie agrandie uniquement.
+  // Les styles copiés sont ceux de la petite carte : on restaure le bandeau
+  // plein bord et on évite son liseré additionnel.
+  const zoomName=copy.querySelector('.name');
+  if(zoomName){
+    copy.style.setProperty('position','relative','important');
+    copy.style.setProperty('overflow','hidden','important');
+    zoomName.style.setProperty('position','absolute','important');
+    zoomName.style.setProperty('left','0','important');
+    zoomName.style.setProperty('right','0','important');
+    zoomName.style.setProperty('bottom','0','important');
+    zoomName.style.setProperty('top','auto','important');
+    zoomName.style.setProperty('width','100%','important');
+    zoomName.style.setProperty('height','10%','important');
+    zoomName.style.setProperty('min-height','0','important');
+    zoomName.style.setProperty('max-height','none','important');
+    zoomName.style.setProperty('box-sizing','border-box','important');
+    zoomName.style.setProperty('background','rgba(5,8,11,.88)','important');
+    zoomName.style.setProperty('border','0','important');
+    zoomName.style.setProperty('border-radius','0','important');
+    zoomName.style.setProperty('display','flex','important');
+    zoomName.style.setProperty('align-items','center','important');
+    zoomName.style.setProperty('justify-content','center','important');
+    zoomName.style.setProperty('padding','0 15% 0 5%','important');
+    zoomName.style.setProperty('font-size','clamp(4.8px,0.66vw,7.2px)','important');
+    zoomName.style.setProperty('line-height','1','important');
+    zoomName.style.setProperty('white-space','nowrap','important');
+    zoomName.style.setProperty('z-index','15','important');
+    // Zoom : le numéro doit être un enfant DIRECT de la carte copiée.
+    // Un numéro hérité d'un sous-calque se positionne par rapport au mauvais cadre.
+    const originalNumber=source.querySelector('.ks-unified-number');
+    const cardTitle=source.querySelector('.name')?.textContent?.trim();
+    const cardNumber=originalNumber?.textContent?.trim() ||
+      (typeof KS_CARD_NUMBERS!=='undefined' ? KS_CARD_NUMBERS[cardTitle] : '');
+    copy.querySelectorAll('.ks-unified-number').forEach(el=>el.remove());
+    if(cardNumber){
+      const num=document.createElement('span');
+      num.className='ks-unified-number';
+      num.textContent=cardNumber;
+      copy.appendChild(num);
+      // La copie est ensuite agrandie avec transform:scale : taille en px
+      // calculée sur sa largeur d'origine, jamais sur le viewport.
+      const numberPx=Math.max(3,Math.min(5.5,rect.width*0.037));
+      num.style.setProperty('position','absolute','important');
+      num.style.setProperty('right','2.5%','important');
+      num.style.setProperty('bottom','2.8%','important');
+      num.style.setProperty('font-size',numberPx+'px','important');
+      num.style.setProperty('line-height','1','important');
+      num.style.setProperty('z-index','16','important');
+      num.style.setProperty('pointer-events','none','important');
+    }
+  }
   const scale=Math.min(1.8,(innerHeight-185)/rect.height,(innerWidth*.34)/rect.width);
   const w=rect.width*scale,h=rect.height*scale;
   copy.style.position='absolute';copy.style.left='0';copy.style.top='0';copy.style.width=rect.width+'px';copy.style.height=rect.height+'px';copy.style.transformOrigin='top left';copy.style.transform='scale('+scale+')';copy.style.pointerEvents='none';
@@ -3741,7 +3864,8 @@ window.KS229PlayDebitSound=function(){
  }
  function animate(index,oldCard,isRem,forcedKind){
   const cell=board.children[index];if(!cell)return Promise.resolve();
-  const rect=cell.getBoundingClientRect();if(rect.width<10)return Promise.resolve();
+  const cardFace=cell.querySelector('.card,.placed-card,.card-on-board,.game-card');
+  const rect=(cardFace||cell).getBoundingClientRect();if(rect.width<10)return Promise.resolve();
   const wrap=document.createElement('div');wrap.className='ks241-veil';
   wrap.style.cssText=`left:${rect.left}px;top:${rect.top}px;width:${rect.width}px;height:${rect.height}px`;
   const back=document.createElement('div');back.className='ks241-back';wrap.append(back);document.body.append(wrap);
@@ -4110,6 +4234,271 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 <script id="ks-v385-version">
 (function(){const b=document.getElementById('ksVersionBadge');if(b)b.textContent='V394';})();
+</script>
+
+<style id="ks-collection-portrait-style">
+#ksCollectionPortrait{position:fixed!important;inset:0!important;z-index:2147483646!important;background:#090e19!important;color:#f5dfb0!important;display:flex!important;justify-content:center!important;align-items:stretch!important;overflow:hidden!important;touch-action:pan-y!important}
+#ksCollectionPortrait[hidden]{display:none!important}
+#ksCollectionPortrait .ks-portrait-page{width:100%;max-width:540px;height:100%;box-sizing:border-box;background:linear-gradient(160deg,#22394e,#101b2c 70%);display:flex;flex-direction:column;overflow:auto}
+#ksCollectionPortrait .ks-portrait-top{display:flex;align-items:center;gap:8px;padding:12px 12px 10px;border-bottom:2px solid #bfa06a;flex-shrink:0;padding-top:max(12px,env(safe-area-inset-top))}
+#ksCollectionPortrait .ks-portrait-tabs{display:flex;flex:1;gap:8px;min-width:0}
+#ksCollectionPortrait .ks-portrait-tab{flex:1;min-width:0;min-height:48px;padding:7px 4px;border:1px solid #a28b65;border-radius:10px;background:#1d3246;color:#fff;font-size:clamp(12px,3.5vw,16px);font-weight:700}
+#ksCollectionPortrait .ks-portrait-tab[aria-selected="true"]{background:#416486;border-color:#d6b16b}
+#ksCollectionPortraitClose{background:#304b65;border:2px solid #d6b16b;border-radius:12px;color:white;font-size:32px;line-height:1;width:49px;height:49px;cursor:pointer;flex-shrink:0}
+#ksCollectionPortrait .ks-portrait-content{padding:24px 18px;font-size:17px;flex:1}
+@media (orientation:landscape){#ksCollectionPortrait .ks-portrait-page{max-width:min(480px,95vw)}}
+</style>
+<script id="ks-collection-portrait-script">
+(function(){
+ function init(){
+  const options=document.getElementById('ksOptionsModal');
+  if(!options)return;
+  const overlay=document.createElement('div');overlay.id='ksCollectionPortrait';overlay.hidden=true;
+  overlay.innerHTML='<div class="ks-portrait-page" role="dialog" aria-modal="true" aria-label="Collection"><header class="ks-portrait-top"><nav class="ks-portrait-tabs" aria-label="Rubriques de la collection"><button type="button" class="ks-portrait-tab" data-portrait-tab="cards" aria-selected="true">Cartes</button><button type="button" class="ks-portrait-tab" data-portrait-tab="boosters" aria-selected="false">Boosters achetés</button></nav><button type="button" id="ksCollectionPortraitClose" aria-label="Fermer et revenir aux options">×</button></header><main class="ks-portrait-content"><section data-portrait-pane="cards"><div id="ksCollectionCardSummary"></div><div id="ksCollectionCardGrid" class="ks-owned-grid"></div></section><section data-portrait-pane="boosters" hidden><div class="ks-collection-booster-grid"><a class="ks-collection-booster" href="#" data-ks-booster="starter" aria-label="Ouvrir le Pack Démarrage dans la visualisation 3D" style="text-decoration:none;color:inherit;cursor:pointer"><img src="images/booster/front1.webp" alt="Recto du Pack Démarrage" loading="lazy"><strong>Pack Démarrage</strong><small>30 cartes</small></a></div></section></main></div>';
+  document.body.appendChild(overlay);
+  let didLock=false;
+  function chooseTab(name){overlay.querySelectorAll('[data-portrait-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.portraitTab===name)));overlay.querySelectorAll('[data-portrait-pane]').forEach(p=>p.hidden=p.dataset.portraitPane!==name);}
+  async function openCollection(){
+   chooseTab('cards');document.documentElement.classList.add('ks-collection-open');document.body.classList.add('ks-collection-open');options.hidden=true;overlay.hidden=false;
+   document.getElementById('ksCollectionPortraitClose').focus();
+   try{if(screen.orientation&&screen.orientation.lock){await screen.orientation.lock('portrait');didLock=true;}}catch(e){/* Browser may forbid orientation lock outside fullscreen. */}
+  }
+  async function closeCollection(){
+   // Restore the Notices pane BEFORE removing the portrait exception.
+   const notices=options.querySelector('#ksOptionsTabs [data-opt="notice"]');
+   if(notices)notices.click();
+   options.querySelectorAll('#ksOptionsTabs [data-opt]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.opt==='notice')));
+   options.querySelectorAll('.ks-opt-pane[data-pane]').forEach(p=>p.hidden=p.dataset.pane!=='notice');
+   overlay.hidden=true;
+   options.hidden=false;
+   document.documentElement.classList.remove('ks-collection-open');
+   document.body.classList.remove('ks-collection-open');
+   // Release the portrait lock even when the browser did not report success.
+   try{screen.orientation?.unlock?.();}catch(e){}
+   didLock=false;
+   try{await screen.orientation?.lock?.('landscape');}catch(e){}
+   // Recalculate layout after the physical rotation, without reopening Collection.
+   window.dispatchEvent(new Event('resize'));
+  }
+  // Capture the click before the options menu switches to its inline Collection pane.
+  options.addEventListener('click',function(e){const button=e.target.closest('#ksOptionsTabs [data-opt="collection"]');if(!button)return;openCollection();},true);
+  overlay.querySelectorAll('[data-portrait-tab]').forEach(b=>b.addEventListener('click',()=>chooseTab(b.dataset.portraitTab)));
+  document.getElementById('ksCollectionPortraitClose').addEventListener('click',closeCollection);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!overlay.hidden){e.stopImmediatePropagation();e.preventDefault();closeCollection();}},true);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<style id="ks-owned-collection-style">
+#ksCollectionPortrait .ks-portrait-content{overflow-y:auto;min-height:0;overscroll-behavior:contain}
+#ksCollectionPortrait .ks-owned-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px 6px;padding:12px 0 30px}
+#ksCollectionPortrait .ks-owned-card{min-width:0;position:relative}
+#ksCollectionPortrait .ks-owned-art{position:relative;aspect-ratio:0.69;border:2px solid #c9a45f;border-radius:7px;overflow:hidden;background:#132337;background-size:cover;background-position:center}
+#ksCollectionPortrait .ks-owned-art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,#080e1ec9)}
+#ksCollectionPortrait .ks-owned-name{font-size:clamp(9px,2.5vw,12px);text-align:center;line-height:1.15;margin-top:4px;overflow-wrap:anywhere;color:#f6e5bd}
+#ksCollectionPortrait .ks-owned-count{position:absolute;right:3px;top:3px;z-index:1;background:#111b2eea;border:1px solid #e6c476;border-radius:6px;padding:2px 4px;color:#ffe6a0;font-size:11px;font-weight:800}
+#ksCollectionPortrait #ksCollectionCardSummary{font-size:13px;color:#e6d1a6}
+#ksCollectionPortrait .ks-portrait-content{width:100%!important;box-sizing:border-box!important;display:block!important}
+#ksCollectionPortrait [data-portrait-pane="cards"]{display:block!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+#ksCollectionPortrait [data-portrait-pane="cards"][hidden]{display:none!important}
+#ksCollectionPortrait .ks-owned-grid{width:100%!important;box-sizing:border-box!important;grid-template-columns:repeat(4,minmax(0,1fr))!important}
+#ksCollectionPortrait .ks-owned-name{overflow-wrap:normal!important;word-break:normal!important;hyphens:auto}
+</style><script id="ks-owned-collection-script">
+(function(){
+ function paint(){
+  const grid=document.getElementById('ksCollectionCardGrid'),summary=document.getElementById('ksCollectionCardSummary');
+  if(!grid||!summary)return;
+  // Current game ownership model: one copy of each card in the released pool.
+  // No Firebase inventory is implemented yet; never invent duplicate counts.
+  if(typeof pool==='undefined'||typeof cards==='undefined'||typeof ksOwnedCopies!=='function'){
+   summary.textContent='Collection indisponible : données des cartes non chargées.';return;
+  }
+  const owned=pool.filter(n=>cards[n]&&ksOwnedCopies(n)>0);
+  summary.textContent=owned.length+' cartes différentes · quantités actuelles du jeu';
+  grid.replaceChildren();
+  owned.forEach(n=>{
+   const count=ksOwnedCopies(n),slug=n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+   const el=document.createElement('div');el.className='ks-owned-card';el.dataset.cardName=n;
+   const art=document.createElement('div');art.className='ks-owned-art';
+   // Reuse existing artwork CSS variables (including renamed character assets).
+   const style=getComputedStyle(document.documentElement);
+   const artAliases={ravik:'edwin',kaelan:'olive',nerya:'forrest',durnak:'seth','rhinoceros-geant':'rhino','panthere-noire-alpha':'panthere-alpha','lion-blanc-royal':'lion-blanc',ryokan:'yeonwoo',astrid:'amane',zahir:'chenko',meiyun:'quinn',brogmar:'howard',zalika:'gordon',temur:'fahd',eldric:'diana',eryndra:'jabel',sayuri:'saul',indira:'zoe',argan:'amadeus',thalor:'petra',takoda:'triton'};
+   const candidate=style.getPropertyValue('--art-'+(artAliases[slug]||slug)).trim();
+   if(candidate){
+    let img=candidate;
+    if(location.protocol==='file:'||location.protocol==='content:')img=img.replace(/url\([\"']?images\/cartes\//g,'url(\"https://sweet-halva-c9f3fa.pages.dev/images/cartes/');
+    art.style.backgroundImage='linear-gradient(180deg,#07101b11,#07101b33),'+img;
+   }
+   else art.style.backgroundImage='linear-gradient(180deg,#182b44,#0a1326)';
+   if(count>1){const badge=document.createElement('span');badge.className='ks-owned-count';badge.textContent='×'+count;art.appendChild(badge)}
+   const label=document.createElement('div');label.className='ks-owned-name';label.textContent=n;
+   const number=document.createElement('span');number.className='ks-card-number';number.textContent=KS_CARD_NUMBERS[n]||'';
+   art.appendChild(number);
+   el.append(art,label);grid.appendChild(el);
+  });
+ }
+ document.addEventListener('click',e=>{if(e.target.closest('[data-opt="collection"]'))setTimeout(paint,0)},true);
+ document.addEventListener('DOMContentLoaded',paint);
+})();
+</script><style id="ks-collection-viewer-style">
+#ksCardViewer{position:fixed!important;inset:0!important;z-index:2147483646!important;background:radial-gradient(ellipse at center,#243c54,#0a101d 80%);display:flex;flex-direction:column;align-items:center;color:#f5e5c2;overflow:hidden;touch-action:none}
+#ksCardViewer[hidden]{display:none!important}
+#ksCardViewer .ksv-head{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:12px 18px;box-sizing:border-box;flex-shrink:0}
+#ksCardViewer .ksv-head strong{font-size:18px}
+#ksCardViewer .ksv-close{width:44px;height:44px;border:2px solid #d9b877;border-radius:12px;background:#243b52;color:white;font-size:29px;cursor:pointer}
+#ksCardViewer .ksv-stage{width:100%;flex:1;min-height:0;position:relative;touch-action:none;overflow:hidden;perspective:1000px}
+#ksCardViewer .ksv-move{position:absolute;left:50%;top:50%;width:min(74vw,340px);transform:translate(-50%,-50%);transform-style:preserve-3d;will-change:transform;touch-action:none}
+#ksCardViewer .ksv-card{position:relative;aspect-ratio:.69;border:7px solid #d7b776;border-radius:17px;overflow:hidden;box-sizing:border-box;background:#13283d;box-shadow:0 16px 32px #0008;backface-visibility:hidden}
+#ksCardViewer .ksv-art{position:absolute;inset:0;background-size:cover;background-position:center}
+#ksCardViewer .ksv-shield{position:absolute;left:8px;top:7px;background:#122e48;color:white;font-weight:900;font-size:24px;padding:9px 11px;border:3px solid #d7b776;clip-path:polygon(0 0,100% 0,100% 72%,50% 100%,0 72%)}
+#ksCardViewer .ksv-pawns{position:absolute;right:10px;top:10px;display:flex;gap:3px}
+#ksCardViewer .ksv-pawns i{width:11px;height:11px;background:#f7d16b;border-radius:50%;box-shadow:0 0 3px #000}
+#ksCardViewer .ksv-pattern{position:absolute;left:10px;bottom:21%;display:grid;grid-template-columns:repeat(5,12px);grid-template-rows:repeat(5,12px);gap:1px}
+#ksCardViewer .ksv-pattern span{background:#0a162333}
+#ksCardViewer .ksv-pattern span.active{background:#e6a45cb8}
+#ksCardViewer .ksv-pattern span.center{background:#e8c870e0;border:1px solid #1a2635;box-sizing:border-box}
+#ksCardViewer .ksv-name{position:absolute;bottom:0;left:0;right:0;padding:10px 4px;background:#09121bdc;text-align:center;color:white;font:bold 22px Georgia,serif}
+#ksCardViewer .ksv-details{width:min(92%,440px);box-sizing:border-box;margin:0 auto 14px;padding:12px 16px;border:1px solid #b8a27e;border-radius:12px;background:#0b121de8;font-size:15px;line-height:1.45;flex-shrink:0}
+#ksCardViewer .ksv-hint{font-size:12px;opacity:.8;text-align:center;padding:0 8px 10px}
+</style>
+<script id="ks-collection-viewer-script">
+(function(){
+ let viewer,stage,mover,active=null,zoom=1,panX=0,panY=0,rot=0,tilt=0,drag=null,pointers=new Map(),pinchStart=null;
+ function imageFor(n){const slug=n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');const aliases={ravik:'edwin',kaelan:'olive',nerya:'forrest',durnak:'seth','rhinoceros-geant':'rhino','panthere-noire-alpha':'panthere-alpha','lion-blanc-royal':'lion-blanc',ryokan:'yeonwoo',astrid:'amane',zahir:'chenko',meiyun:'quinn',brogmar:'howard',zalika:'gordon',temur:'fahd',eldric:'diana',eryndra:'jabel',sayuri:'saul',indira:'zoe',argan:'amadeus',thalor:'petra',takoda:'triton'};
+ let v=getComputedStyle(document.documentElement).getPropertyValue('--art-'+(aliases[slug]||slug)).trim();
+ if(location.protocol==='file:'||location.protocol==='content:')v=v.replace(/url\(["']?images\/cartes\//g,'url("https://sweet-halva-c9f3fa.pages.dev/images/cartes/');return v;
+ }
+ function render(){if(!mover)return;mover.style.transform=`translate(calc(-50% + ${panX}px),calc(-50% + ${panY}px)) scale(${zoom}) rotateX(${tilt}deg) rotateY(${rot}deg)`;}
+ function reset(){zoom=1;panX=0;panY=0;rot=0;tilt=0;pointers.clear();drag=null;pinchStart=null;render()}
+ function open(n){if(typeof cards==='undefined'||!cards[n])return;active=n;reset();const c=cards[n];viewer.hidden=false;viewer.querySelector('.ksv-title').textContent=n;viewer.querySelector('.ksv-back').dataset.backFile='image/dos/dos1.webp';viewer.querySelector('.ksv-art').style.backgroundImage=imageFor(n)||'none';viewer.querySelector('.ksv-shield-value').textContent='+'+c.p;const pawns=viewer.querySelector('.ksv-pawns');pawns.replaceChildren();for(let i=0;i<c.cost;i++)pawns.appendChild(document.createElement('i'));
+ const pat=viewer.querySelector('.ksv-pattern');pat.replaceChildren();const cells=new Set((c.inf||[]).map(([x,y])=>`${x},${y}`));for(let y=-2;y<=2;y++)for(let x=-2;x<=2;x++){const e=document.createElement('span');if(x===0&&y===0)e.className='center';else if(cells.has(`${x},${y}`))e.className='active';pat.appendChild(e)}
+ viewer.querySelector('.ksv-name').textContent=n;viewer.querySelector('.ksv-name').dataset.number=KS_CARD_NUMBERS[n]||'';
+ const needs=c.cost===0?'Remplacement (sans coût en pions)':`${c.cost} pion${c.cost>1?'s':''} ou plus`;
+ viewer.querySelector('.ksv-details').replaceChildren();const lines=[['Nécessite : ',needs],['Gain carte : ',`${c.p} point${c.p>1?'s':''}`],['Capacité : ',c.rep?'Carte de remplacement':c.kill?.length?'Effet de destruction':c.buff?.length?'Effet de bonus':'Étend ton territoire selon le schéma tactique']];for(const [label,value] of lines){const div=document.createElement('div'),b=document.createElement('b');b.textContent=label;div.append(b,document.createTextNode(value));viewer.querySelector('.ksv-details').appendChild(div)}
+ }
+ function close(){viewer.hidden=true;active=null;reset()}
+ function init(){viewer=document.createElement('div');viewer.id='ksCardViewer';viewer.hidden=true;viewer.innerHTML='<header class="ksv-head"><strong class="ksv-title">Carte</strong><button class="ksv-close" type="button" aria-label="Fermer">×</button></header><div class="ksv-stage"><div class="ksv-move"><div class="ksv-card"><div class="ksv-front"><div class="ksv-art"></div><div class="ksv-shield"><span class="ksv-shield-core"><span class="ksv-shield-value"></span></span></div><div class="ksv-pawns"></div><div class="ksv-pattern"></div><div class="ksv-name"></div></div><div class="ksv-back"></div></div></div></div><div class="ksv-details"></div><div class="ksv-hint">Un doigt : tourner dans tous les sens · Deux doigts : zoomer · Zoomé : déplacer la vue</div>';(document.getElementById('ksCollectionPortrait')||document.body).appendChild(viewer);stage=viewer.querySelector('.ksv-stage');mover=viewer.querySelector('.ksv-move');viewer.querySelector('.ksv-close').addEventListener('click',e=>{e.preventDefault();e.stopPropagation();close()});
+ document.addEventListener('click',e=>{const el=e.target.closest('#ksCollectionCardGrid .ks-owned-card');if(!el||!viewer.hidden)return;const n=el.dataset.cardName||el.querySelector('.ks-owned-name')?.textContent?.trim();if(!n)return;e.preventDefault();e.stopImmediatePropagation();open(n)},true);
+ const grid=document.getElementById('ksCollectionCardGrid');if(grid){new MutationObserver(()=>{grid.querySelectorAll('.ks-owned-card').forEach((el,i)=>{if(!el.dataset.cardName){const label=el.querySelector('.ks-owned-name');if(label)el.dataset.cardName=label.textContent}el.style.cursor='pointer'})}).observe(grid,{childList:true})}
+ stage.addEventListener('pointerdown',e=>{e.preventDefault();stage.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===1)drag={x:e.clientX,y:e.clientY,px:panX,py:panY,r:rot,t:tilt};if(pointers.size===2){const p=[...pointers.values()];pinchStart={distance:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y),zoom};drag=null}}, {passive:false});
+ stage.addEventListener('pointermove',e=>{if(!pointers.has(e.pointerId))return;e.preventDefault();pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2&&pinchStart){const p=[...pointers.values()];zoom=Math.max(1,Math.min(5,pinchStart.zoom*Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)/Math.max(1,pinchStart.distance)));if(zoom<=1.01){zoom=1;panX=panY=0}render()}else if(pointers.size===1&&drag){if(zoom>1.01){panX=drag.px+e.clientX-drag.x;panY=drag.py+e.clientY-drag.y}else{rot=drag.r+(e.clientX-drag.x)*.55;tilt=Math.max(-85,Math.min(85,drag.t-(e.clientY-drag.y)*.45))}render()}},{passive:false});
+ const end=e=>{pointers.delete(e.pointerId);pinchStart=null;drag=null;if(pointers.size===1){const p=[...pointers.values()][0];drag={x:p.x,y:p.y,px:panX,py:panY,r:rot,t:tilt}}};stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!viewer.hidden){e.stopImmediatePropagation();e.preventDefault();close()}},true);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
+<style id="ks-card-viewer-portrait-fix">
+/* Viewer remains within the portrait Collection overlay, not the landscape game. */
+#ksCollectionPortrait{isolation:isolate;}
+#ksCollectionPortrait #ksCardViewer{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;z-index:20!important;box-sizing:border-box!important;}
+#ksCollectionPortrait #ksCardViewer .ksv-stage{flex:1 1 auto!important;min-height:0!important;width:100%!important;}
+#ksCollectionPortrait #ksCardViewer .ksv-move{width:min(73vw,340px,calc(58dvh * .69))!important;}
+#ksCollectionPortrait #ksCardViewer .ksv-details{max-height:27dvh;overflow:auto;margin-bottom:8px;}
+#ksCollectionPortrait #ksCardViewer .ksv-hint{flex-shrink:0;}
+</style>
+
+
+<style id="ks-collection-viewer-3d-shield-v2">
+/* Shield: gold outer silhouette and inset navy shield, with a complete pointed tip. */
+#ksCardViewer .ksv-shield{position:absolute!important;top:9px!important;left:10px!important;width:61px!important;height:76px!important;padding:3px!important;box-sizing:border-box!important;border:0!important;border-radius:0!important;background:#d9b776!important;clip-path:polygon(0 0,100% 0,100% 75%,50% 100%,0 75%)!important;display:block!important;filter:drop-shadow(0 2px 2px #0008);z-index:5!important;}
+#ksCardViewer .ksv-shield-core{display:flex;width:100%;height:100%;align-items:flex-start;justify-content:center;box-sizing:border-box;padding-top:13px;background:linear-gradient(155deg,#25445f,#07182d);clip-path:polygon(0 0,100% 0,100% 73%,50% 100%,0 73%);}
+#ksCardViewer .ksv-shield-value{font:bold 25px/1 system-ui,sans-serif;color:#fff;text-shadow:0 1px 2px #000;white-space:nowrap;}
+#ksCardViewer .ksv-move{transform-style:preserve-3d!important;}
+#ksCardViewer .ksv-card{transform-style:preserve-3d!important;}
+#ksCardViewer .ksv-front,#ksCardViewer .ksv-back{backface-visibility:hidden!important;-webkit-backface-visibility:hidden!important;}
+</style>
+<style id="ks-card-back-v1">
+#ksCardViewer .ksv-card{overflow:visible!important;transform-style:preserve-3d;backface-visibility:visible!important;border:0!important;background:transparent!important;box-shadow:none!important}
+#ksCardViewer .ksv-front,#ksCardViewer .ksv-back{position:absolute;inset:0;border:7px solid #d7b776;border-radius:17px;overflow:hidden;box-sizing:border-box;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 16px 32px #0008;background:#13283d}
+#ksCardViewer .ksv-back{transform:rotateY(180deg);background:#091a30 url("https://sweet-halva-c9f3fa.pages.dev/image/dos/dos1.webp") center/100% 100% no-repeat!important;}
+</style>
+
+<style id="ks-shop-gallery-v1">
+#ksOptionsModal:has([data-pane="shop"]:not([hidden])) #ksOptionsPanel{width:min(96vw,1080px)}
+#ksOptionsModal [data-pane="shop"]{overflow-y:auto;overscroll-behavior:contain;min-height:0;max-height:calc(92dvh - 115px);scrollbar-width:thin}
+#ksBoosterGallery{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(5px,1vw,14px);align-items:stretch;padding:6px 2px 18px}
+.ks-booster-item{display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0;border:1px solid #a38a63;border-radius:8px;background:linear-gradient(145deg,#2a354c,#172237);padding:7px 4px;color:#f9e4b8;text-align:center;min-height:clamp(145px,43dvh,310px);height:100%;justify-content:flex-start}
+.ks-booster-item img{width:100%;height:clamp(110px,36dvh,255px);object-fit:contain;display:block;filter:drop-shadow(0 3px 4px #0009)}
+.ks-booster-item .ks-booster-name{font-size:clamp(9px,1.6vw,13px);font-weight:700;line-height:1.2}
+.ks-booster-item .ks-booster-info{font-size:clamp(8px,1.3vw,11px);color:#c4cfdf}
+.ks-booster-gift{margin-top:auto;display:inline-block;background:#267c49;color:#fff7d9;border:1px solid #a9d99d;border-radius:5px;padding:3px 10px;font-size:clamp(10px,1.6vw,13px);font-weight:900;letter-spacing:.06em;box-shadow:0 2px 6px #0006}
+.ks-booster-item.ks-booster-empty{opacity:.45;border-style:dashed;justify-content:center}
+.ks-booster-item.ks-booster-empty::before{content:'+';font-size:28px;color:#c6ac80}
+</style>
+
+<style id="ks-booster-claim-test-style">
+#quickHelp,#ksOptionsTabs [data-opt="shop"],#ksOptionsTabs [data-opt="collection"]{position:relative}
+.ks-pack-red-dot{position:absolute;top:0;right:0;transform:translate(35%,-35%);width:9px;height:9px;border-radius:50%;background:#ff273e;box-shadow:0 0 4px #ff273e;pointer-events:none;z-index:5}
+.ks-booster-item.ks-test-clickable{cursor:pointer}
+.ks-booster-item.ks-test-soldout{position:relative;overflow:hidden;isolation:isolate}
+.ks-booster-item.ks-test-soldout:after{content:'ÉPUISÉ';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-60deg);font:bold clamp(28px,4vw,64px)/1 Arial,sans-serif;color:#ff253e;opacity:.60;pointer-events:none;z-index:9}
+#ksClaimConfirm{position:fixed;inset:0;background:#000b;z-index:2147483000;display:grid;place-items:center}
+#ksClaimConfirm[hidden]{display:none!important}
+#ksClaimConfirm .ks-confirm-panel{background:#20334b;color:#f6dcab;border:2px solid #d9b675;border-radius:13px;padding:24px;max-width:min(90vw,420px);text-align:center;font:600 17px system-ui}
+#ksClaimConfirm button{margin:12px 8px 0;padding:9px 25px;border:1px solid #d9b675;border-radius:8px;background:#29445d;color:#fff;font-weight:700}
+.ks-test-pending-note{color:#f1cf82!important;font-weight:bold}
+</style>
+
+
+<style id="ks-fix-zoom-layer-and-mulligan-names">
+/* The collection was stacked ABOVE its own card viewer (2147483647 vs 2147483646).
+   Put the viewer on top and hide only background card numbers while it is open. */
+html:has(#ksCardViewer:not([hidden])) #ksCollectionPortrait{z-index:2147483645!important}
+#ksCardViewer:not([hidden]){z-index:2147483647!important;isolation:isolate}
+html:has(#ksCardViewer:not([hidden])) #ksCollectionPortrait .ks-unified-number,
+html:has(#ksCardViewer:not([hidden])) #ksCollectionPortrait .ks-card-number{visibility:hidden!important}
+/* Small hand cards: the title should scale with the card, not with screen height. */
+#ksMulligan .ksm-card.card .name{font-size:clamp(8px,1.05vw,13px)!important;line-height:1.05!important;padding:3px 13% 3px 4%!important;box-sizing:border-box!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+/* Avoid the container-type changing the existing board/hand layout. */
+#hand .ks-number-host,#board .ks-number-host,#ksMulligan .ks-number-host{container-type:normal!important}
+/* Number scales relative to card size, with a small upper limit. */
+#ksMulligan .ks-unified-number,#hand .ks-unified-number,#board .ks-unified-number{font-size:clamp(5px,.65vw,9px)!important;z-index:9!important}
+/* Restore full-width bottom title strip on held/enlarged cards. */
+#hand .card.ks-hold-enlarged .name,#board .slot.ks-hold-enlarged .name{left:0!important;right:0!important;box-sizing:border-box!important;max-width:100%!important}
+</style>
+
+<style id="ks-card-names-reduced-20-test">
+/* Card titles only: 80% of previous font sizes, all card views. */
+#hand .card .name, #hand.expanded-hand .card .name {font-size:clamp(6.4px,1.76dvh,10.4px)!important}
+#arena #board .slot .name, #board .slot .name {font-size:clamp(6.4px,1.76dvh,9.6px)!important}
+#ksMulligan .ksm-card.card .name, #ksMulligan .ksm-card .name {font-size:clamp(6.4px,0.84vw,10.4px)!important}
+#ksDeckScreen .card .name, #ksDeckBuilder .card .name, #deckBuilder .card .name, .ks-deck-card .name {font-size:80%!important}
+#ksDeckScreen .ksdeck-zoomcard .name {font-size:12px!important}
+#ksCollectionPortrait .ks-owned-art .ks-unified-name {font-size:clamp(6.4px,7.2cqw,12.8px)!important}
+#ksCollectionPortrait .ks-owned-name {font-size:clamp(7.2px,2vw,9.6px)!important}
+/* Enlarged card preview titles retain a proportional reduction. */
+#hand .ks-hold-enlarged .name, #board .ks-hold-enlarged .name {font-size:clamp(8px,2.16dvh,12px)!important}
+</style>
+
+<script type="module" id="ks-booster100-real-firebase-counter">
+/* Lecture seule des joueurs classés ; aucune modification du classement ni des cartes. */
+import {getApps} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js';
+import {getAuth,onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js';
+import {getDatabase,ref,onValue} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js';
+const waitForApp=async()=>{for(let i=0;i<80;i++){if(getApps().length)return getApps()[0];await new Promise(r=>setTimeout(r,100))}throw Error('Firebase non initialisé')};
+function show(message,unlocked=false){
+ window.KSBooster100Unlocked=unlocked;
+ const gift=document.getElementById('ksBooster100Counter')||document.querySelector('#ksBoosterGallery .ks-booster-item:nth-child(2) .ks-booster-gift');
+ const tile=document.querySelector('#ksBoosterGallery .ks-booster-item:nth-child(2)');
+ if(gift && !tile?.classList.contains('ks-unified-soldout'))gift.textContent=message;
+ if(tile)tile.classList.toggle('ks-test-clickable',unlocked);
+ window.dispatchEvent(new Event('ks-booster100-counter-updated'));
+}
+try{
+ const app=await waitForApp(),auth=getAuth(app),db=getDatabase(app);
+ onAuthStateChanged(auth,user=>{
+  if(!user){show('🔒 Connexion requise');return}
+  show('🔒 Lecture du classement…');
+  if(window.__ksBooster100Unsub)window.__ksBooster100Unsub();
+  window.__ksBooster100Unsub=onValue(ref(db,'rankAggregates/players'),snapshot=>{
+   let count=0;
+   snapshot.forEach(child=>{const v=child.val();if(v && (Number(v.wins||0)+Number(v.losses||0)+Number(v.draws||0))>0)count++});
+   show(count>=100?'🎁 '+count+' / 100 · OFFERT':'🔒 '+count+' / 100',count>=100);
+  },error=>{console.error('Compteur booster Firebase:',error);show('🔒 Compteur indisponible ('+error.code+')')});
+ });
+}catch(error){console.error('Initialisation compteur booster:',error);show('🔒 Compteur indisponible')}
 </script>
 </body></html>
 <style>
@@ -4596,7 +4985,7 @@ window.ksCardDescriptions = Object.assign(window.ksCardDescriptions || {}, {"Bri
 #ksOptionsHeader{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid #c6a76b66}
 #ksOptionsHeader strong{font:bold 20px Georgia,serif;color:#ffdf9e}
 #ksOptionsClose{border:1px solid #d6b374;background:#263d55;color:white;border-radius:7px;width:34px;height:34px;font-size:23px;line-height:1}
-#ksOptionsTabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:8px}
+#ksOptionsTabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:8px}
 #ksOptionsTabs button{padding:9px 2px;border:1px solid #a78b5e;border-radius:6px;background:#1c3045;color:#e6e9ee;font-size:clamp(10px,2.5vw,13px);font-weight:700}
 #ksOptionsTabs button[aria-selected="true"]{background:#42658a;color:#fff1ce;border-color:#e0bc77}
 .ks-opt-pane{overflow:auto;min-height:120px;max-height:66dvh;padding:12px 16px 18px;line-height:1.5}
@@ -4621,17 +5010,64 @@ window.ksCardDescriptions = Object.assign(window.ksCardDescriptions || {}, {"Bri
  <button type="button" data-opt="notice" aria-selected="true">Notices</button>
  <button type="button" data-opt="rank" aria-selected="false">Classement</button>
  <button type="button" data-opt="sound" aria-selected="false">Réglages</button>
+ <button type="button" data-opt="collection" aria-selected="false">Collection</button>
  <button type="button" data-opt="shop" aria-selected="false">Magasin</button></nav>
  <div class="ks-opt-pane" data-pane="notice"><h3>Notices du jeu</h3><p>Retrouve les règles et l'assistance de KardShot.</p><button type="button" class="ks-opt-open" id="ksOptionsOpenNotice">Ouvrir les notices</button></div>
  <div class="ks-opt-pane" data-pane="rank" hidden><h3>Classement</h3><p>Consulte le classement des joueurs et des États.</p><button type="button" class="ks-opt-open" id="ksOptionsOpenRank">Voir le classement</button></div>
  <div class="ks-opt-pane" data-pane="sound" hidden><h3>Son du jeu</h3><div class="ks-opt-setting"><label for="ksOptionsSound">Activer les sons du jeu</label><input id="ksOptionsSound" type="checkbox" checked></div><p class="ks-opt-sub">Décoche pour jouer en silence tout en écoutant ta musique sur ton téléphone. Le réglage est conservé.</p></div>
+ <div class="ks-opt-pane" data-pane="collection" hidden>
+ <h3>Collection</h3>
+ <div id="ksCollectionTabs" style="display:flex;gap:10px;margin:12px 0 20px;">
+  <button type="button" data-collection-tab="cards" aria-selected="true" style="flex:1;min-height:44px;border:1px solid #d6b16b;border-radius:9px;background:#416486;color:#fff;font-weight:700;font-size:inherit;">Cartes</button>
+  <button type="button" data-collection-tab="boosters" aria-selected="false" style="flex:1;min-height:44px;border:1px solid #a28b65;border-radius:9px;background:#1d3246;color:#fff;font-weight:700;font-size:inherit;">Boosters achetés</button>
+ </div>
+ <div data-collection-pane="cards">À venir.</div>
+ <div data-collection-pane="boosters" hidden><div class="ks-collection-booster-grid"><a class="ks-collection-booster" href="#" data-ks-booster="starter" aria-label="Ouvrir le Pack Démarrage dans la visualisation 3D" style="text-decoration:none;color:inherit;cursor:pointer"><img src="images/booster/front1.webp" alt="Recto du Pack Démarrage" loading="lazy"><strong>Pack Démarrage</strong><small>30 cartes</small></a></div></div>
+ </div>
  <div class="ks-opt-pane" data-pane="shop" hidden><h3>Magasin</h3><p>À venir.</p></div>
  </section>`;
  document.body.appendChild(root);
+ (function(){
+ const pane=document.querySelector('#ksOptionsModal [data-pane="shop"]');
+ if(!pane)return;
+ // Ajouter les futurs produits ici : le verso est réservé à l'ouverture du booster.
+ const boosters=[{id:1,name:'Pack Démarrage',count:30,front:'images/booster/front1.webp',back:'images/booster/back1.webp'},{id:2,name:'Booster des 100 joueurs classés',count:16,front:'images/booster/front2.webp',back:'images/booster/back2.webp',locked:true}];
+ pane.innerHTML='<h3>Magasin · Boosters</h3><div id="ksBoosterGallery" aria-label="Boosters disponibles"></div>';
+ const gallery=pane.querySelector('#ksBoosterGallery');
+ const slots=Math.ceil(Math.max(6,boosters.length)/6)*6;
+ for(let i=0;i<slots;i++){
+  const data=boosters[i],item=document.createElement('div');item.className='ks-booster-item';
+  if(!data){item.classList.add('ks-booster-empty');item.setAttribute('aria-label','Emplacement futur booster');gallery.appendChild(item);continue;}
+  const img=document.createElement('img');img.src=data.front;img.alt='Recto '+data.name;img.loading='lazy';
+  img.onerror=()=>{img.style.display='none';const msg=document.createElement('span');msg.textContent='Visuel indisponible';msg.className='ks-booster-info';item.prepend(msg)};
+  const name=document.createElement('div');name.className='ks-booster-name';name.textContent=data.name;
+  const info=document.createElement('div');info.className='ks-booster-info';info.textContent=data.count+' cartes';
+  const gift=document.createElement('div');gift.className='ks-booster-gift';
+  if(data.locked){
+   gift.textContent='🔒 Chargement du compteur…';gift.id='ksBooster100Counter';
+   gift.style.background='#4a5263';gift.style.borderColor='#a5a9b2';
+   gift.style.fontSize='clamp(8px,1.1vw,11px)';
+   item.setAttribute('aria-label',data.name+' : verrouillé en attente de vérification Firebase');
+   item.append(img,name,info,gift);
+  }else{gift.textContent='OFFERT';if(data.id===1){item.classList.add('ks-starter-soldout-tile');item.append(img,name,info,gift);}else{item.append(img,name,info,gift);}}
+  gallery.appendChild(item);
+ }
+})();
+
  const close=()=>{root.hidden=true};
  const open=()=>{root.hidden=false;choose('notice')};
  function choose(name){root.querySelectorAll('[data-opt]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.opt===name)));root.querySelectorAll('[data-pane]').forEach(p=>p.hidden=p.dataset.pane!==name)}
  root.querySelectorAll('[data-opt]').forEach(b=>b.addEventListener('click',()=>choose(b.dataset.opt)));
+ root.querySelectorAll('[data-collection-tab]').forEach(b=>b.addEventListener('click',()=>{
+  const selected=b.dataset.collectionTab;
+  root.querySelectorAll('[data-collection-tab]').forEach(tab=>{
+    const active=tab.dataset.collectionTab===selected;
+    tab.setAttribute('aria-selected',String(active));
+    tab.style.background=active?'#416486':'#1d3246';
+  });
+  root.querySelectorAll('[data-collection-pane]').forEach(p=>p.hidden=p.dataset.collectionPane!==selected);
+}));
+ 
  document.getElementById('ksOptionsClose').onclick=close;
  root.addEventListener('click',e=>{if(e.target===root)close()});
  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!root.hidden)close()});
@@ -4696,4 +5132,253 @@ window.ksCardDescriptions = Object.assign(window.ksCardDescriptions || {}, {"Bri
 .turnbar.ks-clock-warning::before{content:""!important;position:absolute!important;inset:-3px!important;border:3px solid #ff202c!important;border-radius:11px!important;background:#f00018!important;box-shadow:0 0 0 2px #ff5151,0 0 18px 7px #ff1111!important;pointer-events:none!important;z-index:0!important;animation:ksV370AlertPulse .75s steps(1,end) infinite!important;}
 .turnbar.ks-clock-warning #timer{position:relative!important;z-index:1!important;color:#fff!important;text-shadow:0 1px 2px #500!important;}
 @keyframes ksV370AlertPulse{0%,49%{opacity:1}50%,100%{opacity:0}}
+</style>
+
+
+<style id="ks-external-dos1-for-all-cards">
+/* Dos externe unique. En cas de chemin indisponible, garder le K visible. */
+.ks241-veil{overflow:hidden!important;border-radius:8px!important;box-sizing:border-box!important}
+.ks241-back{
+  inset:0!important;width:100%!important;height:100%!important;box-sizing:border-box!important;
+  border:3px solid #d8b46e!important;border-radius:8px!important;
+  background:#091a30!important;box-shadow:none!important;overflow:hidden!important;
+}
+.ks241-back::after{content:'K'!important;display:grid!important;place-items:center!important;
+  position:absolute!important;inset:0!important;font:bold min(7vh,50px) Georgia,serif!important;
+  color:#e7c57e!important;text-shadow:0 0 8px #d4a64c88!important}
+html.ks-dos1-ready .ks241-back{
+  background:#091a30 url("https://sweet-halva-c9f3fa.pages.dev/image/dos/dos1.webp") center / 100% 100% no-repeat!important;
+  border:0!important;
+}
+html.ks-dos1-ready .ks241-back::after{content:none!important}
+#ksCardViewer .ksv-back{
+  background:#091a30!important;border:7px solid #d7b776!important;
+  display:grid!important;place-items:center!important;
+}
+#ksCardViewer .ksv-back::after{content:'K';font:bold 110px Georgia,serif;color:#e7c57e;text-shadow:0 0 12px #e7c57e66}
+html.ks-dos1-ready #ksCardViewer .ksv-back{
+  background:#091a30 url("https://sweet-halva-c9f3fa.pages.dev/image/dos/dos1.webp") center / 100% 100% no-repeat!important;
+  border:0!important;
+}
+html.ks-dos1-ready #ksCardViewer .ksv-back::after{content:none}
+</style>
+<script id="ks-dos1-external-preload">
+(function(){
+ const img=new Image();
+ img.onload=function(){if(img.naturalWidth>0)document.documentElement.classList.add('ks-dos1-ready')};
+ img.onerror=function(){document.documentElement.classList.remove('ks-dos1-ready')};
+ img.src='https://sweet-halva-c9f3fa.pages.dev/image/dos/dos1.webp';
+})();
+</script>
+
+<style id="ks-booster-overlay-clean-css">
+#ksBooster3dOverlay{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:2147483647!important;background:#080e18!important;display:none!important;visibility:hidden!important}
+#ksBooster3dOverlay.ks-open{display:block!important;visibility:visible!important}
+#ksBooster3dFrame{position:absolute;inset:0;width:100%;height:100%;border:0;background:#080e18}
+#ksBooster3dClose{position:absolute;top:calc(0px + env(safe-area-inset-top, 0px));right:12px;z-index:2;width:36px;height:36px;box-sizing:border-box;border:1px solid #d6b87b;border-radius:9px;background:#20354b;color:#fff0c9;font:bold 26px/1 system-ui;padding:0;display:grid;place-items:center;cursor:pointer}
+</style>
+<div id="ksBooster3dOverlay" role="dialog" aria-modal="true" aria-label="Visualiseur du booster" aria-hidden="true">
+<iframe id="ksBooster3dFrame" title="Visualiseur 3D KardShot" allow="autoplay; fullscreen"></iframe>
+<button type="button" id="ksBooster3dClose" aria-label="Fermer le visualiseur 3D">✕</button>
+</div>
+<script id="ks-booster-navigation-clean">
+(function(){
+ 'use strict';
+ const overlay=document.getElementById('ksBooster3dOverlay');
+ const frame=document.getElementById('ksBooster3dFrame');
+ const close=document.getElementById('ksBooster3dClose');
+ if(!overlay||!frame||!close)return;
+ let lastActivation=0;
+ function stop(e){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();}
+ function openViewer(e){
+   const node=e.target instanceof Element?e.target:null;
+   const anchor=node?.closest('.ks-collection-booster[data-ks-booster="starter"], .ks-collection-booster[data-ks-booster="100"]');
+   if(!anchor || !anchor.closest('#ksCollectionPortrait, #ksOptionsModal'))return;
+   stop(e);
+   if(e.type==='click' && Date.now()-lastActivation<650)return;
+   lastActivation=Date.now();
+   if(overlay.classList.contains('ks-open'))return;
+   // The visualizer must be attached to the active fullscreen root, if any.
+   const full=document.fullscreenElement || document.webkitFullscreenElement;
+   (full || document.body).appendChild(overlay);
+   frame.src='/test-boosters/visualisation3d.html?pack='+(anchor.dataset.ksBooster==='100'?'100':'30');
+   overlay.classList.add('ks-open');
+   overlay.setAttribute('aria-hidden','false');
+ }
+ function shut(e){if(e)stop(e);overlay.classList.remove('ks-open');overlay.setAttribute('aria-hidden','true');frame.removeAttribute('src');}
+ // Handle touch activation before the Options close control can receive a delayed click.
+ document.addEventListener('pointerup',openViewer,true);
+ document.addEventListener('click',openViewer,true);
+ close.addEventListener('pointerup',shut,true);
+ close.addEventListener('click',shut,true);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('ks-open'))shut(e)},true);
+})();
+</script>
+
+<script id="ks-booster-claim-test-script">
+/* TEST INTERFACE UNIQUEMENT : aucune attribution de cartes, aucune écriture Firebase. */
+(function(){
+ const key='ks_booster100_claim_ui_test_v1';
+ let state='available';try{state=sessionStorage.getItem(key)||'available'}catch(e){}
+ let dismissed=false;
+ function init(){
+ const options=document.getElementById('ksOptionsModal');
+ const gear=document.getElementById('quickHelp');
+ const tab=options?.querySelector('[data-opt="shop"]');
+ const collectionTab=options?.querySelector('[data-opt="collection"]');
+ const gallery=document.getElementById('ksBoosterGallery');
+ const booster=gallery?.querySelectorAll('.ks-booster-item')[1];
+ if(!gear||!tab||!booster)return false;
+ const dialog=document.createElement('div');dialog.id='ksClaimConfirm';dialog.hidden=true;
+ dialog.innerHTML='<div class="ks-confirm-panel" role="dialog" aria-modal="true" aria-label="Confirmation du booster"><div>Récupérer gratuitement le Booster des 100 joueurs classés ?</div><button type="button" data-answer="yes">Oui</button><button type="button" data-answer="no">Non</button></div>';
+ document.body.appendChild(dialog);
+ function dot(parent){let el=parent.querySelector(':scope > .ks-pack-red-dot');if(!el){el=document.createElement('span');el.className='ks-pack-red-dot';parent.appendChild(el)}return el}
+ const gearDot=dot(gear),shopDot=dot(tab),collectionDot=collectionTab?dot(collectionTab):null;
+ const boosterTabSelector='[data-collection-tab="boosters"],[data-portrait-tab="boosters"]';
+ // Le bouton Options masque ses enfants avec overflow:hidden : déplacer son point hors du bouton.
+ document.body.appendChild(gearDot);
+ gearDot.classList.add('ks-gear-floating-dot');
+ function positionGearDot(){
+  const r=gear.getBoundingClientRect();
+  gearDot.style.left=(r.right-4)+'px';gearDot.style.top=(r.top-4)+'px';
+  const x=r.left+r.width/2,y=r.top+r.height/2;
+  const hit=document.elementFromPoint(x,y);
+  const visible=r.width>0&&r.height>0&&x>=0&&y>=0&&x<innerWidth&&y<innerHeight&&!!hit&&(hit===gear||gear.contains(hit));
+  gearDot.style.visibility=visible?'visible':'hidden';
+ }
+ positionGearDot();window.addEventListener('resize',positionGearDot,{passive:true});window.addEventListener('scroll',positionGearDot,{passive:true,capture:true});
+ setInterval(positionGearDot,250);
+ const starter=gallery.querySelectorAll('.ks-booster-item')[0];
+ function syncStarter(){if(!starter)return;starter.classList.add('ks-unified-soldout');starter.classList.remove('ks-starter-soldout-tile');const label=starter.querySelector('.ks-booster-gift');if(label)label.textContent='ÉPUISÉ'}
+ function render(){
+  syncStarter();positionGearDot();
+  shopDot.hidden=state!=='available'||dismissed;
+  if(collectionDot)collectionDot.hidden=state!=='claimed';
+  document.querySelectorAll(boosterTabSelector).forEach(t=>{t.style.position='relative';dot(t).hidden=state!=='claimed'});
+  gearDot.hidden=!((state==='available'&&!dismissed)||state==='claimed');
+  booster.classList.toggle('ks-test-clickable',state==='available' && window.KSBooster100Unlocked===true);
+  booster.classList.toggle('ks-unified-soldout',state!=='available');
+  booster.classList.remove('ks-test-soldout');
+  const gift=booster.querySelector('.ks-booster-gift');if(gift && state!=='available')gift.textContent='ÉPUISÉ';else if(gift && window.KSBooster100Unlocked===true)gift.textContent='OFFERT';
+  const containers=document.querySelectorAll('#ksCollectionPortrait [data-portrait-pane="boosters"] .ks-collection-booster-grid,#ksOptionsModal [data-collection-pane="boosters"] .ks-collection-booster-grid');
+  containers.forEach(grid=>{
+   let tile=grid.querySelector('[data-ks-booster="100"]');
+   if(state==='claimed'){
+    if(!tile){tile=document.createElement('div');tile.className='ks-collection-booster';tile.dataset.ksBooster='100';tile.innerHTML='<img src="images/booster/front2.webp" alt="Booster des 100 joueurs"><strong>Booster des 100 joueurs</strong><small class="ks-test-pending-note">À OUVRIR · TEST</small>';grid.appendChild(tile)}
+   }else tile?.remove();
+   if(tile && state==='claimed'){tile.style.position='relative';dot(tile).hidden=false;}
+  });
+ }
+ function store(){try{sessionStorage.setItem(key,state)}catch(e){}}
+ // Stop accidental navigation: in this phase the 3D opening and Firebase are not connected.
+ for(const eventName of ['pointerup','click'])document.addEventListener(eventName,e=>{
+  if(state!=='available'||window.KSBooster100Unlocked!==true||!booster.contains(e.target))return;
+  e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+  if(eventName==='click')dialog.hidden=false;
+ },true);
+ dialog.addEventListener('click',e=>{
+  const button=e.target.closest('[data-answer]');if(!button)return;
+  if(button.dataset.answer==='yes' && window.KSBooster100Unlocked===true){state='claimed';store()}
+  else dismissed=true;
+  dialog.hidden=true;render();
+ });
+ render();
+ // L'écran Collection portrait est créé à la demande : le bouton n'existe pas encore au premier rendu.
+ // Synchroniser sa pastille lors de son insertion, sans modifier le visualisateur 3D.
+ const portraitObserver=new MutationObserver(()=>{
+  const t=document.querySelector('#ksCollectionPortrait [data-portrait-tab="boosters"]');
+  if(t && state==='claimed' && !t.querySelector(':scope > .ks-pack-red-dot')){
+   t.style.position='relative';dot(t).hidden=false;
+  }
+ });
+ portraitObserver.observe(document.body,{childList:true,subtree:true});
+ return true;
+ }
+ if(!init()){
+  const observer=new MutationObserver(()=>{if(init())observer.disconnect()});
+  observer.observe(document.body,{childList:true,subtree:true});
+ }
+})();
+</script>
+<style>.ks-pack-red-dot[hidden]{display:none!important}</style>
+<style id="ks-unified-shop-status-fix">
+/* Une seule diagonale ÉPUISÉ pour toutes les cases, adaptée à leur largeur. */
+#ksBoosterGallery .ks-booster-item.ks-unified-soldout{position:relative!important;overflow:hidden!important;isolation:isolate;container-type:inline-size}
+#ksBoosterGallery .ks-booster-item.ks-unified-soldout::after{content:"ÉPUISÉ"!important;position:absolute!important;left:50%!important;top:50%!important;width:220%!important;transform:translate(-50%,-50%) rotate(-64deg)!important;transform-origin:center!important;z-index:99!important;display:block!important;font:bold clamp(48px,48cqw,180px)/1 Arial,sans-serif!important;letter-spacing:.025em!important;text-align:center!important;color:#ff253e!important;opacity:.60!important;white-space:nowrap!important;pointer-events:none!important;visibility:visible!important;text-shadow:none!important}
+#ksBoosterGallery .ks-booster-item.ks-unified-soldout .ks-booster-gift{background:#267c49!important;border-color:#a9d99d!important}
+.ks-gear-floating-dot{position:fixed!important;right:auto!important;bottom:auto!important;transform:none!important;z-index:2147482000!important;width:9px!important;height:9px!important;pointer-events:none!important}
+.ks-gear-floating-dot[hidden]{display:none!important}
+</style>
+
+
+<style id="ks-unified-card-overlay-test">
+/* One scale-independent overlay, anchored to each rendered card. */
+.ks-number-host{position:relative!important;container-type:inline-size}
+.ks-unified-number{position:absolute!important;right:2.2%!important;bottom:1.2%!important;z-index:60!important;pointer-events:none!important;font-family:Georgia,serif!important;font-size:clamp(5px,6.3cqw,12px)!important;font-weight:700!important;line-height:1!important;color:#e6c991!important;text-shadow:0 1px 2px #000!important;white-space:nowrap!important}
+/* Collection uses the same metadata layers as the zoom card. */
+#ksCollectionPortrait .ks-owned-art .ks-card-number{display:none!important}
+#ksCollectionPortrait .ks-owned-art .ks-unified-number{font-size:clamp(6px,6.3cqw,11px)!important}
+#ksCollectionPortrait .ks-owned-art .ks-unified-name{position:absolute;bottom:0;left:0;right:0;height:10%;z-index:20;background:#05080bdf;color:#fff5dc;display:flex;align-items:center;justify-content:center;font:bold clamp(8px,9cqw,16px)/1 Georgia,serif;padding:0 18%;text-align:center;white-space:nowrap;overflow:hidden}
+#ksCollectionPortrait .ks-owned-art .ks-unified-shield{position:absolute;left:3%;top:3%;z-index:20;background:#13283e;color:white;border:2px solid #dfc080;clip-path:polygon(0 0,100% 0,100% 75%,50% 100%,0 75%);padding:2% 3% 5%;font:bold clamp(9px,12cqw,21px)/1 Arial,sans-serif;text-shadow:0 1px 2px #000}
+#ksCollectionPortrait .ks-owned-art .ks-unified-pawns{position:absolute;right:4%;top:4%;z-index:20;display:flex;gap:2px}
+#ksCollectionPortrait .ks-owned-art .ks-unified-pawns i{display:block;width:clamp(4px,8cqw,13px);aspect-ratio:1;border-radius:50%;background:#ffe06c;border:1px solid #ae8a35;box-shadow:0 1px 3px #000}
+#ksCollectionPortrait .ks-owned-art .ks-unified-pattern{position:absolute;left:7%;bottom:13%;z-index:20;display:grid;grid-template-columns:repeat(5,1fr);width:37%;aspect-ratio:1;gap:1px;opacity:.85}
+#ksCollectionPortrait .ks-owned-art .ks-unified-pattern i{border:1px solid #a98d55aa;background:#080d1640}
+#ksCollectionPortrait .ks-owned-art .ks-unified-pattern i.active{background:#edb36d88}
+#ksCollectionPortrait .ks-owned-art .ks-unified-pattern i.center{background:#ffdf7b}
+#ksCollectionPortrait .ks-owned-name{display:none!important}
+</style>
+<script id="ks-unified-card-overlay-test-script">
+(function(){
+ const ids=()=>typeof KS_CARD_NUMBERS!=='undefined'?KS_CARD_NUMBERS:{};
+ function overlayNumber(host,name){
+   const number=ids()[name];if(!number||!host)return;
+   host.classList.add('ks-number-host');
+   let node=host.querySelector(':scope > .ks-unified-number');
+   if(!node){node=document.createElement('span');node.className='ks-unified-number';host.appendChild(node)}
+   if(node.textContent!==number)node.textContent=number;
+ }
+ function collection(host,name){
+   if(!host||!name||typeof cards==='undefined'||!cards[name])return;
+   overlayNumber(host,name);
+   if(host.querySelector(':scope > .ks-unified-name'))return;
+   const c=cards[name];
+   const title=document.createElement('span');title.className='ks-unified-name';title.textContent=name;host.appendChild(title);
+   const shield=document.createElement('span');shield.className='ks-unified-shield';shield.textContent=(c.p>=0?'+':'')+c.p;host.appendChild(shield);
+   const pawns=document.createElement('span');pawns.className='ks-unified-pawns';for(let i=0;i<c.cost;i++)pawns.appendChild(document.createElement('i'));host.appendChild(pawns);
+   const pattern=document.createElement('span');pattern.className='ks-unified-pattern';const active=new Set((c.inf||[]).map(([x,y])=>x+','+y));
+   for(let y=-2;y<=2;y++)for(let x=-2;x<=2;x++){const cell=document.createElement('i');if(x===0&&y===0)cell.className='center';else if(active.has(x+','+y))cell.className='active';pattern.appendChild(cell)}host.appendChild(pattern);
+ }
+ function scan(){
+   if(typeof cards==='undefined')return;
+   document.querySelectorAll('#hand .card,#board .slot,#ksDeckScreen .card,#ksdeck-grid .card,#ksDeckScreen button.card,#ksMulligan .card,.mulligan .card,#ksZoomCard .card').forEach(host=>{
+     const name=host.querySelector('.name')?.textContent?.trim()||host.dataset.cardName;
+     if(name&&cards[name])overlayNumber(host,name);
+   });
+   document.querySelectorAll('#ksCollectionCardGrid .ks-owned-card').forEach(tile=>{
+     const name=tile.dataset.cardName||tile.querySelector('.ks-owned-name')?.textContent?.trim();
+     collection(tile.querySelector('.ks-owned-art'),name);
+   });
+ }
+ function init(){scan();let pending=false;const observer=new MutationObserver(()=>{if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;scan()})});observer.observe(document.body,{subtree:true,childList:true});document.addEventListener('click',()=>requestAnimationFrame(scan),true)}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>
+
+<style id="ks-fix-small-card-numbers-70">
+/* Small cards only: 30% of prior 5–12px sizing. Keep collection and zoom unchanged. */
+#ksMulligan .ks-unified-number,
+#hand .ks-unified-number,
+#board .ks-unified-number,
+#deckBuilder .ks-unified-number,
+#ksDeckBuilder .ks-unified-number,
+.ks-deck-card .ks-unified-number,
+.ks-mulligan-card .ks-unified-number {
+  font-size:clamp(1.5px,1.89cqw,3.6px)!important;
+}
+/* Enlarged/held card retains normal readable number. */
+#hand .ks-hold-enlarged .ks-unified-number,
+#board .ks-hold-enlarged .ks-unified-number {
+  font-size:clamp(5px,6.3cqw,12px)!important;
+}
 </style>
