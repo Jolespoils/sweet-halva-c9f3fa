@@ -30,14 +30,40 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (request.method !== 'GET') return json({error:'method_not_allowed'},405);
-    if (url.pathname === '/') return json({service:'KardShot Boosters',status:'configured',firebaseTest:'/firebase-test'});
-    if (url.pathname !== '/firebase-test') return json({error:'not_found'},404);
+    if (url.pathname === '/') return json({service:'KardShot Boosters',status:'configured',firebaseTest:'/firebase-test',structureTest:'/structure-test',boosterStatus:'/booster-status'});
+    if (url.pathname !== '/firebase-test' && url.pathname !== '/structure-test' && url.pathname !== '/booster-status') return json({error:'not_found'},404);
     const secret = env.FIREBASE_SERVICE_ACCOUNT;
     if (!secret) return json({service:'KardShot Boosters',firebase:'missing_secret'},503);
     try {
       const account = JSON.parse(secret);
       if (!account.client_email || !account.private_key) throw new Error('Invalid service account');
       const token = await accessToken(account);
+      if (url.pathname === '/booster-status') {
+        const [ranksResponse, profilesResponse] = await Promise.all([
+          fetch(`${DATABASE_URL}/rankAggregates/players.json?access_token=${encodeURIComponent(token)}`),
+          fetch(`${DATABASE_URL}/rankProfiles.json?access_token=${encodeURIComponent(token)}`)
+        ]);
+        if (!ranksResponse.ok || !profilesResponse.ok) return json({error:'firebase_read_failed'},503);
+        const ranks = (await ranksResponse.json()) || {};
+        const profiles = (await profilesResponse.json()) || {};
+        const count = Object.entries(ranks).filter(([uid, stats]) => {
+          const p = profiles[uid];
+          return p && p.declaredKingshotId && p.state && stats &&
+            (Number(stats.wins || 0) + Number(stats.losses || 0) + Number(stats.draws || 0) > 0);
+        }).length;
+        return json({service:'KardShot Boosters',rankedPlayers:count,threshold:100,unlocked:count>=100,mode:'read_only'});
+      }
+      if (url.pathname === '/structure-test') {
+        const paths = ['playerCards', 'playerBoosters', 'playerDecks', 'leaderboard', 'rankings', 'players', 'users'];
+        const results = {};
+        for (const path of paths) {
+          const res = await fetch(`${DATABASE_URL}/${path}.json?shallow=true&access_token=${encodeURIComponent(token)}`);
+          if (!res.ok) { results[path] = `http_${res.status}`; continue; }
+          const value = await res.json();
+          results[path] = value === null ? 'absent' : 'present';
+        }
+        return json({service:'KardShot Boosters',mode:'read_only',paths:results});
+      }
       // Lecture superficielle de la racine : aucun contenu de la base n’est renvoyé au navigateur.
       const response = await fetch(`${DATABASE_URL}/.json?shallow=true&access_token=${encodeURIComponent(token)}`);
       // Ce test vérifie l’authentification et la lecture, pas encore l’écriture.
