@@ -4498,8 +4498,10 @@ try{
   window.__ksBooster100Unsub=onValue(ref(db,'rankAggregates/players'),snapshot=>{
    let count=0;
    snapshot.forEach(child=>{const v=child.val();if(v && (Number(v.wins||0)+Number(v.losses||0)+Number(v.draws||0))>0)count++});
-   const testOnly=ksTestUserUid===KS_TEST_UID;
-   show(testOnly?'🧪 TEST PRIVÉ · '+count+' / 100 · OFFERT':(count>=100?'🎁 '+count+' / 100 · OFFERT':'🔒 '+count+' / 100'),testOnly||count>=100);
+   const activeUid=auth.currentUser?.uid||ksTestUserUid||'';
+   const testOnly=activeUid===KS_TEST_UID;
+   if(!testOnly)console.warn('Booster privé : UID de session différent de l’UID autorisé',activeUid);
+   show(testOnly?'🧪 TEST PRIVÉ · '+count+' / 100 · OFFERT':(count>=100?'🎁 '+count+' / 100 · OFFERT':'🔒 '+count+' / 100 · UID '+activeUid.slice(0,5)+'…'+activeUid.slice(-5)),testOnly||count>=100);
   },error=>{console.error('Compteur booster Firebase:',error);show('🔒 Compteur indisponible ('+error.code+')')});
  });
 }catch(error){console.error('Initialisation compteur booster:',error);show('🔒 Compteur indisponible')}
