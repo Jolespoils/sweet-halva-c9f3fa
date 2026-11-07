@@ -321,7 +321,7 @@ function finishRevealedCard(crossed=false){
  const side=x0>=0?1:-1;
  const offsets=[.47,.70,.57,.85,.62],tilts=[.045,-.075,.09,-.04,.07];
  const targetX=side*offsets[revealed%offsets.length],targetRot=side*tilts[revealed%tilts.length];
- const targetZ=packCount===30?(-.17+revealed*.003):(-.17+revealed*.018);
+ const targetZ=-.17+revealed*.003;
  const from=performance.now();
  function settle(t){
   const k=Math.min(1,(t-from)/360),e=easeOut(k);
