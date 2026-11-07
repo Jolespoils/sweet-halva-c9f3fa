@@ -5191,7 +5191,7 @@ import {getApps,initializeApp} from 'https://www.gstatic.com/firebasejs/13.1.0/f
 import {getAuth,onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js';
 const app=getApps()[0]||initializeApp({apiKey:'AIzaSyA3O2SD-L3DlQCR7VCcMphlCPnG0LXiE0E',authDomain:'kingshot-cards.firebaseapp.com',databaseURL:'https://kingshot-cards-default-rtdb.europe-west1.firebasedatabase.app/',projectId:'kingshot-cards',appId:'1:633151991828:web:611bf2ed383692f0c6f701'});
 const auth=getAuth(app),API='/api/booster-bridge?route=';
-let status={eligible:false,claimed:false},busy=false,dismissed=false,initialized=false;
+let status={eligible:false,claimed:false},busy=false,dismissed=false,initialized=false,boosterError='',rankedCount=null;
 const logged=()=>{const u=auth.currentUser;return !!(u&&!u.isAnonymous&&u.providerData.some(p=>p.providerId==='google.com'))};
 async function call(path,post=false){const u=auth.currentUser;if(!u)throw Error('Connexion Google requise');const token=await u.getIdToken();const r=await fetch(API+encodeURIComponent(path),{method:post?'POST':'GET',headers:{Authorization:'Bearer '+token,...(post?{'Content-Type':'application/json'}:{})},...(post?{body:'{}'}:{})});const data=await r.json().catch(()=>({}));if(!r.ok)throw Error(data.error||data.detail||'Erreur Worker '+r.status);return data;}
 function init(){if(initialized)return true;
@@ -5209,9 +5209,30 @@ function init(){if(initialized)return true;
  shopDot.hidden=!available||dismissed;if(collectionDot)collectionDot.hidden=!claimed;gearDot.hidden=!((available&&!dismissed)||claimed);
  document.querySelectorAll('[data-collection-tab="boosters"],[data-portrait-tab="boosters"]').forEach(t=>{t.style.position='relative';dot(t).hidden=!claimed});
  booster.classList.toggle('ks-test-clickable',available);booster.classList.toggle('ks-unified-soldout',claimed);booster.classList.remove('ks-test-soldout');
- const gift=booster.querySelector('.ks-booster-gift');if(gift)gift.textContent=claimed?'ÉPUISÉ':available?'OFFERT':'VERROUILLÉ';
+ const gift=booster.querySelector('.ks-booster-gift');
+ if(gift){
+  const count=Number.isFinite(Number(status.rankedPlayers))&&status.rankedPlayers!=null?Number(status.rankedPlayers):rankedCount;
+  gift.textContent=claimed?'ÉPUISÉ':available?'OFFERT':boosterError?'CONNEXION IMPOSSIBLE':count!==null?`🔒 ${count} / 100`:'VERROUILLÉ';
+  gift.classList.toggle('ks-booster-locked-grey',!claimed&&!available);
+  gift.title=boosterError||(!available?'Déblocage collectif à 100 joueurs classés':'');
+ }
+ let notice=booster.querySelector('.ks-booster-connection-error');
+ if(boosterError){if(!notice){notice=document.createElement('small');notice.className='ks-booster-connection-error';booster.appendChild(notice)}notice.textContent=boosterError}
+ else notice?.remove();
  document.querySelectorAll('#ksCollectionPortrait [data-portrait-pane="boosters"] .ks-collection-booster-grid,#ksOptionsModal [data-collection-pane="boosters"] .ks-collection-booster-grid').forEach(grid=>{let tile=grid.querySelector('[data-ks-booster="100"]');if(claimed){if(!tile){tile=document.createElement('div');tile.className='ks-collection-booster';tile.dataset.ksBooster='100';tile.innerHTML='<img src="images/booster/front2.webp" alt="Booster des 100 joueurs"><strong>Booster des 100 joueurs</strong><small class="ks-test-pending-note">16 cartes attribuées</small>';grid.appendChild(tile)}tile.style.position='relative';dot(tile).hidden=false}else tile?.remove()});}
- async function refresh(){if(!logged()){status={eligible:false,claimed:false};render();return}try{status=await call('/booster-eligibility');render()}catch(e){console.warn('Booster100 : vérification impossible',e);status={eligible:false,claimed:false};render()}}
+ async function refresh(){
+  boosterError='';
+  try{
+   const r=await fetch(API+encodeURIComponent('/booster-status'),{cache:'no-store'});
+   const data=await r.json().catch(()=>({}));
+   if(!r.ok)throw Error(data.error||data.detail||`HTTP ${r.status}`);
+   if(Number.isFinite(Number(data.rankedPlayers)))rankedCount=Number(data.rankedPlayers);
+  }catch(e){boosterError='Statut indisponible : '+e.message;console.warn('Booster100 : statut impossible',e)}
+  if(!logged()){status={eligible:false,claimed:false};render();return}
+  try{status=await call('/booster-eligibility');boosterError='';if(Number.isFinite(Number(status.rankedPlayers)))rankedCount=Number(status.rankedPlayers)}
+  catch(e){console.warn('Booster100 : vérification impossible',e);status={eligible:false,claimed:false};boosterError='Vérification impossible : '+e.message}
+  render();
+ }
  for(const type of ['pointerup','click'])document.addEventListener(type,e=>{if(!booster.contains(e.target)||!status.eligible||status.claimed)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();if(type==='click'){msg.textContent='';dialog.hidden=false}},true);
  dialog.addEventListener('click',async e=>{const btn=e.target.closest('[data-answer]');if(!btn||busy)return;if(btn.dataset.answer==='no'){dismissed=true;dialog.hidden=true;render();return}busy=true;btn.disabled=true;msg.textContent='Attribution Firebase en cours…';try{const result=await call('/booster-claim',true);if(!result.ok||!Array.isArray(result.cards)||result.cards.length!==16)throw Error('Réponse du booster invalide');await refresh();if(!status.claimed)throw Error('Attribution non confirmée');dialog.hidden=true;window.dispatchEvent(new CustomEvent('ks-booster100-granted',{detail:{cards:result.cards}}))}catch(err){msg.textContent='Échec : '+err.message}finally{busy=false;btn.disabled=false}});
  new MutationObserver(()=>{if(status.claimed)document.querySelectorAll('[data-portrait-tab="boosters"]').forEach(t=>{t.style.position='relative';dot(t).hidden=false})}).observe(document.body,{childList:true,subtree:true});
@@ -5219,6 +5240,10 @@ function init(){if(initialized)return true;
  if(!init()){const obs=new MutationObserver(()=>{if(init())obs.disconnect()});obs.observe(document.body,{childList:true,subtree:true})}
 </script>
 <style>.ks-pack-red-dot[hidden]{display:none!important}</style>
+<style id="ks-booster100-locked-status">
+#ksBoosterGallery .ks-booster-item .ks-booster-gift.ks-booster-locked-grey{background:#505b6d!important;border-color:#a2a9b6!important;color:#f5f5f5!important;box-shadow:none!important;font-size:clamp(11px,1.3vw,17px)!important;white-space:nowrap!important}
+#ksBoosterGallery .ks-booster-connection-error{display:block;color:#ffc4a8;font-size:11px;line-height:1.2;text-align:center;margin-top:4px;overflow-wrap:anywhere}
+</style>
 <style id="ks-unified-shop-status-fix">
 /* Une seule diagonale ÉPUISÉ pour toutes les cases, adaptée à leur largeur. */
 #ksBoosterGallery .ks-booster-item.ks-unified-soldout{position:relative!important;overflow:hidden!important;isolation:isolate;container-type:inline-size}
