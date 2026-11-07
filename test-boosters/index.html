@@ -4477,6 +4477,8 @@ html:has(#ksCardViewer:not([hidden])) #ksCollectionPortrait .ks-card-number{visi
 import {getApps} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js';
 import {getAuth,onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js';
 import {getDatabase,ref,onValue} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js';
+const KS_TEST_UID='NlYgDB1LpLWCQxgnEyLpTXsAgKB2';
+let ksTestUserUid=null;
 const waitForApp=async()=>{for(let i=0;i<80;i++){if(getApps().length)return getApps()[0];await new Promise(r=>setTimeout(r,100))}throw Error('Firebase non initialisé')};
 function show(message,unlocked=false){
  window.KSBooster100Unlocked=unlocked;
@@ -4489,13 +4491,15 @@ function show(message,unlocked=false){
 try{
  const app=await waitForApp(),auth=getAuth(app),db=getDatabase(app);
  onAuthStateChanged(auth,user=>{
+  ksTestUserUid=user?.uid||null;
   if(!user){show('🔒 Connexion requise');return}
   show('🔒 Lecture du classement…');
   if(window.__ksBooster100Unsub)window.__ksBooster100Unsub();
   window.__ksBooster100Unsub=onValue(ref(db,'rankAggregates/players'),snapshot=>{
    let count=0;
    snapshot.forEach(child=>{const v=child.val();if(v && (Number(v.wins||0)+Number(v.losses||0)+Number(v.draws||0))>0)count++});
-   show(count>=100?'🎁 '+count+' / 100 · OFFERT':'🔒 '+count+' / 100',count>=100);
+   const testOnly=ksTestUserUid===KS_TEST_UID;
+   show(testOnly?'🧪 TEST PRIVÉ · '+count+' / 100 · OFFERT':(count>=100?'🎁 '+count+' / 100 · OFFERT':'🔒 '+count+' / 100'),testOnly||count>=100);
   },error=>{console.error('Compteur booster Firebase:',error);show('🔒 Compteur indisponible ('+error.code+')')});
  });
 }catch(error){console.error('Initialisation compteur booster:',error);show('🔒 Compteur indisponible')}
@@ -5216,7 +5220,7 @@ html.ks-dos1-ready #ksCardViewer .ksv-back::after{content:none}
 </script>
 
 <script id="ks-booster-claim-test-script">
-/* TEST INTERFACE UNIQUEMENT : aucune attribution de cartes, aucune écriture Firebase. */
+/* TEST INTERFACE UNIQUEMENT : aucune attribution de cartes, aucune écriture Firebase. Le déblocage anticipé est visuel et réservé à l'UID de test. */
 (function(){
  const key='ks_booster100_claim_ui_test_v1';
  let state='available';try{state=sessionStorage.getItem(key)||'available'}catch(e){}
