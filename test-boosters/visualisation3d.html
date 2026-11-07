@@ -450,7 +450,6 @@ function slideSleeve(q){
   sleeveProgress=Math.max(0,Math.min(1,q));
   soundSleeveMovement(previousSleeveProgress,sleeveProgress);
   lower.visible=true;
-  cardGroup.visible=true;
   lower.position.y=-5.85*sleeveProgress;
   lower.rotation.z=-.025*sleeveProgress;
   document.getElementById('tearHint').textContent=sleeveProgress>=.55
