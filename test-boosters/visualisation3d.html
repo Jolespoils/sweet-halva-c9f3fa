@@ -172,7 +172,12 @@ function makeCardFront(info){
   maskCardCorners(x,480,720,17);
   maskCardCorners(x,480,720,13);
   tex.needsUpdate=true;
- };im.onerror=()=>{const ctx=c.getContext("2d");ctx.fillStyle="#10172b";ctx.fillRect(0,0,480,720);ctx.fillStyle="#f1d491";ctx.font="bold 25px Arial";ctx.textAlign="center";ctx.fillText(info.name,240,340);ctx.font="18px Arial";ctx.fillText("Illustration indisponible",240,385);tex.needsUpdate=true;};
+ };im.onerror=()=>{const ctx=c.getContext("2d");const grad=ctx.createLinearGradient(0,0,480,720);grad.addColorStop(0,"#294363");grad.addColorStop(.55,"#172c49");grad.addColorStop(1,"#44304e");ctx.fillStyle=grad;ctx.fillRect(0,0,480,720);
+ctx.strokeStyle="#d9bb80";ctx.lineWidth=12;ctx.strokeRect(8,8,464,704);
+ctx.strokeStyle="#9b8359";ctx.lineWidth=2;ctx.strokeRect(22,22,436,676);
+ctx.fillStyle="#d9bb80";ctx.font="bold 100px Georgia";ctx.textAlign="center";ctx.fillText("K",240,290);
+ctx.font="bold 32px Georgia";ctx.fillStyle="#fff0c8";ctx.fillText(info.name,240,510);
+ctx.font="20px Arial";ctx.fillStyle="#d9bb80";ctx.fillText("Illustration à ajouter",240,555);tex.needsUpdate=true;};
  if(info.image){im.src=info.image}else{im.onerror();}
  return new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide,transparent:true,alphaTest:.025,depthWrite:true});
 }
@@ -377,7 +382,7 @@ function syncTearSound(progress){
  source.start(t,offset,Math.min(tearBuffer.duration-offset,length*rate));source.stop(t+length+.005);
  tearVoice=source;tearGain=gain;
 }
-function applyTear(p){syncTearSound(Math.max(tearProgress,Math.min(1,p)));tearProgress=Math.max(tearProgress,Math.min(1,p));let visible=tearProgress>.025;lipLow.visible=visible;lipTop.visible=visible;cardGroup.visible=visible;cardGroup.position.y=Math.max(0,tearProgress-.1)*.18;let q=tearProgress;upper.position.x=q*.11;upper.position.y=q*.065;upper.rotation.z=-q*.035;upper.position.z=q*.04;if(q>=1&&!topThrown){tearDone=true;topThrown=true;targetX=0;targetY=0;rotateId=null;document.getElementById('tearHint').textContent=`Glisse un doigt vers le bas sur le sachet pour libérer les ${packCount} cartes.`;let t0=performance.now();function fly(t){let k=Math.min(1,(t-t0)/850);upper.position.x=.11+k*3.4;upper.position.y=.065+k*1.5;upper.rotation.z=-.035-k*.6;if(k<1)requestAnimationFrame(fly);else upper.visible=false}requestAnimationFrame(fly)}}
+function applyTear(p){syncTearSound(Math.max(tearProgress,Math.min(1,p)));tearProgress=Math.max(tearProgress,Math.min(1,p));let visible=tearProgress>.025;lipLow.visible=visible;lipTop.visible=visible;cardGroup.visible=tearDone && sleeveProgress>=.55;cardGroup.position.y=Math.max(0,tearProgress-.1)*.18;let q=tearProgress;upper.position.x=q*.11;upper.position.y=q*.065;upper.rotation.z=-q*.035;upper.position.z=q*.04;if(q>=1&&!topThrown){cardGroup.visible=false;tearDone=true;topThrown=true;targetX=0;targetY=0;rotateId=null;document.getElementById('tearHint').textContent=`Glisse un doigt vers le bas sur le sachet pour libérer les ${packCount} cartes.`;let t0=performance.now();function fly(t){let k=Math.min(1,(t-t0)/850);upper.position.x=.11+k*3.4;upper.position.y=.065+k*1.5;upper.rotation.z=-.035-k*.6;if(k<1)requestAnimationFrame(fly);else upper.visible=false}requestAnimationFrame(fly)}}
 // V53 TEST — glissement sonore bidirectionnel, asservi à la distance du doigt.
 // Audio chargé depuis le même hébergement externe que les illustrations.
 const sleeveAudioUrl='https://sweet-halva-c9f3fa.pages.dev/son/slide.mp3';
@@ -444,7 +449,8 @@ function slideSleeve(q){
   const previousSleeveProgress=sleeveProgress;
   sleeveProgress=Math.max(0,Math.min(1,q));
   soundSleeveMovement(previousSleeveProgress,sleeveProgress);
-  lower.visible=true;
+  lower.visible=sleeveProgress<.55;
+  cardGroup.visible=sleeveProgress>=.55;
   lower.position.y=-5.85*sleeveProgress;
   lower.rotation.z=-.025*sleeveProgress;
   document.getElementById('tearHint').textContent=sleeveProgress>=.55
