@@ -113,7 +113,7 @@ function shufflePack(){
 let revealed=0,cardZoomMode=false;
 function makeCardFront(info){
  const c=document.createElement('canvas');c.width=480;c.height=720;
- const x=c.getContext('2d');const im=new Image();im.crossOrigin="anonymous";im.onload=()=>{
+ const x=c.getContext('2d');const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;const im=new Image();im.crossOrigin="anonymous";im.onload=()=>{
   // Clip illustration strictly inside the golden frame: no artwork bleeding at zoom.
   x.fillStyle='#d9bb80';roundedCardPath(x,480,720,13);x.fill();
   x.save();roundedCardPath(x,480,720,13);x.clip();x.beginPath();x.roundRect(12,12,456,696,8);x.clip();
@@ -173,7 +173,6 @@ function makeCardFront(info){
   maskCardCorners(x,480,720,13);
   tex.needsUpdate=true;
  };im.onerror=()=>{const ctx=c.getContext("2d");ctx.fillStyle="#10172b";ctx.fillRect(0,0,480,720);ctx.fillStyle="#f1d491";ctx.font="bold 25px Arial";ctx.textAlign="center";ctx.fillText(info.name,240,340);ctx.font="18px Arial";ctx.fillText("Illustration indisponible",240,385);tex.needsUpdate=true;};
- const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;
  if(info.image){im.src=info.image}else{im.onerror();}
  return new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide,transparent:true,alphaTest:.025,depthWrite:true});
 }
