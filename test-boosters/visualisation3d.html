@@ -116,9 +116,9 @@ let revealed=0,cardZoomMode=false;
 function printCardNumber(ctx,info){
  const number=String(info.numero||'').padStart(4,'0');
  if(!/^\d{4}$/.test(number))return;
- ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';
- ctx.font='bold 19px Arial';ctx.lineWidth=3;ctx.strokeStyle='rgba(0,0,0,.85)';
- ctx.strokeText(number+'/0046',240,620);ctx.fillStyle='#ffe8b4';ctx.fillText(number+'/0046',240,620);ctx.restore();
+ ctx.save();ctx.textAlign='right';ctx.textBaseline='alphabetic';
+ ctx.font='bold 14px Arial';ctx.lineWidth=2;ctx.strokeStyle='rgba(0,0,0,.85)';
+ ctx.strokeText(number,449,699);ctx.fillStyle='#ffe8b4';ctx.fillText(number,449,699);ctx.restore();
 }
 function makeCardFront(info){
  const c=document.createElement('canvas');c.width=480;c.height=720;
