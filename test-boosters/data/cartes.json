@@ -867,7 +867,8 @@
         "photoY": 50,
         "photoZoom": 100,
         "remColor": "red"
-      }
+      },
+      "image": "/images/cartes/brise-montagne.webp"
     },
     {
       "numero": "0032",
@@ -990,7 +991,8 @@
         "photoY": 50,
         "photoZoom": 100,
         "remColor": "red"
-      }
+      },
+      "image": "/images/cartes/griffe-tonnerre.webp"
     },
     {
       "numero": "0033",
@@ -1113,7 +1115,8 @@
         "photoY": 50,
         "photoZoom": 100,
         "remColor": "red"
-      }
+      },
+      "image": "/images/cartes/aile-tempete.webp"
     },
     {
       "numero": "0034",
@@ -1241,7 +1244,8 @@
         },
         "selectedTargetedAbility": "buff",
         "targetedAmount": 2
-      }
+      },
+      "image": "/images/cartes/vespera.webp"
     },
     {
       "numero": "0035",
@@ -1371,7 +1375,8 @@
           "trigger": "destroyed",
           "scope": "allies"
         }
-      }
+      },
+      "image": "/images/cartes/grimbok.webp"
     },
     {
       "numero": "0036",
@@ -1500,7 +1505,8 @@
         "selectedTargetedAbility": "weaken",
         "targetedAmount": 2,
         "targetedScope": "enemies"
-      }
+      },
+      "image": "/images/cartes/kragna.webp"
     },
     {
       "numero": "0037",
@@ -1622,7 +1628,8 @@
         "photoX": 50,
         "photoY": 50,
         "photoZoom": 100
-      }
+      },
+      "image": "/images/cartes/morgha.webp"
     },
     {
       "numero": "0038",
@@ -1750,7 +1757,8 @@
         },
         "selectedTargetedAbility": "weaken",
         "targetedAmount": 6
-      }
+      },
+      "image": "/images/cartes/sylvara.webp"
     },
     {
       "numero": "0039",
@@ -1872,7 +1880,8 @@
         "photoX": 43,
         "photoY": 75,
         "photoZoom": 101
-      }
+      },
+      "image": "/images/cartes/vargul.webp"
     },
     {
       "numero": "0040",
@@ -2000,7 +2009,8 @@
         },
         "selectedTargetedAbility": "weaken",
         "targetedAmount": 3
-      }
+      },
+      "image": "/images/cartes/thorgar.webp"
     },
     {
       "numero": "0041",
@@ -2131,7 +2141,8 @@
           "trigger": "otherPlayed",
           "scope": "allies"
         }
-      }
+      },
+      "image": "/images/cartes/kenshiro.webp"
     },
     {
       "numero": "0042",
@@ -2261,7 +2272,8 @@
           "trigger": "otherPlayed",
           "scope": "allies"
         }
-      }
+      },
+      "image": "/images/cartes/amara.webp"
     },
     {
       "numero": "0043",
@@ -2391,7 +2403,8 @@
           "trigger": "destroyed",
           "scope": "enemies"
         }
-      }
+      },
+      "image": "/images/cartes/rashan.webp"
     },
     {
       "numero": "0044",
@@ -2520,7 +2533,8 @@
         "selectedTargetedAbility": "buff",
         "targetedAmount": 4,
         "targetedScope": "allies"
-      }
+      },
+      "image": "/images/cartes/calyra.jpeg"
     },
     {
       "numero": "0045",
@@ -2649,7 +2663,8 @@
         "selectedTargetedAbility": "weaken",
         "targetedAmount": 2,
         "targetedScope": "enemies"
-      }
+      },
+      "image": "/images/cartes/zaphira.jpeg"
     },
     {
       "numero": "0046",
@@ -2778,7 +2793,8 @@
         "selectedTargetedAbility": "buff",
         "targetedAmount": 3,
         "targetedScope": "allies"
-      }
+      },
+      "image": "/images/cartes/shenlong.jpeg"
     }
   ],
   "avertissement": "Les numéros 0031 à 0046 sont provisoires (ordre des 3 packs dans le HTML), non attribués par le jeu; KS_RELEASE_CARDS_30 limite le catalogue public aux 30 premières. Ne pas utiliser ces numéros comme identifiants officiels."
