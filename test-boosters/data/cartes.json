@@ -1,0 +1,2785 @@
+{
+  "schema": 1,
+  "source": "Extraction du HTML KardShot_TEST_Point_Rouge_Onglet_Boosters_Corrige.html : 30 cartes publiques et 16 cartes enregistrées hors catalogue public",
+  "cartes": [
+    {
+      "numero": "0001",
+      "nom": "Ravik",
+      "cout": 1,
+      "puissance": 2,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0002",
+      "nom": "Kaelan",
+      "cout": 1,
+      "puissance": 1,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "bonus": [
+        [
+          1,
+          0
+        ]
+      ],
+      "plus": 1,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0003",
+      "nom": "Nerya",
+      "cout": 1,
+      "puissance": 2,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0004",
+      "nom": "Durnak",
+      "cout": 1,
+      "puissance": 3,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          -1
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0005",
+      "nom": "Loup gris",
+      "cout": 1,
+      "puissance": 2,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -2,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0006",
+      "nom": "Lynx",
+      "cout": 1,
+      "puissance": 3,
+      "influence": [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0007",
+      "nom": "Bison",
+      "cout": 1,
+      "puissance": 2,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0008",
+      "nom": "Guépard",
+      "cout": 1,
+      "puissance": 1,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0009",
+      "nom": "Élan",
+      "cout": 1,
+      "puissance": 2,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0010",
+      "nom": "Ours grizzly",
+      "cout": 1,
+      "puissance": 2,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0011",
+      "nom": "Lion",
+      "cout": 3,
+      "puissance": 6,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0012",
+      "nom": "Rhinocéros géant",
+      "cout": 2,
+      "puissance": 4,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0013",
+      "nom": "Bison puissant",
+      "cout": 1,
+      "puissance": 2,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [
+        [
+          0,
+          1,
+          "enemy"
+        ]
+      ],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0014",
+      "nom": "Grand élan",
+      "cout": 1,
+      "puissance": 1,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -2,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0015",
+      "nom": "Panthère noire alpha",
+      "cout": 2,
+      "puissance": 5,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          -1
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0016",
+      "nom": "Lion blanc royal",
+      "cout": 2,
+      "puissance": 3,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "R",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0017",
+      "nom": "Ryokan",
+      "cout": 1,
+      "puissance": 1,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "bonus": [
+        [
+          1,
+          1
+        ]
+      ],
+      "plus": 2,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "SR",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0018",
+      "nom": "Astrid",
+      "cout": 1,
+      "puissance": 2,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          -2,
+          0
+        ]
+      ],
+      "bonus": [
+        [
+          0,
+          1
+        ]
+      ],
+      "plus": 2,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "SR",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0019",
+      "nom": "Zahir",
+      "cout": 1,
+      "puissance": 2,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "bonus": [
+        [
+          0,
+          1
+        ]
+      ],
+      "plus": 1,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "SR",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0020",
+      "nom": "Meiyun",
+      "cout": 2,
+      "puissance": 4,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "SR",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0021",
+      "nom": "Brogmar",
+      "cout": 1,
+      "puissance": 2,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          -1
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "SR",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0022",
+      "nom": "Zalika",
+      "cout": 1,
+      "puissance": 1,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "bonus": [
+        [
+          0,
+          1
+        ]
+      ],
+      "plus": 2,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "SR",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0023",
+      "nom": "Temür",
+      "cout": 2,
+      "puissance": 3,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -2,
+          1
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [
+        [
+          0,
+          1,
+          "enemy"
+        ]
+      ],
+      "remplacement": "",
+      "rarete": "SR",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0024",
+      "nom": "Eldric",
+      "cout": 2,
+      "puissance": 4,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          2
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "SR",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0025",
+      "nom": "Eryndra",
+      "cout": 2,
+      "puissance": 5,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -2,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "SSR",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0026",
+      "nom": "Sayuri",
+      "cout": 2,
+      "puissance": 4,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "SSR",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0027",
+      "nom": "Indira",
+      "cout": 3,
+      "puissance": 7,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "",
+      "rarete": "SSR",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0028",
+      "nom": "Argan",
+      "cout": 0,
+      "puissance": 4,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [],
+      "remplacement": "ally",
+      "rarete": "REM",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0029",
+      "nom": "Thalor",
+      "cout": 0,
+      "puissance": 2,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "bonus": [
+        [
+          0,
+          1
+        ]
+      ],
+      "plus": 3,
+      "destruction": [],
+      "remplacement": "enemy",
+      "rarete": "REM",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0030",
+      "nom": "Takoda",
+      "cout": 0,
+      "puissance": 1,
+      "influence": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          -1
+        ]
+      ],
+      "bonus": [],
+      "plus": 0,
+      "destruction": [
+        [
+          0,
+          -1,
+          "all"
+        ]
+      ],
+      "remplacement": "all",
+      "rarete": "REM",
+      "statut": "catalogue_public"
+    },
+    {
+      "numero": "0031",
+      "nom": "Brise-Montagne",
+      "source": "KS262_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793487354617-gdm8337oaf6",
+        "name": "Brise-Montagne",
+        "cost": 2,
+        "effect": "none",
+        "effectStrength": 65,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 3,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "remColor": "red"
+      }
+    },
+    {
+      "numero": "0032",
+      "nom": "Griffe-Tonnerre",
+      "source": "KS262_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793487517446-5cphtr6klgu",
+        "name": "Griffe-Tonnerre",
+        "cost": 2,
+        "effect": "none",
+        "effectStrength": 65,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 2,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "remColor": "red"
+      }
+    },
+    {
+      "numero": "0033",
+      "nom": "Aile-Tempête",
+      "source": "KS262_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793487753733-tjmp4ndwh5l",
+        "name": "Aile-Tempête",
+        "cost": 3,
+        "effect": "none",
+        "effectStrength": 60,
+        "grid": [
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 3,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "remColor": "red"
+      }
+    },
+    {
+      "numero": "0034",
+      "nom": "Vespera",
+      "source": "KS262_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793541292835-s4ps1vysyyo",
+        "name": "Vespera",
+        "cost": 3,
+        "effect": "none",
+        "effectStrength": 0,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": "buff"
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 5,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "ability": {
+          "type": "none",
+          "amount": 2
+        },
+        "selectedTargetedAbility": "buff",
+        "targetedAmount": 2
+      }
+    },
+    {
+      "numero": "0035",
+      "nom": "Grimbok",
+      "source": "KS262_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793541735836-bizl4hv0lw",
+        "name": "Grimbok",
+        "cost": 3,
+        "effect": "none",
+        "effectStrength": 25,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 5,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "ability": {
+          "type": "lastBreath",
+          "amount": 1,
+          "mode": "bonus",
+          "target": "",
+          "trigger": "destroyed",
+          "scope": "allies"
+        }
+      }
+    },
+    {
+      "numero": "0036",
+      "nom": "Kragna",
+      "source": "KS263_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793547946907-y849r75gvtd",
+        "name": "Kragna",
+        "cost": 3,
+        "effect": "none",
+        "effectStrength": 65,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 1,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "ability": {
+          "type": "none",
+          "amount": 2
+        },
+        "selectedTargetedAbility": "weaken",
+        "targetedAmount": 2,
+        "targetedScope": "enemies"
+      }
+    },
+    {
+      "numero": "0037",
+      "nom": "Morgha",
+      "source": "KS263_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793548643450-a4nh0ovgfe9",
+        "name": "Morgha",
+        "cost": 1,
+        "effect": "none",
+        "effectStrength": 65,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 8,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100
+      }
+    },
+    {
+      "numero": "0038",
+      "nom": "Sylvara",
+      "source": "KS263_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793549294042-cy0k5gi21zh",
+        "name": "Sylvara",
+        "cost": 3,
+        "effect": "none",
+        "effectStrength": 10,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 3,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "ability": {
+          "type": "none",
+          "amount": 2
+        },
+        "selectedTargetedAbility": "weaken",
+        "targetedAmount": 6
+      }
+    },
+    {
+      "numero": "0039",
+      "nom": "Vargul",
+      "source": "KS263_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793549433659-83u3iqebz78",
+        "name": "Vargul",
+        "cost": 3,
+        "effect": "none",
+        "effectStrength": 65,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 1,
+        "photoX": 43,
+        "photoY": 75,
+        "photoZoom": 101
+      }
+    },
+    {
+      "numero": "0040",
+      "nom": "Thorgar",
+      "source": "KS263_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793549586526-1o29zha1pcn",
+        "name": "Thorgar",
+        "cost": 3,
+        "effect": "none",
+        "effectStrength": 10,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 3,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "ability": {
+          "type": "none",
+          "amount": 2
+        },
+        "selectedTargetedAbility": "weaken",
+        "targetedAmount": 3
+      }
+    },
+    {
+      "numero": "0041",
+      "nom": "Kenshiro",
+      "source": "KS263_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793549755865-zhy7coh38kr",
+        "name": "Kenshiro",
+        "cost": 3,
+        "effect": "none",
+        "effectStrength": 65,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 2,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "selectedTargetedAbility": "",
+        "ability": {
+          "type": "growth",
+          "amount": 1,
+          "mode": "bonus",
+          "target": "",
+          "trigger": "otherPlayed",
+          "scope": "allies"
+        }
+      }
+    },
+    {
+      "numero": "0042",
+      "nom": "Amara",
+      "source": "KS263_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793549937685-0f3b24suw16",
+        "name": "Amara",
+        "cost": 3,
+        "effect": "none",
+        "effectStrength": 65,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 1,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "ability": {
+          "type": "growth",
+          "amount": 1,
+          "mode": "bonus",
+          "target": "",
+          "trigger": "otherPlayed",
+          "scope": "allies"
+        }
+      }
+    },
+    {
+      "numero": "0043",
+      "nom": "Rashan",
+      "source": "KS263_PACK",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793550077400-b9icxsm90r4",
+        "name": "Rashan",
+        "cost": 3,
+        "effect": "none",
+        "effectStrength": 65,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 6,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "ability": {
+          "type": "lastBreath",
+          "amount": 3,
+          "mode": "malus",
+          "target": "",
+          "trigger": "destroyed",
+          "scope": "enemies"
+        }
+      }
+    },
+    {
+      "numero": "0044",
+      "nom": "Calyra",
+      "source": "KS308_DEV_CARDS",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793627383793-xcrg8cn2plc",
+        "name": "Calyra",
+        "cost": 2,
+        "effect": "none",
+        "effectStrength": 65,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": "buff"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 3,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "ability": {
+          "type": "none",
+          "amount": 2
+        },
+        "selectedTargetedAbility": "buff",
+        "targetedAmount": 4,
+        "targetedScope": "allies"
+      }
+    },
+    {
+      "numero": "0045",
+      "nom": "Zafira",
+      "source": "KS308_DEV_CARDS",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793627727251-zzex5fbfpz",
+        "name": "Zafira",
+        "cost": 2,
+        "effect": "none",
+        "effectStrength": 65,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": "weaken"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 3,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "ability": {
+          "type": "none",
+          "amount": 2
+        },
+        "selectedTargetedAbility": "weaken",
+        "targetedAmount": 2,
+        "targetedScope": "enemies"
+      }
+    },
+    {
+      "numero": "0046",
+      "nom": "Shenlong",
+      "source": "KS308_DEV_CARDS",
+      "statut": "programme_hors_catalogue_public",
+      "donnees_atelier": {
+        "id": "1793628042143-uujuzngr9wk",
+        "name": "Shenlong",
+        "cost": 2,
+        "effect": "none",
+        "effectStrength": 65,
+        "grid": [
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": "buff"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "influence",
+            "ability": "buff"
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          },
+          {
+            "effect": "",
+            "ability": ""
+          }
+        ],
+        "intensity": 1,
+        "special": "none",
+        "approved": true,
+        "points": 1,
+        "photoX": 50,
+        "photoY": 50,
+        "photoZoom": 100,
+        "ability": {
+          "type": "none",
+          "amount": 2
+        },
+        "selectedTargetedAbility": "buff",
+        "targetedAmount": 3,
+        "targetedScope": "allies"
+      }
+    }
+  ],
+  "avertissement": "Les numéros 0031 à 0046 sont provisoires (ordre des 3 packs dans le HTML), non attribués par le jeu; KS_RELEASE_CARDS_30 limite le catalogue public aux 30 premières. Ne pas utiliser ces numéros comme identifiants officiels."
+}
