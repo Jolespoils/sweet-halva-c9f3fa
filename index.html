@@ -5375,7 +5375,7 @@ function init(){if(initialized)return true;
 </style>
 <script id="ks-unified-card-overlay-test-script">
 (function(){
- const ids=()=>typeof KS_CARD_NUMBERS!=='undefined'?KS_CARD_NUMBERS:{};
+ const ids=()=>typeof KS_CARD_NUMBERS_ALL!=='undefined'?KS_CARD_NUMBERS_ALL:(typeof KS_CARD_NUMBERS!=='undefined'?KS_CARD_NUMBERS:{});
  function overlayNumber(host,name){
    const number=ids()[name];if(!number||!host)return;
    host.classList.add('ks-number-host');
