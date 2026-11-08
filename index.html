@@ -4013,7 +4013,7 @@ let unsubscribeInventory=null;
 function publishInventory(connected,cards){window.KSBoosterInventory={connected,cards:cards&&typeof cards==='object'?cards:{}};window.dispatchEvent(new Event('ks-booster-inventory-updated'));}
 onAuthStateChanged(auth,user=>{
  if(unsubscribeInventory){unsubscribeInventory();unsubscribeInventory=null;}
- publishInventory(false,{});
+ if(!connected()||!user)publishInventory(false,{});
  if(connected()&&user){
   const expectedUid=user.uid;
   unsubscribeInventory=onValue(ref(db,'playerCards/'+expectedUid),snap=>{
@@ -4333,28 +4333,35 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   if(typeof pool==='undefined'||typeof cards==='undefined'||typeof ksOwnedCopies!=='function'){
    summary.textContent='Collection indisponible : données des cartes non chargées.';return;
   }
-  const owned=ksCollectionNames().filter(n=>cards[n]&&ksOwnedCopies(n)>0);
-  summary.textContent=owned.length+' cartes différentes · quantités actuelles du jeu';
+  // Chaque numéro 0001–0046 possède sa case permanente, même non possédée.
+  const names=Array.from({length:46},(_,i)=>KS_BOOSTER_NUMBERS[String(i+1).padStart(4,'0')]);
+  const owned=names.filter(n=>cards[n]&&ksOwnedCopies(n)>0);
+  summary.textContent=owned.length+' / 46 cartes différentes';
   grid.replaceChildren();
-  owned.forEach(n=>{
-   const count=ksOwnedCopies(n),slug=n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-   const el=document.createElement('div');el.className='ks-owned-card';el.dataset.cardName=n;
+  const images=Object.assign({},window.KS262_IMAGES||{},window.KS263_IMAGES||{});
+  const aliases={ravik:'edwin',kaelan:'olive',nerya:'forrest',durnak:'seth','rhinoceros-geant':'rhino','panthere-noire-alpha':'panthere-alpha','lion-blanc-royal':'lion-blanc',ryokan:'yeonwoo',astrid:'amane',zahir:'chenko',meiyun:'quinn',brogmar:'howard',zalika:'gordon',temur:'fahd',eldric:'diana',eryndra:'jabel',sayuri:'saul',indira:'zoe',argan:'amadeus',thalor:'petra',takoda:'triton'};
+  const style=getComputedStyle(document.documentElement);
+  names.forEach((n,index)=>{
+   const count=cards[n]?ksOwnedCopies(n):0;
+   const el=document.createElement('div');el.className='ks-owned-card';
    const art=document.createElement('div');art.className='ks-owned-art';
-   // Reuse existing artwork CSS variables (including renamed character assets).
-   const style=getComputedStyle(document.documentElement);
-   const artAliases={ravik:'edwin',kaelan:'olive',nerya:'forrest',durnak:'seth','rhinoceros-geant':'rhino','panthere-noire-alpha':'panthere-alpha','lion-blanc-royal':'lion-blanc',ryokan:'yeonwoo',astrid:'amane',zahir:'chenko',meiyun:'quinn',brogmar:'howard',zalika:'gordon',temur:'fahd',eldric:'diana',eryndra:'jabel',sayuri:'saul',indira:'zoe',argan:'amadeus',thalor:'petra',takoda:'triton'};
-   const candidate=style.getPropertyValue('--art-'+(artAliases[slug]||slug)).trim();
-   if(candidate){
-    let img=candidate;
-    if(location.protocol==='file:'||location.protocol==='content:')img=img.replace(/url\([\"']?images\/cartes\//g,'url(\"https://sweet-halva-c9f3fa.pages.dev/images/cartes/');
-    art.style.backgroundImage='linear-gradient(180deg,#07101b11,#07101b33),'+img;
+   const number=document.createElement('span');number.className='ks-card-number';number.textContent=String(index+1).padStart(4,'0');
+   if(count>0){
+    el.dataset.cardName=n;
+    const slug=n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    const candidate=style.getPropertyValue('--art-'+(aliases[slug]||slug)).trim();
+    const image=images[n];
+    if(image){art.style.backgroundImage='linear-gradient(180deg,#07101b11,#07101b33),url("/'+image.replace(/^\/?/,'')+'")';}
+    else if(candidate){art.style.backgroundImage='linear-gradient(180deg,#07101b11,#07101b33),'+candidate;}
+    if(count>1){const badge=document.createElement('span');badge.className='ks-owned-count';badge.textContent='×'+count;art.appendChild(badge)}
+    const label=document.createElement('div');label.className='ks-owned-name';label.textContent=n;
+    art.appendChild(number);el.append(art,label);
+   }else{
+    el.classList.add('ks-empty-slot');
+    art.appendChild(number);
+    el.appendChild(art);
    }
-   else art.style.backgroundImage='linear-gradient(180deg,#182b44,#0a1326)';
-   if(count>1){const badge=document.createElement('span');badge.className='ks-owned-count';badge.textContent='×'+count;art.appendChild(badge)}
-   const label=document.createElement('div');label.className='ks-owned-name';label.textContent=n;
-   const number=document.createElement('span');number.className='ks-card-number';number.textContent=KS_CARD_NUMBERS_ALL[n]||'';
-   art.appendChild(number);
-   el.append(art,label);grid.appendChild(el);
+   grid.appendChild(el);
   });
  }
  document.addEventListener('click',e=>{if(e.target.closest('[data-opt="collection"]'))setTimeout(paint,0)},true);
@@ -5259,11 +5266,19 @@ window.KSBooster100ClaimAndVerify=async function(){
  if(!result.ok||!Array.isArray(result.cards)||result.cards.length!==16||new Set(result.cards).size!==16)throw Error('Attribution Firebase non confirmée.');
  const confirmed=await req('/booster-eligibility',false);
  if(!confirmed.claimed||JSON.stringify(confirmed.cards)!==JSON.stringify(result.cards))throw Error('Le tirage enregistré ne correspond pas à la réponse serveur.');
- // Firebase en temps réel peut être momentanément en retard. Rendre immédiatement le gain visible.
- const inventory=window.KSBoosterInventory||{connected:false,cards:{}};
- const merged={...(inventory.cards||{})};
- for(const id of result.cards)merged[id]=Math.max(1,Number(merged[id])||0);
- window.KSBoosterInventory={connected:true,cards:merged};
+ // Vérifier les 16 quantités réellement persistées dans Firebase, sans inventer de cartes localement.
+ const {getDatabase,ref,get}=await import('https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js');
+ const db=getDatabase(app);
+ let confirmedInventory=null;
+ for(let attempt=0;attempt<3;attempt++){
+  const snapshot=await get(ref(db,'playerCards/'+u.uid));
+  const data=snapshot.val();
+  if(data?.appliedBoosters?.booster100 && result.cards.every(id=>Number(data.cards?.[id])>=1)){
+   confirmedInventory=data.cards;break;
+  }
+ }
+ if(!confirmedInventory)throw Error('Tirage conservé, mais les 16 cartes ne sont pas confirmées dans playerCards Firebase. Aucun second tirage effectué.');
+ window.KSBoosterInventory={connected:true,cards:confirmedInventory};
  window.dispatchEvent(new Event('ks-booster-inventory-updated'));
  window.dispatchEvent(new Event('ks-deck-auth-changed'));
  window.dispatchEvent(new CustomEvent('ks-booster100-granted',{detail:{cards:result.cards,inventoryUpdated:result.inventoryUpdated}}));
@@ -5360,6 +5375,12 @@ function init(){if(initialized)return true;
 #ksCollectionPortrait .ks-owned-art .ks-unified-pattern i.active{background:#edb36d88}
 #ksCollectionPortrait .ks-owned-art .ks-unified-pattern i.center{background:#ffdf7b}
 #ksCollectionPortrait .ks-owned-name{display:none!important}
+#ksCollectionPortrait .ks-owned-art{container-type:inline-size}
+#ksCollectionPortrait .ks-owned-card.ks-empty-slot .ks-owned-art{background:linear-gradient(145deg,#1b2d43,#101b2c)!important;border:1px dashed #6b7583!important;opacity:.65}
+#ksCollectionPortrait .ks-owned-card.ks-empty-slot .ks-card-number{display:block!important;position:absolute;right:5%;bottom:4%;font:600 9px Georgia,serif;color:#8e9bad;z-index:5}
+#ksCollectionPortrait .ks-owned-art .ks-unified-shield{font-size:clamp(8px,10cqw,14px)!important;padding:1% 2% 4%!important;border-width:1px!important}
+#ksCollectionPortrait .ks-owned-art .ks-unified-pawns i{width:clamp(4px,6.5cqw,9px)!important}
+#ksCollectionPortrait .ks-owned-art .ks-unified-name{font-size:clamp(7px,7cqw,11px)!important}
 </style>
 <script id="ks-unified-card-overlay-test-script">
 (function(){
