@@ -1606,6 +1606,13 @@ const pool=raw.map(a=>a[0]); // catalogue de 30 modèles
 // Numéros permanents du catalogue actuel ; les futurs modèles continueront à 0031.
 const KS_CARD_NUMBERS=Object.freeze(Object.fromEntries(pool.map((name,index)=>[name,String(index+1).padStart(4,"0")])));
 const KS_RELEASE_CARDS_30=Object.freeze([...pool]);
+// Correspondance permanente des 16 cartes Atelier (0031–0046).
+const KS_BOOSTER_EXTRA_NAMES=['Brise-Montagne','Griffe-Tonnerre','Aile-Tempête','Vespera','Grimbok','Kragna','Morgha','Sylvara','Vargul','Thorgar','Kenshiro','Amara','Rashan','Calyra','Zafira','Shenlong'];
+const KS_BOOSTER_NUMBERS=Object.freeze(Object.fromEntries([...KS_RELEASE_CARDS_30,...KS_BOOSTER_EXTRA_NAMES].map((n,i)=>[String(i+1).padStart(4,'0'),n])));
+const KS_CARD_NUMBERS_ALL=Object.freeze(Object.fromEntries(Object.entries(KS_BOOSTER_NUMBERS).map(([id,n])=>[n,id])));
+window.KSBoosterInventory={connected:false,cards:{}};
+function ksCollectionNames(){return [...KS_RELEASE_CARDS_30,...KS_BOOSTER_EXTRA_NAMES.filter(n=>cards[n]&&ksOwnedCopies(n)>0)];}
+
 
 const KS261={
  version:261,
@@ -1751,17 +1758,17 @@ const KS_DECK_SIZE=20,KS_DRAW_SIZE=15,KS_REM_MAX=2;
 const ksIsRem=n=>!!(cards[n]?.rep||cards[n]?.rarity==='REM');
 function ksDeckRemCount(list){return list.filter(ksIsRem).length;}
 // Collection actuelle : un exemplaire de chaque carte. Une future collection pourra fournir ses quantites ici.
-function ksOwnedCopies(n){return pool.includes(n)&&cards[n]?1:0;}
+function ksOwnedCopies(n){if(!cards[n])return 0;const inv=window.KSBoosterInventory;const id=KS_CARD_NUMBERS_ALL[n];const extra=Number(inv?.connected&&id?inv.cards?.[id]:0)||0;return (KS_RELEASE_CARDS_30.includes(n)?1:0)+Math.max(0,extra);}
 function ksRespectsOwnership(list){const counts={};for(const n of list){counts[n]=(counts[n]||0)+1;if(counts[n]>Math.min(2,ksOwnedCopies(n)))return false;}return true;}
-function ksDeckFromCounts(counts){return Object.entries(counts||{}).flatMap(([n,q])=>cards[n]&&pool.includes(n)?Array(Math.min(2,ksOwnedCopies(n),Math.max(0,Number(q)||0))).fill(n):[]);}
-function ksValidDeck20(list){return Array.isArray(list)&&list.length===KS_DECK_SIZE&&ksDeckRemCount(list)<=KS_REM_MAX&&ksRespectsOwnership(list)&&list.every(n=>pool.includes(n));}
-function ksValidRemoteDeck20(list){if(!Array.isArray(list)||list.length!==KS_DECK_SIZE||ksDeckRemCount(list)>KS_REM_MAX)return false;const counts={};return list.every(n=>{if(!pool.includes(n))return false;counts[n]=(counts[n]||0)+1;return counts[n]<=2;});}
+function ksDeckFromCounts(counts){return Object.entries(counts||{}).flatMap(([n,q])=>cards[n]&&(pool.includes(n)||ksOwnedCopies(n)>0)?Array(Math.min(2,ksOwnedCopies(n),Math.max(0,Number(q)||0))).fill(n):[]);}
+function ksValidDeck20(list){return Array.isArray(list)&&list.length===KS_DECK_SIZE&&ksDeckRemCount(list)<=KS_REM_MAX&&ksRespectsOwnership(list)&&list.every(n=>pool.includes(n)||ksOwnedCopies(n)>0);}
+function ksValidRemoteDeck20(list){if(!Array.isArray(list)||list.length!==KS_DECK_SIZE||ksDeckRemCount(list)>KS_REM_MAX)return false;const counts={};return list.every(n=>{if(!pool.includes(n)&&ksOwnedCopies(n)<=0)return false;counts[n]=(counts[n]||0)+1;return counts[n]<=2;});}
 function ksRandomDeck20(){const choices=shuffle(pool.filter(n=>!ksIsRem(n)));const rem=shuffle(pool.filter(ksIsRem));const selected=shuffle([...rem.slice(0,Math.min(2,rem.length)),...choices.slice(0,KS_DECK_SIZE-Math.min(2,rem.length))]);return selected;}
 function ksDraw15(deck20){return shuffle(deck20).slice(0,KS_DRAW_SIZE);}
 function ksPlayerDeck20(){
  const list=ksDeckFromCounts(deckCounts);
  if(window.KS271Dev?.enabled){
-   return list.length>=1&&list.length<=KS_DECK_SIZE&&ksDeckRemCount(list)<=KS_REM_MAX&&ksRespectsOwnership(list)&&list.every(n=>pool.includes(n))?list:null;
+   return list.length>=1&&list.length<=KS_DECK_SIZE&&ksDeckRemCount(list)<=KS_REM_MAX&&ksRespectsOwnership(list)&&list.every(n=>pool.includes(n)||ksOwnedCopies(n)>0)?list:null;
  }
  return ksValidDeck20(list)?list:null;
 }
@@ -2084,7 +2091,7 @@ function initDeckBuilder(){
  const cacheRead=()=>{try{return JSON.parse(localStorage.getItem(cacheStorageKey)||'{}')}catch{return {}}};
  const cacheSave=(name,deck)=>{const all=cacheRead();all[name]={...deck};localStorage.setItem(cacheStorageKey,JSON.stringify(all))};
  const devRead=()=>{try{return JSON.parse(localStorage.getItem(devStorageKey)||'{}')}catch{return {}}};
- const count=()=>KS_RELEASE_CARDS_30.reduce((a,n)=>a+Number(deckCounts[n]||0),0);
+ const count=()=>ksCollectionNames().reduce((a,n)=>a+Number(deckCounts[n]||0),0);
  const max=n=>Math.min(2,ksOwnedCopies(n)); // Un seul exemplaire disponible actuellement par carte
  const read=()=>({...cloudDecks,...devRead(),...cacheRead()});
  const setSaveMessage=(message,error=false)=>{const el=$('ksdeck-status');el.dataset.saved='1';el.textContent=message;el.style.color=error?'#ff8b8b':'#7dffb2';};
@@ -2134,7 +2141,7 @@ function initDeckBuilder(){
  const mode=$('ksdeck-sort').value;
  const cardCost=n=>{const d=cards[n]||{};return Number(d.cost??d.pions??0)||0};
  const cardPoints=n=>Number((cards[n]||{}).p ?? (cards[n]||{}).points ?? 0)||0;
- const ordered=[...KS_RELEASE_CARDS_30].filter(n=>!!cards[n]&&pool.includes(n)).sort((a,b)=>{
+ const ordered=ksCollectionNames().filter(n=>!!cards[n]&&(pool.includes(n)||ksOwnedCopies(n)>0)).sort((a,b)=>{
   let diff=0;
   if(mode==='costAsc')diff=cardCost(a)-cardCost(b);
   else if(mode==='costDesc')diff=cardCost(b)-cardCost(a);
@@ -2201,7 +2208,7 @@ function initDeckBuilder(){
  document.getElementById('gameMode').value='training';
  startTraining();
 };
- const open=()=>{if(!canDeck()){alert('Les decks sont disponibles même hors connexion.');return;}root.classList.add('open');refreshCloud()};launch.onclick=open;window.addEventListener('ks-deck-auth-changed',()=>{if(!canDeck()){close();toggle.checked=false;}launch.style.display='none';refreshCloud()});toggle.onchange=()=>{if(toggle.checked&&!canDeck()){toggle.checked=false;alert('Les decks sont disponibles même hors connexion.');return;}launch.style.display='none';$('deckCount').style.display=toggle.checked?'block':'none';if(toggle.checked)open();else close();updateDeckCount()};
+ const open=()=>{if(!canDeck()){alert('Les decks sont disponibles même hors connexion.');return;}root.classList.add('open');refreshCloud()};launch.onclick=open;window.addEventListener('ks-booster-inventory-updated',()=>{if(slot)loadSlot(slot);else draw();updateDeckCount();});window.addEventListener('ks-deck-auth-changed',()=>{if(!canDeck()){close();toggle.checked=false;}launch.style.display='none';refreshCloud()});toggle.onchange=()=>{if(toggle.checked&&!canDeck()){toggle.checked=false;alert('Les decks sont disponibles même hors connexion.');return;}launch.style.display='none';$('deckCount').style.display=toggle.checked?'block':'none';if(toggle.checked)open();else close();updateDeckCount()};
  launch.style.display='none';window.KSOpenDeckBuilder=open;updateDeckCount();
 }
 initDeckBuilder();
@@ -3997,12 +4004,25 @@ window.KS229PlayDebitSound=function(){
 <script type="module" id="ks-deck-cloud-261">
 import {getApps,initializeApp} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js';
 import {getAuth,onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js';
-import {getDatabase,ref,get,set} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js';
+import {getDatabase,ref,get,set,onValue} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js';
 const app=getApps()[0]||initializeApp({apiKey:'AIzaSyA3O2SD-L3DlQCR7VCcMphlCPnG0LXiE0E',authDomain:'kingshot-cards.firebaseapp.com',databaseURL:'https://kingshot-cards-default-rtdb.europe-west1.firebasedatabase.app/',projectId:'kingshot-cards',storageBucket:'kingshot-cards.firebasestorage.app',messagingSenderId:'633151991828',appId:'1:633151991828:web:611bf2ed383692f0c6f701'});
 const auth=getAuth(app),db=getDatabase(app);
 const connected=()=>{const u=auth.currentUser;return !!(u&&!u.isAnonymous&&u.providerData.some(p=>p.providerId==='google.com'))};
 window.KSDeckCloud261={connected,async load(){if(!connected())throw Error('Connexion Google requise');const u=auth.currentUser;const snap=await get(ref(db,'playerDecks/'+u.uid));return snap.val()||{}},async save(name,deck){if(!connected())throw Error('Connexion Google requise');if(!/^Deck [123]$/.test(name))throw Error('Emplacement invalide');const u=auth.currentUser;await set(ref(db,'playerDecks/'+u.uid+'/'+name.replace(' ','_')),{cards:deck,updatedAt:Date.now()})}};
-onAuthStateChanged(auth,()=>window.dispatchEvent(new Event('ks-deck-auth-changed')));
+let unsubscribeInventory=null;
+function publishInventory(connected,cards){window.KSBoosterInventory={connected,cards:cards&&typeof cards==='object'?cards:{}};window.dispatchEvent(new Event('ks-booster-inventory-updated'));}
+onAuthStateChanged(auth,user=>{
+ if(unsubscribeInventory){unsubscribeInventory();unsubscribeInventory=null;}
+ publishInventory(false,{});
+ if(connected()&&user){
+  const expectedUid=user.uid;
+  unsubscribeInventory=onValue(ref(db,'playerCards/'+expectedUid),snap=>{
+   if(auth.currentUser?.uid!==expectedUid)return;
+   const value=snap.val();publishInventory(true,value?.cards||{});
+  },err=>{console.warn('Collection Firebase inaccessible',err);publishInventory(false,{});});
+ }
+ window.dispatchEvent(new Event('ks-deck-auth-changed'));
+});
 </script>
 <script id="ks263-illustrations">
 window.KS263_IMAGES={};
@@ -4313,7 +4333,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   if(typeof pool==='undefined'||typeof cards==='undefined'||typeof ksOwnedCopies!=='function'){
    summary.textContent='Collection indisponible : données des cartes non chargées.';return;
   }
-  const owned=pool.filter(n=>cards[n]&&ksOwnedCopies(n)>0);
+  const owned=ksCollectionNames().filter(n=>cards[n]&&ksOwnedCopies(n)>0);
   summary.textContent=owned.length+' cartes différentes · quantités actuelles du jeu';
   grid.replaceChildren();
   owned.forEach(n=>{
@@ -4332,13 +4352,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
    else art.style.backgroundImage='linear-gradient(180deg,#182b44,#0a1326)';
    if(count>1){const badge=document.createElement('span');badge.className='ks-owned-count';badge.textContent='×'+count;art.appendChild(badge)}
    const label=document.createElement('div');label.className='ks-owned-name';label.textContent=n;
-   const number=document.createElement('span');number.className='ks-card-number';number.textContent=KS_CARD_NUMBERS[n]||'';
+   const number=document.createElement('span');number.className='ks-card-number';number.textContent=KS_CARD_NUMBERS_ALL[n]||'';
    art.appendChild(number);
    el.append(art,label);grid.appendChild(el);
   });
  }
  document.addEventListener('click',e=>{if(e.target.closest('[data-opt="collection"]'))setTimeout(paint,0)},true);
- document.addEventListener('DOMContentLoaded',paint);
+ document.addEventListener('DOMContentLoaded',paint);window.addEventListener('ks-booster-inventory-updated',paint);
 })();
 </script><style id="ks-collection-viewer-style">
 #ksCardViewer{position:fixed!important;inset:0!important;z-index:2147483646!important;background:radial-gradient(ellipse at center,#243c54,#0a101d 80%);display:flex;flex-direction:column;align-items:center;color:#f5e5c2;overflow:hidden;touch-action:none}
@@ -4372,7 +4392,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  function reset(){zoom=1;panX=0;panY=0;rot=0;tilt=0;pointers.clear();drag=null;pinchStart=null;render()}
  function open(n){if(typeof cards==='undefined'||!cards[n])return;active=n;reset();const c=cards[n];viewer.hidden=false;viewer.querySelector('.ksv-title').textContent=n;viewer.querySelector('.ksv-back').dataset.backFile='image/dos/dos1.webp';viewer.querySelector('.ksv-art').style.backgroundImage=imageFor(n)||'none';viewer.querySelector('.ksv-shield-value').textContent='+'+c.p;const pawns=viewer.querySelector('.ksv-pawns');pawns.replaceChildren();for(let i=0;i<c.cost;i++)pawns.appendChild(document.createElement('i'));
  const pat=viewer.querySelector('.ksv-pattern');pat.replaceChildren();const cells=new Set((c.inf||[]).map(([x,y])=>`${x},${y}`));for(let y=-2;y<=2;y++)for(let x=-2;x<=2;x++){const e=document.createElement('span');if(x===0&&y===0)e.className='center';else if(cells.has(`${x},${y}`))e.className='active';pat.appendChild(e)}
- viewer.querySelector('.ksv-name').textContent=n;viewer.querySelector('.ksv-name').dataset.number=KS_CARD_NUMBERS[n]||'';
+ viewer.querySelector('.ksv-name').textContent=n;viewer.querySelector('.ksv-name').dataset.number=KS_CARD_NUMBERS_ALL[n]||'';
  const needs=c.cost===0?'Remplacement (sans coût en pions)':`${c.cost} pion${c.cost>1?'s':''} ou plus`;
  viewer.querySelector('.ksv-details').replaceChildren();const lines=[['Nécessite : ',needs],['Gain carte : ',`${c.p} point${c.p>1?'s':''}`],['Capacité : ',c.rep?'Carte de remplacement':c.kill?.length?'Effet de destruction':c.buff?.length?'Effet de bonus':'Étend ton territoire selon le schéma tactique']];for(const [label,value] of lines){const div=document.createElement('div'),b=document.createElement('b');b.textContent=label;div.append(b,document.createTextNode(value));viewer.querySelector('.ksv-details').appendChild(div)}
  }
