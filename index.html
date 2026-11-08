@@ -5192,7 +5192,7 @@ html.ks-dos1-ready #ksCardViewer .ksv-back::after{content:none}
    // The visualizer must be attached to the active fullscreen root, if any.
    const full=document.fullscreenElement || document.webkitFullscreenElement;
    (full || document.body).appendChild(overlay);
-   frame.src='visualisation3d.html?pack='+(anchor.dataset.ksBooster==='100'?'100':'30');
+   frame.src='/test-boosters/visualisation3d.html?pack='+(anchor.dataset.ksBooster==='100'?'100':'30');
    overlay.classList.add('ks-open');
    overlay.setAttribute('aria-hidden','false');
  }
