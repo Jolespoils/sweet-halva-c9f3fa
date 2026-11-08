@@ -4009,18 +4009,19 @@ const app=getApps()[0]||initializeApp({apiKey:'AIzaSyA3O2SD-L3DlQCR7VCcMphlCPnG0
 const auth=getAuth(app),db=getDatabase(app);
 const connected=()=>{const u=auth.currentUser;return !!(u&&!u.isAnonymous&&u.providerData.some(p=>p.providerId==='google.com'))};
 window.KSDeckCloud261={connected,async load(){if(!connected())throw Error('Connexion Google requise');const u=auth.currentUser;const snap=await get(ref(db,'playerDecks/'+u.uid));return snap.val()||{}},async save(name,deck){if(!connected())throw Error('Connexion Google requise');if(!/^Deck [123]$/.test(name))throw Error('Emplacement invalide');const u=auth.currentUser;await set(ref(db,'playerDecks/'+u.uid+'/'+name.replace(' ','_')),{cards:deck,updatedAt:Date.now()})}};
-let unsubscribeInventory=null;
 function publishInventory(connected,cards){window.KSBoosterInventory={connected,cards:cards&&typeof cards==='object'?cards:{}};window.dispatchEvent(new Event('ks-booster-inventory-updated'));}
-onAuthStateChanged(auth,user=>{
- if(unsubscribeInventory){unsubscribeInventory();unsubscribeInventory=null;}
- if(!connected()||!user)publishInventory(false,{});
- if(connected()&&user){
-  const expectedUid=user.uid;
-  unsubscribeInventory=onValue(ref(db,'playerCards/'+expectedUid),snap=>{
-   if(auth.currentUser?.uid!==expectedUid)return;
-   const value=snap.val();publishInventory(true,value?.cards||{});
-  },err=>{console.warn('Collection Firebase inaccessible',err);publishInventory(false,{});});
- }
+let inventoryEpoch=0;
+onAuthStateChanged(auth,async user=>{
+ const epoch=++inventoryEpoch;
+ if(!connected()||!user){publishInventory(false,{});window.dispatchEvent(new Event('ks-deck-auth-changed'));return;}
+ // Lire par l'API du Worker : les règles RTDB interdisent la lecture directe de playerCards.
+ try{
+  const token=await user.getIdToken();
+  const res=await fetch('/api/booster-bridge?route=%2Fbooster-eligibility',{headers:{Authorization:'Bearer '+token},cache:'no-store'});
+  const data=await res.json();if(!res.ok)throw Error(data.detail||data.error||'HTTP '+res.status);
+  if(epoch!==inventoryEpoch||auth.currentUser?.uid!==user.uid)return;
+  publishInventory(true,data.inventory||{});
+ }catch(err){if(epoch===inventoryEpoch)console.warn('Inventaire booster indisponible',err);}
  window.dispatchEvent(new Event('ks-deck-auth-changed'));
 });
 </script>
@@ -5266,19 +5267,9 @@ window.KSBooster100ClaimAndVerify=async function(){
  if(!result.ok||!Array.isArray(result.cards)||result.cards.length!==16||new Set(result.cards).size!==16)throw Error('Attribution Firebase non confirmée.');
  const confirmed=await req('/booster-eligibility',false);
  if(!confirmed.claimed||JSON.stringify(confirmed.cards)!==JSON.stringify(result.cards))throw Error('Le tirage enregistré ne correspond pas à la réponse serveur.');
- // Vérifier les 16 quantités réellement persistées dans Firebase, sans inventer de cartes localement.
- const {getDatabase,ref,get}=await import('https://www.gstatic.com/firebasejs/13.1.0/firebase-database.js');
- const db=getDatabase(app);
- let confirmedInventory=null;
- for(let attempt=0;attempt<3;attempt++){
-  const snapshot=await get(ref(db,'playerCards/'+u.uid));
-  const data=snapshot.val();
-  if(data?.appliedBoosters?.booster100 && result.cards.every(id=>Number(data.cards?.[id])>=1)){
-   confirmedInventory=data.cards;break;
-  }
- }
- if(!confirmedInventory)throw Error('Tirage conservé, mais les 16 cartes ne sont pas confirmées dans playerCards Firebase. Aucun second tirage effectué.');
- window.KSBoosterInventory={connected:true,cards:confirmedInventory};
+ // Le Worker authentifié lit et vérifie l'inventaire. Aucun accès client direct à playerCards.
+ if(!result.inventoryConfirmed||!result.inventory||!result.cards.every(id=>Number(result.inventory[id])>=1))throw Error('Inventaire non confirmé par le serveur : '+(result.detail||'réponse incomplète'));
+ window.KSBoosterInventory={connected:true,cards:result.inventory};
  window.dispatchEvent(new Event('ks-booster-inventory-updated'));
  window.dispatchEvent(new Event('ks-deck-auth-changed'));
  window.dispatchEvent(new CustomEvent('ks-booster100-granted',{detail:{cards:result.cards,inventoryUpdated:result.inventoryUpdated}}));
@@ -5323,14 +5314,14 @@ function init(){if(initialized)return true;
    if(Number.isFinite(Number(data.rankedPlayers)))rankedCount=Number(data.rankedPlayers);
   }catch(e){boosterError='Statut indisponible : '+e.message;console.warn('Booster100 : statut impossible',e)}
   if(!logged()){status={eligible:false,claimed:false};render();return}
-  try{status=await call('/booster-eligibility');boosterError='';if(Number.isFinite(Number(status.rankedPlayers)))rankedCount=Number(status.rankedPlayers);
+  try{status=await call('/booster-eligibility');boosterError='';if(status.inventory){window.KSBoosterInventory={connected:true,cards:status.inventory};window.dispatchEvent(new Event('ks-booster-inventory-updated'));}if(Number.isFinite(Number(status.rankedPlayers)))rankedCount=Number(status.rankedPlayers);
    // Reprendre une attribution déjà enregistrée si l'écriture de l'inventaire a été interrompue.
    // Le Worker réutilise les 16 identifiants persistés et protège l'ajout par appliedBoosters.booster100.
    // Une seule tentative par session et par UID, sans nouveau tirage ni double crédit.
    if(status.claimed && !window.__ksBooster100InventoryRecovery?.has(auth.currentUser.uid)){
     (window.__ksBooster100InventoryRecovery ||= new Set()).add(auth.currentUser.uid);
     try{const recovery=await call('/booster-claim',true);
-     if(!recovery.ok || !Array.isArray(recovery.cards) || recovery.cards.length!==16)throw Error('Réparation non confirmée');
+     if(!recovery.ok || !Array.isArray(recovery.cards) || recovery.cards.length!==16)throw Error('Réparation non confirmée');if(!recovery.inventoryConfirmed||!recovery.inventory)throw Error('Inventaire non confirmé');window.KSBoosterInventory={connected:true,cards:recovery.inventory};window.dispatchEvent(new Event('ks-booster-inventory-updated'));
      window.dispatchEvent(new Event('ks-booster-inventory-recheck'));
     }catch(recoveryError){console.warn('Reprise inventaire Booster 100 impossible',recoveryError);boosterError='Synchronisation des cartes impossible : '+recoveryError.message;}
    }
