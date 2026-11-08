@@ -4491,6 +4491,73 @@ html:has(#ksCardViewer:not([hidden])) #ksCollectionPortrait .ks-card-number{visi
 /* Enlarged card preview titles retain a proportional reduction. */
 #hand .ks-hold-enlarged .name, #board .ks-hold-enlarged .name {font-size:clamp(8px,2.16dvh,12px)!important}
 </style>
+<script type="module" id="ks-booster100-viewer-firebase-test">
+/* TEST : synchronise les cartes visibles du visualiseur avec le tirage persistant Firebase.
+   L'attribution reste exclusivement faite par /booster-claim et le Worker. */
+import {getApps} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js';
+import {getAuth} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js';
+const frame=document.getElementById('ksBooster3dFrame');
+const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+let sequence=0;
+async function syncBooster100(){
+ const seq=++sequence;
+ if(!frame?.src.includes('pack=100'))return;
+ try{
+  const app=getApps()[0];if(!app)throw Error('Firebase non initialisé');
+  const user=getAuth(app).currentUser;
+  if(!user||user.isAnonymous||!user.providerData.some(p=>p.providerId==='google.com'))throw Error('Connexion Google requise');
+  const token=await user.getIdToken();
+  const response=await fetch('/api/booster-bridge?route=%2Fbooster-eligibility',{headers:{Authorization:'Bearer '+token},cache:'no-store'});
+  if(!response.ok)throw Error('Vérification Firebase HTTP '+response.status);
+  const result=await response.json();
+  if(!result.claimed||!Array.isArray(result.cards)||result.cards.length!==16)throw Error('Booster non attribué : utiliser d’abord le bouton de réclamation');
+  const ids=result.cards.map(String);
+  if(new Set(ids).size!==16||ids.some(id=>!/^00(?:[0-3][0-9]|4[0-6])$/.test(id)||id==='0000'))throw Error('Identifiants du tirage invalides');
+  // Le visualiseur actuel est un script classique sur la même origine.
+  // On conserve toutes ses animations et ne remplace que la sélection des faces des cartes.
+  for(let tries=0;tries<100;tries++){
+   if(seq!==sequence||!frame.src.includes('pack=100'))return;
+   const win=frame.contentWindow;
+   if(win){
+    try{
+     const ready=win.eval("typeof boosterReady!=='undefined' && boosterReady && boosterPool.length===46 && cards.length>=16");
+     if(ready){
+      const payload=JSON.stringify(ids);
+      const code=`(function(){
+       const saved=${payload};
+       const lookup=new Map(boosterPool.map(c=>[String(c.numero),c]));
+       const infos=saved.map(id=>lookup.get(id));
+       if(infos.some(x=>!x))throw Error('Carte du catalogue introuvable');
+       const original=shufflePack;
+       shufflePack=function(){
+        if(selectedPack!=='100')return original();
+        packCards=cards.slice(0,16);
+        cards.forEach(c=>c.visible=false);
+        packCards.forEach((c,i)=>{
+         c.visible=true;c.position.set(0,.28,-.006+i*.001);
+         const face=c.children[1];face.material.dispose();face.material=makeCardFront(infos[i]);
+        });
+        document.getElementById('packCountLabel').textContent=16;
+       };
+       shufflePack();
+       document.getElementById('tearHint').textContent='Booster Firebase : 16 cartes enregistrées dans ta collection.';
+      })()`;
+      win.eval(code);
+      return;
+     }
+    }catch(err){if(tries>5)throw err;}
+   }
+   await pause(100);
+  }
+  throw Error('Visualiseur non prêt');
+ }catch(err){
+  console.warn('[KardShot TEST] Synchronisation booster 100 :',err);
+  try{const hint=frame.contentDocument?.getElementById('tearHint');if(hint)hint.textContent='Synchronisation impossible : '+err.message;}catch{}
+ }
+}
+frame?.addEventListener('load',syncBooster100);
+window.addEventListener('ks-booster100-granted',()=>{if(frame?.src.includes('pack=100'))syncBooster100()});
+</script>
 </body></html>
 <style>
 /* V83 : icône historique géométriquement centrée */
