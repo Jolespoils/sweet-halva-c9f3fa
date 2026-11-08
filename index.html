@@ -5249,7 +5249,18 @@ function init(){if(initialized)return true;
    if(Number.isFinite(Number(data.rankedPlayers)))rankedCount=Number(data.rankedPlayers);
   }catch(e){boosterError='Statut indisponible : '+e.message;console.warn('Booster100 : statut impossible',e)}
   if(!logged()){status={eligible:false,claimed:false};render();return}
-  try{status=await call('/booster-eligibility');boosterError='';if(Number.isFinite(Number(status.rankedPlayers)))rankedCount=Number(status.rankedPlayers)}
+  try{status=await call('/booster-eligibility');boosterError='';if(Number.isFinite(Number(status.rankedPlayers)))rankedCount=Number(status.rankedPlayers);
+   // Reprendre une attribution déjà enregistrée si l'écriture de l'inventaire a été interrompue.
+   // Le Worker réutilise les 16 identifiants persistés et protège l'ajout par appliedBoosters.booster100.
+   // Une seule tentative par session et par UID, sans nouveau tirage ni double crédit.
+   if(status.claimed && !window.__ksBooster100InventoryRecovery?.has(auth.currentUser.uid)){
+    (window.__ksBooster100InventoryRecovery ||= new Set()).add(auth.currentUser.uid);
+    try{const recovery=await call('/booster-claim',true);
+     if(!recovery.ok || !Array.isArray(recovery.cards) || recovery.cards.length!==16)throw Error('Réparation non confirmée');
+     window.dispatchEvent(new Event('ks-booster-inventory-recheck'));
+    }catch(recoveryError){console.warn('Reprise inventaire Booster 100 impossible',recoveryError);boosterError='Synchronisation des cartes impossible : '+recoveryError.message;}
+   }
+  }
   catch(e){console.warn('Booster100 : vérification impossible',e);status={eligible:false,claimed:false};boosterError='Vérification impossible : '+e.message}
   render();
  }
