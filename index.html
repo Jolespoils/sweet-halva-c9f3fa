@@ -5183,7 +5183,7 @@ html.ks-dos1-ready #ksCardViewer .ksv-back::after{content:none}
  function stop(e){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();}
  function openViewer(e){
    const node=e.target instanceof Element?e.target:null;
-   const anchor=node?.closest('a.ks-collection-booster[data-ks-booster="starter"]');
+   const anchor=node?.closest('.ks-collection-booster[data-ks-booster="starter"], .ks-collection-booster[data-ks-booster="100"]');
    if(!anchor || !anchor.closest('#ksCollectionPortrait, #ksOptionsModal'))return;
    stop(e);
    if(e.type==='click' && Date.now()-lastActivation<650)return;
@@ -5192,7 +5192,7 @@ html.ks-dos1-ready #ksCardViewer .ksv-back::after{content:none}
    // The visualizer must be attached to the active fullscreen root, if any.
    const full=document.fullscreenElement || document.webkitFullscreenElement;
    (full || document.body).appendChild(overlay);
-   frame.src='visualisation3d.html';
+   frame.src='visualisation3d.html?pack='+(anchor.dataset.ksBooster==='100'?'100':'30');
    overlay.classList.add('ks-open');
    overlay.setAttribute('aria-hidden','false');
  }
@@ -5239,7 +5239,7 @@ function init(){if(initialized)return true;
  let notice=booster.querySelector('.ks-booster-connection-error');
  if(boosterError){if(!notice){notice=document.createElement('small');notice.className='ks-booster-connection-error';booster.appendChild(notice)}notice.textContent=boosterError}
  else notice?.remove();
- document.querySelectorAll('#ksCollectionPortrait [data-portrait-pane="boosters"] .ks-collection-booster-grid,#ksOptionsModal [data-collection-pane="boosters"] .ks-collection-booster-grid').forEach(grid=>{let tile=grid.querySelector('[data-ks-booster="100"]');if(claimed){if(!tile){tile=document.createElement('div');tile.className='ks-collection-booster';tile.dataset.ksBooster='100';tile.innerHTML='<img src="images/booster/front2.webp" alt="Booster des 100 joueurs"><strong>Booster des 100 joueurs</strong><small class="ks-test-pending-note">16 cartes attribuées</small>';grid.appendChild(tile)}tile.style.position='relative';dot(tile).hidden=false}else tile?.remove()});}
+ document.querySelectorAll('#ksCollectionPortrait [data-portrait-pane="boosters"] .ks-collection-booster-grid,#ksOptionsModal [data-collection-pane="boosters"] .ks-collection-booster-grid').forEach(grid=>{let tile=grid.querySelector('[data-ks-booster="100"]');if(claimed){if(!tile){tile=document.createElement('a');tile.href='#';tile.setAttribute('aria-label','Ouvrir le Booster des 100 joueurs dans la visualisation 3D');tile.className='ks-collection-booster';tile.dataset.ksBooster='100';tile.innerHTML='<img src="images/booster/front2.webp" alt="Booster des 100 joueurs"><strong>Booster des 100 joueurs</strong><small class="ks-test-pending-note">16 cartes attribuées</small>';grid.appendChild(tile)}tile.style.position='relative';tile.style.cursor='pointer';dot(tile).hidden=false}else tile?.remove()});}
  async function refresh(){
   boosterError='';
   try{
