@@ -5181,35 +5181,52 @@ html.ks-dos1-ready #ksCardViewer .ksv-back::after{content:none}
  if(!overlay||!frame||!close)return;
  let lastActivation=0;
  function stop(e){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();}
- function openViewer(e){
-   const node=e.target instanceof Element?e.target:null;
-   const anchor=node?.closest('.ks-collection-booster[data-ks-booster="starter"], .ks-collection-booster[data-ks-booster="100"]');
-   if(!anchor || !anchor.closest('#ksCollectionPortrait, #ksOptionsModal'))return;
-   stop(e);
-   if(e.type==='click' && Date.now()-lastActivation<650)return;
-   lastActivation=Date.now();
-   if(overlay.classList.contains('ks-open'))return;
-   // The visualizer must be attached to the active fullscreen root, if any.
+ let opening=false;
+ function showBoosterError(message){
+  let el=document.getElementById('ksBooster100SyncError');
+  if(!el){el=document.createElement('div');el.id='ksBooster100SyncError';el.style.cssText='position:fixed;z-index:100000;left:12%;right:12%;top:12%;padding:16px;border:2px solid #e99b65;border-radius:10px;background:#192637;color:white;font:600 14px system-ui;white-space:pre-wrap;box-shadow:0 4px 30px #000';document.body.append(el)}
+  el.replaceChildren(document.createTextNode('Booster 100 : '+message+'\n'),Object.assign(document.createElement('button'),{textContent:'Fermer',onclick:()=>el.remove()}));
+ }
+ async function openViewer(e){
+  const node=e.target instanceof Element?e.target:null;
+  const anchor=node?.closest('.ks-collection-booster[data-ks-booster="starter"], .ks-collection-booster[data-ks-booster="100"]');
+  if(!anchor || !anchor.closest('#ksCollectionPortrait, #ksOptionsModal'))return;
+  stop(e);
+  if(e.type==='click' && Date.now()-lastActivation<650)return;
+  lastActivation=Date.now();
+  if(opening||overlay.classList.contains('ks-open'))return;
+  opening=true;
+  try{
+   const is100=anchor.dataset.ksBooster==='100';
+   let granted=null;
+   if(is100){
+    if(typeof window.KSBooster100ClaimAndVerify!=='function')throw Error('Service Firebase non chargé. Recharge la page puis réessaie.');
+    granted=await window.KSBooster100ClaimAndVerify();
+    if(!Array.isArray(granted)||granted.length!==16||new Set(granted).size!==16)throw Error('Tirage serveur invalide.');
+   }
    const full=document.fullscreenElement || document.webkitFullscreenElement;
    (full || document.body).appendChild(overlay);
-   if(anchor.dataset.ksBooster!=='100'){
-     frame.src='/test-boosters/visualisation3d.html?pack=30';
-     overlay.classList.add('ks-open');overlay.setAttribute('aria-hidden','false');
-     return;
-   }
-   if(anchor.dataset.ksSyncBusy==='1')return;
-   const ensure=window.KSBooster100EnsureCards;
-   if(typeof ensure!=='function'){alert('Le service Firebase du booster n’est pas encore chargé.');return;}
-   anchor.dataset.ksSyncBusy='1';
-   Promise.resolve().then(ensure).then(ids=>{
-     if(!Array.isArray(ids)||ids.length!==16)throw Error('Le serveur n’a pas confirmé les 16 cartes.');
-     // Attribution Firebase confirmée. Le visualiseur 3D existant reste inchangé.
-     frame.src='/test-boosters/visualisation3d.html?pack=100';
-     overlay.classList.add('ks-open');overlay.setAttribute('aria-hidden','false');
-   }).catch(err=>{console.error('Booster100 : attribution/synchronisation',err);alert('Booster 100 : '+err.message);})
-   .finally(()=>{delete anchor.dataset.ksSyncBusy});
+   if(is100){
+    // Adapter le visualiseur existant en mémoire, sans changer ses illustrations ni son HTML GitHub.
+    const response=await fetch('/test-boosters/visualisation3d.html?pack=100',{cache:'no-store'});
+    if(!response.ok)throw Error('Visualiseur indisponible : HTTP '+response.status);
+    let html=await response.text();
+    const marker="const uniqueInfos=selectedPack==='100'?[...boosterPool]:[...OFFICIAL_CARDS];";
+    const loop="for(let i=uniqueInfos.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[uniqueInfos[i],uniqueInfos[j]]=[uniqueInfos[j],uniqueInfos[i]];}";
+    if(!html.includes(marker)||!html.includes(loop))throw Error('Version du visualiseur incompatible : affichage annulé pour éviter un faux tirage.');
+    html=html.replace("const selectedPack=new URLSearchParams(location.search).get('pack')==='100'?'100':'starter';","const selectedPack='100';");
+    html=html.replace(marker,"const uniqueInfos=selectedPack==='100'?window.__KS_GRANTED_CARDS.map(id=>boosterPool.find(c=>c.numero===id)):[...OFFICIAL_CARDS]; if(uniqueInfos.some(c=>!c))throw Error('Carte serveur absente du catalogue');");
+    html=html.replace(loop,"if(selectedPack!=='100'){"+loop+"}");
+    // srcdoc garde l'origine du jeu ; base restaure les chemins d'images, sons et JSON du visualiseur.
+    const setup='<base href="/test-boosters/"><script>window.__KS_GRANTED_CARDS='+JSON.stringify(granted)+';<\/script>';
+    html=html.replace('<head>','<head>'+setup);
+    frame.removeAttribute('src');frame.srcdoc=html;
+   }else{frame.removeAttribute('srcdoc');frame.src='/test-boosters/visualisation3d.html?pack=30';}
+   overlay.classList.add('ks-open');overlay.setAttribute('aria-hidden','false');
+  }catch(err){console.error('Booster 100 : attribution bloquée',err);showBoosterError(err.message||String(err));}
+  finally{opening=false;}
  }
- function shut(e){if(e)stop(e);overlay.classList.remove('ks-open');overlay.setAttribute('aria-hidden','true');frame.removeAttribute('src');}
+ function shut(e){if(e)stop(e);overlay.classList.remove('ks-open');overlay.setAttribute('aria-hidden','true');frame.removeAttribute('src');frame.removeAttribute('srcdoc');}
  // Handle touch activation before the Options close control can receive a delayed click.
  document.addEventListener('pointerup',openViewer,true);
  document.addEventListener('click',openViewer,true);
@@ -5224,21 +5241,38 @@ import {getApps,initializeApp} from 'https://www.gstatic.com/firebasejs/13.1.0/f
 import {getAuth,onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js';
 const app=getApps()[0]||initializeApp({apiKey:'AIzaSyA3O2SD-L3DlQCR7VCcMphlCPnG0LXiE0E',authDomain:'kingshot-cards.firebaseapp.com',databaseURL:'https://kingshot-cards-default-rtdb.europe-west1.firebasedatabase.app/',projectId:'kingshot-cards',appId:'1:633151991828:web:611bf2ed383692f0c6f701'});
 const auth=getAuth(app),API='/api/booster-bridge?route=';
+// Réclamation serveur idempotente : aucune animation 3D ne démarre avant confirmation.
+window.KSBooster100ClaimAndVerify=async function(){
+ const u=auth.currentUser;
+ if(!u||u.isAnonymous||!u.providerData.some(p=>p.providerId==='google.com'))throw Error('Connexion Google requise.');
+ const token=await u.getIdToken(true);
+ async function req(route,post){
+  const response=await fetch(API+encodeURIComponent(route),{method:post?'POST':'GET',cache:'no-store',headers:{Authorization:'Bearer '+token,...(post?{'Content-Type':'application/json'}:{})},...(post?{body:'{}'}:{})});
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw Error('Serveur HTTP '+response.status+' : '+(data.detail||data.error||'Réponse invalide'));
+  return data;
+ }
+ const eligibility=await req('/booster-eligibility',false);
+ if(!eligibility.eligible&&!eligibility.claimed)throw Error('Booster non débloqué sur le serveur : '+(eligibility.rankedPlayers??'?')+'/100 joueurs classés.');
+ // L'appel répare également une attribution antérieure dont l'inventaire n'avait pas été écrit.
+ const result=await req('/booster-claim',true);
+ if(!result.ok||!Array.isArray(result.cards)||result.cards.length!==16||new Set(result.cards).size!==16)throw Error('Attribution Firebase non confirmée.');
+ const confirmed=await req('/booster-eligibility',false);
+ if(!confirmed.claimed||JSON.stringify(confirmed.cards)!==JSON.stringify(result.cards))throw Error('Le tirage enregistré ne correspond pas à la réponse serveur.');
+ // Firebase en temps réel peut être momentanément en retard. Rendre immédiatement le gain visible.
+ const inventory=window.KSBoosterInventory||{connected:false,cards:{}};
+ const merged={...(inventory.cards||{})};
+ for(const id of result.cards)merged[id]=Math.max(1,Number(merged[id])||0);
+ window.KSBoosterInventory={connected:true,cards:merged};
+ window.dispatchEvent(new Event('ks-booster-inventory-updated'));
+ window.dispatchEvent(new Event('ks-deck-auth-changed'));
+ window.dispatchEvent(new CustomEvent('ks-booster100-granted',{detail:{cards:result.cards,inventoryUpdated:result.inventoryUpdated}}));
+ return result.cards;
+};
+
 let status={eligible:false,claimed:false},busy=false,dismissed=false,initialized=false,boosterError='',rankedCount=null;
 const logged=()=>{const u=auth.currentUser;return !!(u&&!u.isAnonymous&&u.providerData.some(p=>p.providerId==='google.com'))};
 async function call(path,post=false){const u=auth.currentUser;if(!u)throw Error('Connexion Google requise');const token=await u.getIdToken();const r=await fetch(API+encodeURIComponent(path),{method:post?'POST':'GET',headers:{Authorization:'Bearer '+token,...(post?{'Content-Type':'application/json'}:{})},...(post?{body:'{}'}:{})});const data=await r.json().catch(()=>({}));if(!r.ok)throw Error(data.error||data.detail||'Erreur Worker '+r.status);return data;}
-window.KSBooster100EnsureCards=async function(){
- if(!logged())throw Error('Connexion Google requise');
- const eligibility=await call('/booster-eligibility');
- if(!eligibility.claimed&&!eligibility.eligible)throw Error('Booster non débloqué pour ce compte');
- // L'endpoint POST est idempotent : réutilise le tirage enregistré et répare l'inventaire si nécessaire.
- const claim=await call('/booster-claim',true);
- const ids=claim.cards;
- if(!claim.ok||!Array.isArray(ids)||ids.length!==16||new Set(ids).size!==16)throw Error('Attribution des 16 cartes non confirmée');
- window.dispatchEvent(new Event('ks-booster-inventory-recheck'));
- window.dispatchEvent(new CustomEvent('ks-booster100-granted',{detail:{cards:ids}}));
- return ids;
-};
 function init(){if(initialized)return true;
  const options=document.getElementById('ksOptionsModal'),gear=document.getElementById('quickHelp'),tab=options?.querySelector('[data-opt="shop"]'),collectionTab=options?.querySelector('[data-opt="collection"]'),gallery=document.getElementById('ksBoosterGallery'),booster=gallery?.querySelectorAll('.ks-booster-item')[1];
  if(!options||!gear||!tab||!booster)return false;initialized=true;
