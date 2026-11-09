@@ -34,6 +34,7 @@ let reverse=new Map([...translations].map(([fr,en])=>[en,fr]));
 // Otherwise English text written before the JSON loads cannot be translated again.
 const originalTexts=new WeakMap();
 const originalAttributes=new WeakMap();
+const lastRendered=new WeakMap();
 const englishReverse=new Map([...translations].map(([fr,en])=>[en,fr]));
 function sourceText(value){
  if(translations.has(value))return value;
@@ -55,16 +56,17 @@ function apply(){if(busy)return;busy=true;try{
   if(node.parentElement?.closest('script,style'))continue;
   const raw=node.nodeValue,trimmed=raw.trim();if(!trimmed)continue;
   let source=originalTexts.get(node);
-  if(!source || (trimmed!==source && trimmed!==translate(source,lang))){source=sourceText(trimmed);originalTexts.set(node,source);}
+  if(!source || (lastRendered.has(node) && trimmed!==lastRendered.get(node))){source=sourceText(trimmed);originalTexts.set(node,source);}
   const next=translate(source,lang);
   if(next!==trimmed)node.nodeValue=raw.replace(trimmed,next);
+  lastRendered.set(node,next);
  }
  const close=document.getElementById('close3d');
  if(close){const original='Fermer le visualiseur';close.setAttribute('aria-label',translate(original,lang));}
 }finally{busy=false;}}
 let queued=false;
 const obs=new MutationObserver(()=>{if(busy||queued)return;queued=true;queueMicrotask(()=>{queued=false;apply();});});
-function start(){apply();obs.observe(document.body,{subtree:true,childList:true,characterData:true});}
+function start(){obs.observe(document.body,{subtree:true,childList:true,characterData:true});}
 let boosterLoadSerial=0;
 async function ksLoadBoosterLanguage(code){
  const serial=++boosterLoadSerial;

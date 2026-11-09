@@ -4614,7 +4614,13 @@ function translate(s){
  const match=s.match(/^(\s*)([\s\S]*?)(\s*)$/);if(!match)return s;
  const pre=match[1],body=match[2],post=match[3];
  if(Object.prototype.hasOwnProperty.call(dictionary,body))return pre+dictionary[body]+post;
- for(const [re,fn] of patterns)if(re.test(s))return s.replace(re,fn);
+ if(chosenLang!=='en'){
+  const count=body.match(/^(\d+)\s*\/\s*(\d+)\s+cartes différentes$/i);
+  if(count)return pre+count[1]+' / '+count[2]+' '+(dictionary['cartes différentes']||'cartes différentes')+post;
+  const count2=body.match(/^(\d+)\s+cartes différentes$/i);
+  if(count2)return pre+count2[1]+' '+(dictionary['cartes différentes']||'cartes différentes')+post;
+ }
+ if(chosenLang==='en')for(const [re,fn] of patterns)if(re.test(s))return s.replace(re,fn);
  // Embedded phrases: only replace complete phrases and labels, never arbitrary substrings of names.
  let t=body;
  for(const k of keys){if(k.length<9||!t.includes(k))continue;
@@ -4647,7 +4653,9 @@ function applyGuideTranslations(){
   }
   const record=originalGuideHTML.get(p);if(!record)return;
   if(chosenLang!=='fr'){
-   if(p.textContent!==record.translation)p.textContent=record.translation;
+   const match=Object.keys(guideTranslations).find(prefix=>record.html.replace(/<[^>]*>/g,'').trim().startsWith(prefix));
+   const translated=match?guideTranslations[match]:null;
+   if(translated&&p.textContent!==translated)p.textContent=translated;
   }else if(p.innerHTML!==record.html)p.innerHTML=record.html;
  });
 }
@@ -4670,7 +4678,7 @@ function translateNode(root){
 }
 let running=false,scheduled=false;
 function apply(){if(running)return;running=true;try{applyCardDescriptions();applyGuideTranslations();translateNode(document.body)}finally{running=false}}
-function start(){installLanguageSelector();apply();new MutationObserver(()=>{
+function start(){installLanguageSelector();if(chosenLang==='en')apply();new MutationObserver(()=>{
  if(running||scheduled)return;scheduled=true;queueMicrotask(()=>{scheduled=false;apply()});
  }).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['title','placeholder','aria-label']});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
@@ -4696,10 +4704,10 @@ async function loadLanguageDictionary(code){
    const translatedName=(data.cardNames||{})[id];
    if(originalName&&translatedName)translatedCardNames[originalName]=translatedName;
   }
-  dictionary=target==='fr'?{}:{...embeddedEnglish.ui,...(data.ui||{}),...translatedCardNames};
+  dictionary=target==='fr'?{}:{...(target==='en'?embeddedEnglish.ui:{}),...(data.ui||{}),...translatedCardNames};
   keys=Object.keys(dictionary).sort((a,b)=>b.length-a.length);
-  cardEN=target==='fr'?{}:{...embeddedEnglish.cards,...(data.cards||{})};
-  guideTranslations=target==='fr'?{}:{...embeddedEnglish.guides,...(data.guides||{})};
+  cardEN=target==='fr'?{}:{...(target==='en'?embeddedEnglish.cards:{}),...(data.cards||{})};
+  guideTranslations=target==='fr'?{}:{...(target==='en'?embeddedEnglish.guides:{}),...(data.guides||{})};
   apply();
  }catch(error){console.warn('KardShot: chargement de langue impossible',code,error);}
 }
