@@ -1,7 +1,80 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>KardShot · Booster 3D · V06 TEST LOCAL</title><style>
 *{box-sizing:border-box}body{margin:0;background:#090911;color:#f6dfb0;font-family:system-ui,sans-serif;overflow:hidden}canvas{display:block;touch-action:none}header{position:absolute;top:calc(40px + env(safe-area-inset-top, 0px));left:0;right:0;text-align:center;pointer-events:none;padding:14px 10px;background:linear-gradient(#090911d9,transparent);z-index:2}h1{font-size:16px;letter-spacing:2px;margin:0 0 4px}small{color:#d5c1a6}footer{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;padding:15px 12px 20px;background:linear-gradient(transparent,#090911eb);z-index:2}button{border:1px solid #b58a48;background:#271a34;color:#ffe3ac;border-radius:10px;padding:10px 13px;font-weight:650}#hint{width:100%;text-align:center;font-size:12px;color:#d6c2ad}#error{display:none;position:absolute;inset:0;background:#15101b;align-items:center;justify-content:center;padding:24px;text-align:center;z-index:5}
-.packSelect{display:inline-flex;align-items:center;gap:7px;border:1px solid #b58a48;background:#271a34;color:#ffe3ac;border-radius:10px;padding:9px 11px;font-size:13px;font-weight:650}.packSelect select{background:#120c20;color:#ffe3ac;border:1px solid #b58a48;border-radius:6px;padding:4px;font-size:14px}.upload{display:inline-block;border:1px solid #b58a48;background:#271a34;color:#ffe3ac;border-radius:10px;padding:10px 13px;font-size:13px;font-weight:650;cursor:pointer}.upload input{display:none} footer .packSelect,footer .upload,footer #front,footer #back,header small{display:none!important}</style></head><body><header><h1>KARDSHOT · BOOSTER 3D</h1><small>Édition Origine · <span id="packCountLabel">5</span> cartes · Base universelle · V55 TEST</small></header><button id="close3d" type="button" aria-label="Fermer le visualiseur" style="position:fixed;right:12px;top:calc(38px + env(safe-area-inset-top, 0px));width:36px;height:36px;padding:0;border:1px solid #d6b876;border-radius:9px;background:#20354b;color:#fff;font:700 26px/1 system-ui;display:grid;place-items:center;cursor:pointer;z-index:10000;pointer-events:auto">×</button><script>if(window.parent!==window){document.getElementById('close3d').style.display='none';}document.getElementById('close3d').addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(window.parent!==window){window.parent.postMessage({type:'KARDSHOT_CLOSE_3D'},'*');}else if(history.length>1){history.back();}});</script><div id="scene"></div><footer><div id="hint">Avant ouverture : pivoter / zoomer · Après déchirure : glisser le sachet uniquement</div><label class="packSelect">Cartes <select id="packCount"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="30">30</option></select></label><label class="upload">Changer l’avant<input id="frontFile" type="file" accept="image/*"></label><label class="upload">Changer le dos<input id="backFile" type="file" accept="image/*"></label><button id="front">Face avant</button><button id="back">Dos</button><button id="reset">Réinitialiser</button></footer><div id="error">Impossible de charger le moteur 3D. Ouvre ce fichier dans Chrome avec une connexion Internet.</div>
-<div id="tearHint" style="position:fixed;top:calc(86px + env(safe-area-inset-top, 0px));left:8%;width:84%;text-align:center;color:#f7dfb0;background:#120c20c9;border:1px solid #86613c;border-radius:9px;padding:9px;font-size:12px;pointer-events:none;z-index:4">Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.</div><script type="module">
+.packSelect{display:inline-flex;align-items:center;gap:7px;border:1px solid #b58a48;background:#271a34;color:#ffe3ac;border-radius:10px;padding:9px 11px;font-size:13px;font-weight:650}.packSelect select{background:#120c20;color:#ffe3ac;border:1px solid #b58a48;border-radius:6px;padding:4px;font-size:14px}.upload{display:inline-block;border:1px solid #b58a48;background:#271a34;color:#ffe3ac;border-radius:10px;padding:10px 13px;font-size:13px;font-weight:650;cursor:pointer}.upload input{display:none} footer .packSelect,footer .upload,footer #front,footer #back,header small{display:none!important}</style><script src="/langues/i18n.js" defer></script></head><body><header><h1>KARDSHOT · BOOSTER 3D</h1><small>Édition Origine · <span id="packCountLabel">5</span> cartes · Base universelle · V55 TEST</small></header><button id="close3d" type="button" aria-label="Fermer le visualiseur" style="position:fixed;right:12px;top:calc(38px + env(safe-area-inset-top, 0px));width:36px;height:36px;padding:0;border:1px solid #d6b876;border-radius:9px;background:#20354b;color:#fff;font:700 26px/1 system-ui;display:grid;place-items:center;cursor:pointer;z-index:10000;pointer-events:auto">×</button><script>if(window.parent!==window){document.getElementById('close3d').style.display='none';}document.getElementById('close3d').addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(window.parent!==window){window.parent.postMessage({type:'KARDSHOT_CLOSE_3D'},'*');}else if(history.length>1){history.back();}});</script><div id="scene"></div><footer><div id="hint">Avant ouverture : pivoter / zoomer · Après déchirure : glisser le sachet uniquement</div><label class="packSelect">Cartes <select id="packCount"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="30">30</option></select></label><label class="upload">Changer l’avant<input id="frontFile" type="file" accept="image/*"></label><label class="upload">Changer le dos<input id="backFile" type="file" accept="image/*"></label><button id="front">Face avant</button><button id="back">Dos</button><button id="reset">Réinitialiser</button></footer><div id="error">Impossible de charger le moteur 3D. Ouvre ce fichier dans Chrome avec une connexion Internet.</div>
+<div id="tearHint" style="position:fixed;top:calc(86px + env(safe-area-inset-top, 0px));left:8%;width:84%;text-align:center;color:#f7dfb0;background:#120c20c9;border:1px solid #86613c;border-radius:9px;padding:9px;font-size:12px;pointer-events:none;z-index:4">Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.</div><script id="ks-booster-i18n-test">
+/* Booster translations only. English forced for local testing; follows KardShot V400 preference if present. */
+(function(){
+'use strict';
+const KEY='kardshot_v400_test_lang';
+let lang='fr';
+try{const saved=localStorage.getItem('kardshot.language')||localStorage.getItem(KEY);lang=(saved==='fr'||saved==='en')?saved:((navigator.language||'fr').toLowerCase().startsWith('en')?'en':'fr');}catch(e){}
+const translations=new Map([
+['Édition Origine ·','Origin Edition ·'],['cartes · Base universelle ·','cards · Universal base ·'],
+['Fermer le visualiseur','Close viewer'],
+['Avant ouverture : pivoter / zoomer · Après déchirure : glisser le sachet uniquement','Before opening: rotate / zoom · After tearing: slide the wrapper only'],
+['Cartes','Cards'],['Changer l’avant','Change front'],['Changer le dos','Change back'],['Face avant','Front'],['Dos','Back'],['Réinitialiser','Reset'],
+['Impossible de charger le moteur 3D. Ouvre ce fichier dans Chrome avec une connexion Internet.','Unable to load the 3D engine. Open this file in Chrome with an internet connection.'],
+['Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.','Hold one finger at the bottom, then slide a second finger across the top to the right.'],
+['Booster prêt : 16 cartes différentes chargées. Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.','Booster ready: 16 different cards loaded. Hold one finger at the bottom, then slide a second finger across the top to the right.'],
+['Chargement des 46 cartes…','Loading 46 cards…'],
+['Glisse sur la pile : dépasse le bord pour ranger la carte derrière.','Swipe across the stack: go past the edge to move the card to the back.'],
+['Double-tape pour retourner la suivante.','Double-tap to flip the next card.'],
+['Les cartes sont dégagées. Double-tape pour retourner la première carte.','The cards are free. Double-tap to flip the first card.'],
+['Glisse vers le bas ou vers le haut pour déplacer le sachet librement.','Swipe down or up to move the wrapper freely.'],
+['chargement en cours. Attends quelques secondes puis réinitialise.','loading in progress. Wait a few seconds, then reset.']
+]);
+const patterns=[
+[/^Impossible de charger les 46 cartes : (.*)$/,'Unable to load the 46 cards: $1'],
+[/^Cartes non prêtes : (.*)$/,'Cards not ready: $1'],
+[/^Glisse un doigt vers le bas sur le sachet pour libérer les (\d+) cartes\.$/,'Swipe down on the wrapper with one finger to release the $1 cards.'],
+[/^(\d+) cartes révélées\. Zoome pour les regarder\.$/,'$1 cards revealed. Zoom in to see them.']
+];
+const reverse=new Map([...translations].map(([fr,en])=>[en,fr]));
+function translate(value,to){
+ if(to==='en'){
+  if(translations.has(value))return translations.get(value);
+  for(const [pattern,replacement] of patterns)if(pattern.test(value))return value.replace(pattern,replacement);
+ }else{
+  if(reverse.has(value))return reverse.get(value);
+  // Pattern translations are reversible for switching languages without resetting the booster.
+  const rev=[[/^Unable to load the 46 cards: (.*)$/,'Impossible de charger les 46 cartes : $1'],[/^Cards not ready: (.*)$/,'Cartes non prêtes : $1'],[/^Swipe down on the wrapper with one finger to release the (\d+) cards\.$/,'Glisse un doigt vers le bas sur le sachet pour libérer les $1 cartes.'],[/^(\d+) cards revealed\. Zoom in to see them\.$/,'$1 cartes révélées. Zoome pour les regarder.']];
+  for(const [pattern,replacement] of rev)if(pattern.test(value))return value.replace(pattern,replacement);
+ }
+ return value;
+}
+let busy=false;
+function apply(){if(busy)return;busy=true;try{
+ document.documentElement.lang=lang;
+ const walk=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ let node;while((node=walk.nextNode())){
+  if(node.parentElement?.closest('script,style'))continue;
+  const raw=node.nodeValue,trimmed=raw.trim();if(!trimmed)continue;
+  const next=translate(trimmed,lang);
+  if(next!==trimmed)node.nodeValue=raw.replace(trimmed,next);
+ }
+ const close=document.getElementById('close3d');if(close)close.setAttribute('aria-label',lang==='en'?'Close viewer':'Fermer le visualiseur');
+}finally{busy=false;}}
+let queued=false;
+const obs=new MutationObserver(()=>{if(busy||queued)return;queued=true;queueMicrotask(()=>{queued=false;apply();});});
+function start(){apply();obs.observe(document.body,{subtree:true,childList:true,characterData:true});}
+async function syncBoosterLanguage(){
+ try{
+  if(!window.KardShotI18n)return;
+  await window.KardShotI18n.init();
+  const response=await fetch('/langues/en.json');
+  if(response.ok){const data=await response.json();for(const [fr,en] of Object.entries(data.booster||{})){translations.set(fr,en);reverse.set(en,fr);}}
+  lang=window.KardShotI18n.getLanguage();apply();
+ }catch(error){console.warn('KardShot booster: traductions embarquées conservées',error)}
+}
+window.addEventListener('load',syncBoosterLanguage,{once:true});
+document.addEventListener('kardshot:languagechange',event=>{lang=event.detail.language;apply();});
+
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+window.addEventListener('storage',e=>{if(e.key===KEY&&(e.newValue==='fr'||e.newValue==='en')){lang=e.newValue;apply();}});
+window.addEventListener('message',e=>{if(e.data?.type==='KARDSHOT_LANGUAGE'&&(e.data.lang==='fr'||e.data.lang==='en')){lang=e.data.lang;apply();window.KardShotI18n?.setLanguage(lang).catch(console.warn);}});
+window.ksBoosterSetLanguage=function(next){if(next==='fr'||next==='en'){lang=next;apply();}};
+})();
+</script><script type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js';
 const selectedPack=new URLSearchParams(location.search).get('pack')==='100'?'100':'starter';
 const assetBase='https://sweet-halva-c9f3fa.pages.dev/images/booster/';
@@ -120,6 +193,20 @@ function printCardNumber(ctx,info){
  ctx.font='bold 14px Arial';ctx.lineWidth=2;ctx.strokeStyle='rgba(0,0,0,.85)';
  ctx.strokeText(number,449,699);ctx.fillStyle='#ffe8b4';ctx.fillText(number,449,699);ctx.restore();
 }
+
+// V402: Display-name translations only; card IDs, stats, assets and gameplay are unchanged.
+const KS_CARD_NAMES_EN = {5: "Grey Wolf", 6: "Lynx", 7: "Bison", 8: "Cheetah", 9: "Elk", 10: "Grizzly Bear", 11: "Lion", 12: "Giant Rhinoceros", 13: "Mighty Bison", 14: "Great Elk", 15: "Alpha Black Panther", 16: "Royal White Lion", 31: "Mountainbreaker", 32: "Thunderclaw", 33: "Stormwing", 35: "Grimbok", 36: "Kragna", 37: "Morgha", 38: "Sylvara", 39: "Vargul", 40: "Thorgar"};
+function ksBoosterLanguage(){
+  try {
+    const choice=localStorage.getItem('kardshot_v400_test_lang');
+    if(choice==='fr'||choice==='en')return choice;
+  } catch(e) {}
+  return 'en'; // English forced for this local translation test.
+}
+function ksBoosterCardName(info){
+  const num=Number(info.numero);
+  return ksBoosterLanguage()==='en' ? (KS_CARD_NAMES_EN[num] || info.name) : info.name;
+}
 function makeCardFront(info){
  const c=document.createElement('canvas');c.width=480;c.height=720;
  const x=c.getContext('2d');const tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;const im=new Image();im.crossOrigin="anonymous";im.onload=()=>{
@@ -174,7 +261,7 @@ function makeCardFront(info){
   x.beginPath();x.roundRect(12,12,456,696,8);x.clip();
   x.fillStyle='#08070edc';x.fillRect(12,637,456,71);
   x.restore();
-  x.fillStyle='#fff2d3';x.font='bold 35px Georgia';x.fillText(info.name,240,685);
+  x.fillStyle='#fff2d3';x.font='bold 35px Georgia';x.fillText(ksBoosterCardName(info),240,685);
   printCardNumber(x,info);
   // Le liseré reste au premier plan, par-dessus tous les éléments imprimés.
   x.strokeStyle='#d9bb80';x.lineWidth=1.5;
@@ -186,7 +273,7 @@ function makeCardFront(info){
 ctx.strokeStyle="#d9bb80";ctx.lineWidth=12;ctx.strokeRect(8,8,464,704);
 ctx.strokeStyle="#9b8359";ctx.lineWidth=2;ctx.strokeRect(22,22,436,676);
 ctx.fillStyle="#d9bb80";ctx.font="bold 100px Georgia";ctx.textAlign="center";ctx.fillText("K",240,290);
-ctx.font="bold 32px Georgia";ctx.fillStyle="#fff0c8";ctx.fillText(info.name,240,510);
+ctx.font="bold 32px Georgia";ctx.fillStyle="#fff0c8";ctx.fillText(ksBoosterCardName(info),240,510);
 ctx.font="20px Arial";ctx.fillStyle="#d9bb80";ctx.fillText("Illustration à ajouter",240,555);printCardNumber(ctx,info);tex.needsUpdate=true;};
  if(info.image){im.src=info.image}else{im.onerror();}
  return new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide,transparent:true,alphaTest:.025,depthWrite:true});
