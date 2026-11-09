@@ -4685,8 +4685,18 @@ async function loadLanguageDictionary(code){
   const response=await fetch('/langues/'+target+'.json');
   if(!response.ok)throw Error(target+'.json '+response.status);
   const data=await response.json();
+  // Card names are indexed by permanent card ID in each language JSON.
+  // Resolve them from the French source rather than relying on UI labels.
+  const frenchResponse=await fetch('/langues/fr.json');
+  if(!frenchResponse.ok)throw Error('fr.json '+frenchResponse.status);
+  const frenchData=await frenchResponse.json();
   if(serial!==languageLoadSerial)return;
-  dictionary=target==='fr'?{}:{...embeddedEnglish.ui,...(data.ui||{})};
+  const translatedCardNames={};
+  for(const [id,originalName] of Object.entries(frenchData.cardNames||{})){
+   const translatedName=(data.cardNames||{})[id];
+   if(originalName&&translatedName)translatedCardNames[originalName]=translatedName;
+  }
+  dictionary=target==='fr'?{}:{...embeddedEnglish.ui,...(data.ui||{}),...translatedCardNames};
   keys=Object.keys(dictionary).sort((a,b)=>b.length-a.length);
   cardEN=target==='fr'?{}:{...embeddedEnglish.cards,...(data.cards||{})};
   guideTranslations=target==='fr'?{}:{...embeddedEnglish.guides,...(data.guides||{})};

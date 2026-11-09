@@ -30,16 +30,21 @@ const patterns=[
 [/^(\d+) cartes révélées\. Zoome pour les regarder\.$/,'$1 cards revealed. Zoom in to see them.']
 ];
 let reverse=new Map([...translations].map(([fr,en])=>[en,fr]));
+// Keep the original French source for each UI text node, even after a language change.
+// Otherwise English text written before the JSON loads cannot be translated again.
+const originalTexts=new WeakMap();
+const originalAttributes=new WeakMap();
+const englishReverse=new Map([...translations].map(([fr,en])=>[en,fr]));
+function sourceText(value){
+ if(translations.has(value))return value;
+ if(englishReverse.has(value))return englishReverse.get(value);
+ if(reverse.has(value))return reverse.get(value);
+ return value;
+}
 function translate(value,to){
- if(to!=='fr'){
-  if(translations.has(value))return translations.get(value);
-  for(const [pattern,replacement] of patterns)if(pattern.test(value))return value.replace(pattern,replacement);
- }else{
-  if(reverse.has(value))return reverse.get(value);
-  // Pattern translations are reversible for switching languages without resetting the booster.
-  const rev=[[/^Unable to load the 46 cards: (.*)$/,'Impossible de charger les 46 cartes : $1'],[/^Cards not ready: (.*)$/,'Cartes non prêtes : $1'],[/^Swipe down on the wrapper with one finger to release the (\d+) cards\.$/,'Glisse un doigt vers le bas sur le sachet pour libérer les $1 cartes.'],[/^(\d+) cards revealed\. Zoom in to see them\.$/,'$1 cartes révélées. Zoome pour les regarder.']];
-  for(const [pattern,replacement] of rev)if(pattern.test(value))return value.replace(pattern,replacement);
- }
+ if(to==='fr')return value;
+ if(translations.has(value))return translations.get(value);
+ for(const [pattern,replacement] of patterns)if(pattern.test(value))return value.replace(pattern,replacement);
  return value;
 }
 let busy=false;
@@ -49,10 +54,13 @@ function apply(){if(busy)return;busy=true;try{
  let node;while((node=walk.nextNode())){
   if(node.parentElement?.closest('script,style'))continue;
   const raw=node.nodeValue,trimmed=raw.trim();if(!trimmed)continue;
-  const next=translate(trimmed,lang);
+  let source=originalTexts.get(node);
+  if(!source || (trimmed!==source && trimmed!==translate(source,lang))){source=sourceText(trimmed);originalTexts.set(node,source);}
+  const next=translate(source,lang);
   if(next!==trimmed)node.nodeValue=raw.replace(trimmed,next);
  }
- const close=document.getElementById('close3d');if(close)close.setAttribute('aria-label',(translations.get('Fermer le visualiseur')||'Close viewer'));
+ const close=document.getElementById('close3d');
+ if(close){const original='Fermer le visualiseur';close.setAttribute('aria-label',translate(original,lang));}
 }finally{busy=false;}}
 let queued=false;
 const obs=new MutationObserver(()=>{if(busy||queued)return;queued=true;queueMicrotask(()=>{queued=false;apply();});});
