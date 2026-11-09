@@ -545,9 +545,28 @@
       "need": "at least 3 pawns",
       "gain": "5 points",
       "cap": "Last Breath: when it leaves the board, grants +1 point to affected allied cards."
+    },
+    "Calyra": {
+      "need": "at least 2 pawns",
+      "gain": "3 points",
+      "cap": "Grants +4 points to allied cards on the square targeted by her ability."
+    },
+    "Zafira": {
+      "need": "at least 2 pawns",
+      "gain": "3 points",
+      "cap": "Deals −2 points to enemy cards on the squares targeted by her ability."
+    },
+    "Shenlong": {
+      "need": "at least 2 pawns",
+      "gain": "1 point",
+      "cap": "Grants +3 points to allied cards on the squares targeted by his ability."
     }
   },
   "cardNames": {
+    "1": "Ravik",
+    "2": "Kaelan",
+    "3": "Nerya",
+    "4": "Durnak",
     "5": "Grey Wolf",
     "6": "Lynx",
     "7": "Bison",
@@ -560,15 +579,69 @@
     "14": "Great Elk",
     "15": "Alpha Black Panther",
     "16": "Royal White Lion",
+    "17": "Ryokan",
+    "18": "Astrid",
+    "19": "Zahir",
+    "20": "Meiyun",
+    "21": "Brogmar",
+    "22": "Zalika",
+    "23": "Temür",
+    "24": "Eldric",
+    "25": "Eryndra",
+    "26": "Sayuri",
+    "27": "Indira",
+    "28": "Argan",
+    "29": "Thalor",
+    "30": "Takoda",
     "31": "Mountainbreaker",
     "32": "Thunderclaw",
     "33": "Stormwing",
+    "34": "Vespera",
     "35": "Grimbok",
     "36": "Kragna",
     "37": "Morgha",
     "38": "Sylvara",
     "39": "Vargul",
-    "40": "Thorgar"
+    "40": "Thorgar",
+    "41": "Kenshiro",
+    "42": "Amara",
+    "43": "Rashan",
+    "44": "Calyra",
+    "45": "Zafira",
+    "46": "Shenlong"
   },
-  "booster": {}
+  "booster": {
+    "Édition Origine ·": "Origin Edition ·",
+    "cartes · Base universelle ·": "cards · Universal base ·",
+    "Fermer le visualiseur": "Close viewer",
+    "Avant ouverture : pivoter / zoomer · Après déchirure : glisser le sachet uniquement": "Before opening: rotate / zoom · After tearing: slide the wrapper only",
+    "Cartes": "Cards",
+    "Changer l’avant": "Change front",
+    "Changer le dos": "Change back",
+    "Face avant": "Front",
+    "Dos": "Back",
+    "Réinitialiser": "Reset",
+    "Impossible de charger le moteur 3D. Ouvre ce fichier dans Chrome avec une connexion Internet.": "Unable to load the 3D engine. Open this file in Chrome with an internet connection.",
+    "Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.": "Hold one finger at the bottom, then slide a second finger across the top to the right.",
+    "Booster prêt : 16 cartes différentes chargées. Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.": "Booster ready: 16 different cards loaded. Hold one finger at the bottom, then slide a second finger across the top to the right.",
+    "Chargement des 46 cartes…": "Loading 46 cards…",
+    "Glisse sur la pile : dépasse le bord pour ranger la carte derrière.": "Swipe across the stack: go past the edge to move the card to the back.",
+    "Double-tape pour retourner la suivante.": "Double-tap to flip the next card.",
+    "Les cartes sont dégagées. Double-tape pour retourner la première carte.": "The cards are free. Double-tap to flip the first card.",
+    "Glisse vers le bas ou vers le haut pour déplacer le sachet librement.": "Swipe down or up to move the wrapper freely.",
+    "chargement en cours. Attends quelques secondes puis réinitialise.": "loading in progress. Wait a few seconds, then reset."
+  },
+  "guides": {
+    "Les bonus augmentent la valeur affichée de la carte concernée": "Bonuses increase a card’s displayed value, while penalties reduce it. Effects can stack. Depending on the card, an ability may activate immediately, while the card remains in play, when another card is played, or when it leaves the board. Some abilities affect allies, others enemies, or both sides. Hold a card to view its Requirements, Card points and Ability.",
+    "Les cartes REM permettent de remplacer une carte déjà présente": "REM cards can replace a card already on the board. There are three types:",
+    "Collection : un joueur peut posséder autant de cartes REM": "Collection: a player may own as many REM cards as they have earned or purchased, with no ownership limit.",
+    "Composition des decks : chaque deck de 20 cartes": "Deck building: each 20-card deck may include at most 2 REM cards, regardless of color. This limit also applies to random decks. Therefore, the 15-card draw for a match can never contain more than 2 REM cards.",
+    "Tu peux affronter l'IA ou jouer en multijoueur": "You can play against the AI or against another player in a private room. In multiplayer, both players must finish preparing before the match starts. The Rematch button may let you keep or change your deck depending on the mode and sign-in status. Matches against the AI award no points toward either the individual player leaderboard or the state leaderboard. The trophy opens ranking information.",
+    "Conseil : une carte très forte en points": "Tip: a high-point card does not necessarily win the match. Controlling several rows, holding key squares and protecting support cards can matter more.",
+    "Chaque joueur peut composer un deck de": "Each player can build a 20-card deck from their collection. At the start of a match, 15 cards are drawn at random from those 20. You can save up to 3 different decks to vary your strategy. You can also choose a random deck, subject to the same building rules, including the limit of 2 REM cards.",
+    "La main de départ contient": "Your starting hand contains 5 cards. During preparation, you may select 0 to 5 cards to replace. When you press Ready, the selected cards are randomly replaced with cards from your 15-card draw. The first player is chosen at random. During the match, you gradually draw the remaining cards from those 15.",
+    "À ton tour, joue une carte autorisée": "On your turn, play an eligible card or choose Pass. Passing may let you draw a card if your draw pile is not empty. Anti-stalling: you may voluntarily pass only once until you play another card. If a legal placement is still available, you must play a card before voluntarily passing again. If no placement is possible, you may always pass; this forced pass does not count as a voluntary pass. This rule applies against the AI and in multiplayer. The Pass icon may light up when no move is playable. If you have more than 6 cards in hand, additional cards are available from a drop-down menu. The optional 60-second timer gives a visual warning during the last 15 seconds. The match ends when neither side can continue; points from all three rows are then tallied.",
+    "La grille représente les effets autour de la carte": "The grid shows effects around the card placed at its center. 🟨 Center: placement square. 🟧 Orange: influence and territory/pawn expansion. 🟩 Green: point bonus. 🟪 Purple: point penalty. 🟥 Red with ×: destruction. Cyan: protection, when the card has that ability. Some squares combine influence and abilities; read the card description for exact targets and conditions. Do not confuse effect colors with REM card colors.",
+    "REM bleue": "Blue REM: replaces a card on your side. Red REM: replaces an enemy card. Purple REM: replaces a card on either side."
+  }
 }

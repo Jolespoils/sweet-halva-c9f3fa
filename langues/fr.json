@@ -545,6 +545,21 @@
       "need": "3 pions ou plus",
       "gain": "5 points",
       "cap": "Dernier souffle : lorsqu’il quitte le plateau, accorde +1 point aux cartes alliées concernées."
+    },
+    "Calyra": {
+      "need": "2 pions ou plus",
+      "gain": "3 points",
+      "cap": "Donne +4 points aux cartes alliées sur la case ciblée par sa capacité."
+    },
+    "Zafira": {
+      "need": "2 pions ou plus",
+      "gain": "3 points",
+      "cap": "Inflige −2 points aux cartes adverses sur les cases ciblées par sa capacité."
+    },
+    "Shenlong": {
+      "need": "2 pions ou plus",
+      "gain": "1 point",
+      "cap": "Donne +3 points aux cartes alliées sur les cases ciblées par sa capacité."
     }
   },
   "cardNames": {
@@ -577,7 +592,56 @@
     "27": "Indira",
     "28": "Argan",
     "29": "Thalor",
-    "30": "Takoda"
+    "30": "Takoda",
+    "31": "Brise-Montagne",
+    "32": "Griffe-Tonnerre",
+    "33": "Aile-Tempête",
+    "34": "Vespera",
+    "35": "Grimbok",
+    "36": "Kragna",
+    "37": "Morgha",
+    "38": "Sylvara",
+    "39": "Vargul",
+    "40": "Thorgar",
+    "41": "Kenshiro",
+    "42": "Amara",
+    "43": "Rashan",
+    "44": "Calyra",
+    "45": "Zafira",
+    "46": "Shenlong"
   },
-  "booster": {}
+  "booster": {
+    "Édition Origine ·": "Édition Origine ·",
+    "cartes · Base universelle ·": "cartes · Base universelle ·",
+    "Fermer le visualiseur": "Fermer le visualiseur",
+    "Avant ouverture : pivoter / zoomer · Après déchirure : glisser le sachet uniquement": "Avant ouverture : pivoter / zoomer · Après déchirure : glisser le sachet uniquement",
+    "Cartes": "Cartes",
+    "Changer l’avant": "Changer l’avant",
+    "Changer le dos": "Changer le dos",
+    "Face avant": "Face avant",
+    "Dos": "Dos",
+    "Réinitialiser": "Réinitialiser",
+    "Impossible de charger le moteur 3D. Ouvre ce fichier dans Chrome avec une connexion Internet.": "Impossible de charger le moteur 3D. Ouvre ce fichier dans Chrome avec une connexion Internet.",
+    "Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.": "Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.",
+    "Booster prêt : 16 cartes différentes chargées. Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.": "Booster prêt : 16 cartes différentes chargées. Maintiens un doigt sur le bas, puis glisse un second doigt sur le haut vers la droite.",
+    "Chargement des 46 cartes…": "Chargement des 46 cartes…",
+    "Glisse sur la pile : dépasse le bord pour ranger la carte derrière.": "Glisse sur la pile : dépasse le bord pour ranger la carte derrière.",
+    "Double-tape pour retourner la suivante.": "Double-tape pour retourner la suivante.",
+    "Les cartes sont dégagées. Double-tape pour retourner la première carte.": "Les cartes sont dégagées. Double-tape pour retourner la première carte.",
+    "Glisse vers le bas ou vers le haut pour déplacer le sachet librement.": "Glisse vers le bas ou vers le haut pour déplacer le sachet librement.",
+    "chargement en cours. Attends quelques secondes puis réinitialise.": "chargement en cours. Attends quelques secondes puis réinitialise."
+  },
+  "guides": {
+    "Les bonus augmentent la valeur affichée de la carte concernée": "Les bonus augmentent la valeur affichée de la carte concernée",
+    "Les cartes REM permettent de remplacer une carte déjà présente": "Les cartes REM permettent de remplacer une carte déjà présente",
+    "Collection : un joueur peut posséder autant de cartes REM": "Collection : un joueur peut posséder autant de cartes REM",
+    "Composition des decks : chaque deck de 20 cartes": "Composition des decks : chaque deck de 20 cartes",
+    "Tu peux affronter l'IA ou jouer en multijoueur": "Tu peux affronter l'IA ou jouer en multijoueur",
+    "Conseil : une carte très forte en points": "Conseil : une carte très forte en points",
+    "Chaque joueur peut composer un deck de": "Chaque joueur peut composer un deck de",
+    "La main de départ contient": "La main de départ contient",
+    "À ton tour, joue une carte autorisée": "À ton tour, joue une carte autorisée",
+    "La grille représente les effets autour de la carte": "La grille représente les effets autour de la carte",
+    "REM bleue": "REM bleue"
+  }
 }
