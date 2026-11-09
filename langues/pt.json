@@ -328,7 +328,11 @@
     "Règles du jeu": "Regras do jogo",
     "Réglages du jeu": "Definições do jogo",
     "Activer les sons": "Ativar os sons",
-    "Désactiver les sons": "Desativar os sons"
+    "Désactiver les sons": "Desativar os sons",
+    "Aucun coup pour le moment.": "Ainda não há jogadas.",
+    "Décoche pour jouer en silence tout en écoutant ta musique sur ton téléphone. Le réglage est conservé.": "Desmarca para jogar sem som enquanto ouves música no telemóvel. Esta definição fica guardada.",
+    "Langue": "Idioma",
+    "Le plateau comporte 3 lignes de 5 cases. Chaque camp pose des cartes pour contrôler les lignes. À la fin, le camp ayant le plus de points sur une ligne remporte les points de cette ligne ; en cas d’égalité, personne ne marque ses points. Le total des trois lignes détermine la victoire, la défaite ou l’égalité.": "O tabuleiro tem 3 linhas de 5 casas. Cada lado joga cartas para controlar as linhas. No fim, o lado com mais pontos numa linha ganha os pontos dessa linha; em caso de empate, ninguém pontua nessa linha. A soma das três linhas determina vitória, derrota ou empate."
   },
   "cards": {
     "Ravik": {

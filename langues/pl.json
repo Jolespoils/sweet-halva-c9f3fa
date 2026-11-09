@@ -328,7 +328,11 @@
     "Règles du jeu": "Zasady gry",
     "Réglages du jeu": "Ustawienia gry",
     "Activer les sons": "Włącz dźwięki",
-    "Désactiver les sons": "Wyłącz dźwięki"
+    "Désactiver les sons": "Wyłącz dźwięki",
+    "Aucun coup pour le moment.": "Brak wykonanych ruchów.",
+    "Décoche pour jouer en silence tout en écoutant ta musique sur ton téléphone. Le réglage est conservé.": "Odznacz, aby grać bez dźwięku podczas słuchania muzyki na telefonie. To ustawienie zostanie zapisane.",
+    "Langue": "Język",
+    "Le plateau comporte 3 lignes de 5 cases. Chaque camp pose des cartes pour contrôler les lignes. À la fin, le camp ayant le plus de points sur une ligne remporte les points de cette ligne ; en cas d’égalité, personne ne marque ses points. Le total des trois lignes détermine la victoire, la défaite ou l’égalité.": "Plansza ma 3 rzędy po 5 pól. Każda strona zagrywa karty, aby kontrolować rzędy. Na koniec strona z większą liczbą punktów w rzędzie zdobywa punkty tego rzędu; przy remisie nikt nie punktuje. Suma punktów z trzech rzędów rozstrzyga o zwycięstwie, porażce lub remisie."
   },
   "cards": {
     "Ravik": {
@@ -568,8 +572,8 @@
     "3": "Nerya",
     "4": "Durnak",
     "5": "Szary wilk",
-    "6": "Lynx",
-    "7": "Bison",
+    "6": "Ryś",
+    "7": "Bizon",
     "8": "Gepard",
     "9": "Łoś",
     "10": "Niedźwiedź grizzly",

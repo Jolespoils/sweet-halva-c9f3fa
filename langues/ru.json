@@ -328,7 +328,11 @@
     "Règles du jeu": "Правила игры",
     "Réglages du jeu": "Настройки игры",
     "Activer les sons": "Включить звуки",
-    "Désactiver les sons": "Выключить звуки"
+    "Désactiver les sons": "Выключить звуки",
+    "Aucun coup pour le moment.": "Ходов пока нет.",
+    "Décoche pour jouer en silence tout en écoutant ta musique sur ton téléphone. Le réglage est conservé.": "Снимите флажок, чтобы играть без звука, слушая музыку на телефоне. Настройка сохраняется.",
+    "Langue": "Язык",
+    "Le plateau comporte 3 lignes de 5 cases. Chaque camp pose des cartes pour contrôler les lignes. À la fin, le camp ayant le plus de points sur une ligne remporte les points de cette ligne ; en cas d’égalité, personne ne marque ses points. Le total des trois lignes détermine la victoire, la défaite ou l’égalité.": "Поле состоит из 3 рядов по 5 клеток. Каждая сторона разыгрывает карты, чтобы контролировать ряды. В конце сторона с наибольшим количеством очков в ряду получает очки этого ряда; при равенстве очков никто их не получает. Сумма по трём рядам определяет победу, поражение или ничью."
   },
   "cards": {
     "Ravik": {
@@ -568,8 +572,8 @@
     "3": "Nerya",
     "4": "Durnak",
     "5": "Серый волк",
-    "6": "Lynx",
-    "7": "Bison",
+    "6": "Рысь",
+    "7": "Бизон",
     "8": "Гепард",
     "9": "Лось",
     "10": "Медведь гризли",

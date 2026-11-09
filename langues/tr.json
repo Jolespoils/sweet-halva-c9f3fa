@@ -328,7 +328,11 @@
     "Règles du jeu": "Oyun kuralları",
     "Réglages du jeu": "Oyun ayarları",
     "Activer les sons": "Sesleri aç",
-    "Désactiver les sons": "Sesleri kapat"
+    "Désactiver les sons": "Sesleri kapat",
+    "Aucun coup pour le moment.": "Henüz hamle yok.",
+    "Décoche pour jouer en silence tout en écoutant ta musique sur ton téléphone. Le réglage est conservé.": "Telefonunda müzik dinlerken oyunu sessiz oynamak için işareti kaldır. Bu ayar kaydedilir.",
+    "Langue": "Dil",
+    "Le plateau comporte 3 lignes de 5 cases. Chaque camp pose des cartes pour contrôler les lignes. À la fin, le camp ayant le plus de points sur une ligne remporte les points de cette ligne ; en cas d’égalité, personne ne marque ses points. Le total des trois lignes détermine la victoire, la défaite ou l’égalité.": "Tahta 5 kareden oluşan 3 sıraya sahiptir. Her iki taraf da sıraları kontrol etmek için kart oynar. Sonunda bir sırada daha fazla puanı olan taraf o sıranın puanını kazanır; eşitlikte iki taraf da puan alamaz. Üç sıranın toplamı galibiyeti, yenilgiyi veya beraberliği belirler."
   },
   "cards": {
     "Ravik": {
@@ -568,12 +572,12 @@
     "3": "Nerya",
     "4": "Durnak",
     "5": "Bozkurt",
-    "6": "Lynx",
-    "7": "Bison",
+    "6": "Vaşak",
+    "7": "Bizon",
     "8": "Çita",
     "9": "Geyik",
     "10": "Bozayı",
-    "11": "Lion",
+    "11": "Aslan",
     "12": "Dev Gergedan",
     "13": "Güçlü Bizon",
     "14": "Büyük Geyik",

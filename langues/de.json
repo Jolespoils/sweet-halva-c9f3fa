@@ -328,7 +328,12 @@
     "Règles du jeu": "Spielregeln",
     "Réglages du jeu": "Spieleinstellungen",
     "Activer les sons": "Töne aktivieren",
-    "Désactiver les sons": "Töne deaktivieren"
+    "Désactiver les sons": "Töne deaktivieren",
+    "Aucun coup pour le moment.": "Noch keine Züge.",
+    "Décoche pour jouer en silence tout en écoutant ta musique sur ton téléphone. Le réglage est conservé.": "Deaktiviere diese Option, um ohne Spielton zu spielen und dabei Musik auf deinem Handy zu hören. Diese Einstellung wird gespeichert.",
+    "Langue": "Sprache",
+    "Lion": "Löwe",
+    "Le plateau comporte 3 lignes de 5 cases. Chaque camp pose des cartes pour contrôler les lignes. À la fin, le camp ayant le plus de points sur une ligne remporte les points de cette ligne ; en cas d’égalité, personne ne marque ses points. Le total des trois lignes détermine la victoire, la défaite ou l’égalité.": "Das Spielfeld hat 3 Reihen mit je 5 Feldern. Beide Seiten spielen Karten, um die Reihen zu kontrollieren. Am Ende erhält die Seite mit den meisten Punkten in einer Reihe deren Punkte; bei Gleichstand erhält niemand Punkte für diese Reihe. Die Summe aller drei Reihen entscheidet über Sieg, Niederlage oder Unentschieden."
   },
   "cards": {
     "Ravik": {
@@ -568,12 +573,12 @@
     "3": "Nerya",
     "4": "Durnak",
     "5": "Grauwolf",
-    "6": "Lynx",
-    "7": "Bison",
+    "6": "Luchs",
+    "7": "Wisent",
     "8": "Gepard",
     "9": "Elch",
     "10": "Grizzlybär",
-    "11": "Lion",
+    "11": "Löwe",
     "12": "Riesennashorn",
     "13": "Mächtiger Bison",
     "14": "Großer Elch",

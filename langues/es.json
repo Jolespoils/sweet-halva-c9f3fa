@@ -328,7 +328,11 @@
     "Règles du jeu": "Reglas del juego",
     "Réglages du jeu": "Ajustes del juego",
     "Activer les sons": "Activar sonidos",
-    "Désactiver les sons": "Desactivar sonidos"
+    "Désactiver les sons": "Desactivar sonidos",
+    "Aucun coup pour le moment.": "Todavía no hay jugadas.",
+    "Décoche pour jouer en silence tout en écoutant ta musique sur ton téléphone. Le réglage est conservé.": "Desmarca esta opción para jugar sin sonido mientras escuchas música en tu teléfono. Este ajuste se guarda.",
+    "Langue": "Idioma",
+    "Le plateau comporte 3 lignes de 5 cases. Chaque camp pose des cartes pour contrôler les lignes. À la fin, le camp ayant le plus de points sur une ligne remporte les points de cette ligne ; en cas d’égalité, personne ne marque ses points. Le total des trois lignes détermine la victoire, la défaite ou l’égalité.": "El tablero tiene 3 filas de 5 casillas. Cada bando juega cartas para controlar las filas. Al final, el bando con más puntos en una fila obtiene sus puntos; si hay empate, ninguno puntúa en esa fila. La suma de las tres filas determina la victoria, la derrota o el empate."
   },
   "cards": {
     "Ravik": {
@@ -568,12 +572,12 @@
     "3": "Nerya",
     "4": "Durnak",
     "5": "Lobo gris",
-    "6": "Lynx",
-    "7": "Bison",
+    "6": "Lince",
+    "7": "Bisonte",
     "8": "Guepardo",
     "9": "Alce",
     "10": "Oso grizzly",
-    "11": "Lion",
+    "11": "León",
     "12": "Rinoceronte gigante",
     "13": "Bisonte poderoso",
     "14": "Gran alce",
@@ -632,16 +636,16 @@
     "chargement en cours. Attends quelques secondes puis réinitialise.": "carga en curso. Espera unos segundos y después restablece."
   },
   "guides": {
-    "Les bonus augmentent la valeur affichée de la carte concernée": "Las bonificaciones aumentan el valor mostrado de la carta correspondiente",
-    "Les cartes REM permettent de remplacer une carte déjà présente": "Las cartas REM permiten sustituir una carta ya presente",
-    "Collection : un joueur peut posséder autant de cartes REM": "Colección: un jugador puede poseer tantas cartas REM",
-    "Composition des decks : chaque deck de 20 cartes": "Construcción de mazos: cada mazo de 20 cartas",
-    "Tu peux affronter l'IA ou jouer en multijoueur": "Puedes enfrentarte a la IA o jugar en multijugador",
-    "Conseil : une carte très forte en points": "Consejo: una carta con muchos puntos",
-    "Chaque joueur peut composer un deck de": "Cada jugador puede crear un mazo de",
-    "La main de départ contient": "La mano inicial contiene",
-    "À ton tour, joue une carte autorisée": "En tu turno, juega una carta permitida",
-    "La grille représente les effets autour de la carte": "La cuadrícula muestra los efectos alrededor de la carta",
-    "REM bleue": "REM azul"
+    "Les bonus augmentent la valeur affichée de la carte concernée": "Las bonificaciones aumentan el valor mostrado de la carta y las penalizaciones lo reducen. Los efectos pueden acumularse. Según la carta, una habilidad puede activarse inmediatamente, mientras permanece en juego, cuando se juega otra carta o cuando abandona el tablero. Algunas habilidades afectan a aliados, otras a enemigos o a ambos bandos. Mantén pulsada una carta para consultar sus requisitos, puntos y habilidad.",
+    "Les cartes REM permettent de remplacer une carte déjà présente": "Las cartas REM permiten sustituir una carta que ya está en el tablero. Existen tres tipos:",
+    "Collection : un joueur peut posséder autant de cartes REM": "Colección: un jugador puede poseer tantas cartas REM como haya conseguido o comprado, sin límite de posesión.",
+    "Composition des decks : chaque deck de 20 cartes": "Composición de mazos: cada mazo de 20 cartas puede incluir como máximo 2 cartas REM, sin importar su color. Este límite también se aplica a los mazos aleatorios. Por tanto, las 15 cartas seleccionadas para una partida nunca pueden contener más de 2 REM.",
+    "Tu peux affronter l'IA ou jouer en multijoueur": "Puedes enfrentarte a la IA o jugar contra otro jugador en una sala privada. En multijugador, ambos jugadores deben terminar la preparación antes de empezar. El botón Revancha puede permitir conservar o cambiar el mazo según el modo y el estado de conexión. Las partidas contra la IA no otorgan puntos para la clasificación individual ni para la de estados. El trofeo abre la información de clasificación.",
+    "Conseil : une carte très forte en points": "Consejo: una carta con muchos puntos no garantiza ganar la partida. Controlar varias filas, ocupar casillas clave y proteger las cartas de apoyo puede ser más importante.",
+    "Chaque joueur peut composer un deck de": "Cada jugador puede formar un mazo de 20 cartas de su colección. Al comenzar una partida, se eligen al azar 15 de esas 20 cartas. Puedes guardar hasta 3 mazos diferentes para variar tu estrategia. También puedes elegir un mazo aleatorio, sujeto a las mismas reglas de composición, incluido el límite de 2 cartas REM.",
+    "La main de départ contient": "La mano inicial contiene 5 cartas. Durante la preparación puedes seleccionar entre 0 y 5 cartas para cambiarlas. Al pulsar Listo, las cartas seleccionadas se sustituyen aleatoriamente por otras de tu selección de 15 cartas. El primer jugador se decide al azar. Durante la partida robas progresivamente las cartas restantes de esas 15.",
+    "À ton tour, joue une carte autorisée": "En tu turno, juega una carta permitida o elige Pasar. Pasar puede permitirte robar una carta si tu mazo de robo no está vacío. Para evitar bloqueos deliberados, solo puedes pasar voluntariamente una vez hasta que juegues otra carta. Si todavía hay una jugada legal, debes jugar antes de volver a pasar voluntariamente. Si no puedes colocar ninguna carta, siempre puedes pasar; ese pase forzado no cuenta como voluntario. Esta regla se aplica contra la IA y en multijugador. El icono Pasar puede iluminarse cuando no hay jugadas disponibles. Si tienes más de 6 cartas en la mano, las adicionales aparecen en un menú desplegable. El temporizador opcional de 60 segundos muestra una alerta visual durante los últimos 15 segundos. La partida termina cuando ningún jugador puede continuar; entonces se suman los puntos de las tres filas.",
+    "La grille représente les effets autour de la carte": "La cuadrícula muestra los efectos alrededor de la carta colocada en el centro. 🟨 Centro: casilla de colocación. 🟧 Naranja: influencia y expansión del territorio y de los peones. 🟩 Verde: bonificación de puntos. 🟪 Morado: penalización de puntos. 🟥 Rojo con ×: destrucción. Cian: protección, si la carta posee esa habilidad. Algunas casillas combinan influencia y habilidades; consulta la descripción de la carta para conocer objetivos y condiciones exactos. No confundas los colores de los efectos con los de las cartas REM.",
+    "REM bleue": "REM azul: sustituye una carta de tu lado. REM roja: sustituye una carta enemiga. REM morada: sustituye una carta de cualquiera de los dos bandos."
   }
 }
