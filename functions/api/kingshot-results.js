@@ -1,13 +1,40 @@
 import {json,db,atomic,token,error} from './_lib.js';
-import {clean,calculateScores,weekKey,leaderboardRows,addToAggregate} from './_rank_rules.js';
+import {clean,calculateScores,weekKey,addToAggregate} from './_rank_rules.js';
+import {rankingRows,weeklyAwards} from './_rank_v418.js';
+
+// Settles all closed weeks on a request. Firebase transaction on the lifetime
+// aggregate ensures each weekly award is credited exactly once.
+async function settleClosedWeeks(env){
+ const all=(await db(env,'rankAggregatesWeekly')).value||{};
+ const current=weekKey();
+ for(const [week,weekly] of Object.entries(all).sort(([a],[b])=>a.localeCompare(b))){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(week)||week>=current)continue;
+  const awards=weeklyAwards(weekly?.players||{});
+  await atomic(env,'rankAggregates',old=>{
+   const a=old||{};
+   a.weeklySettlements||={};
+   if(a.weeklySettlements[week])return undefined;
+   a.players||={};
+   for(const [uid,amount] of Object.entries(awards)){
+    const p=a.players[uid]||{};
+    a.players[uid]={...p,bonusPoints:(p.bonusPoints||0)+amount};
+   }
+   a.weeklySettlements[week]={at:Date.now(),awards};
+   return a;
+  });
+ }
+}
+
 export async function onRequestPost({request,env}){try{
  const data=await request.json(),action=data?.action;
  if(action==='leaderboard'){
   if(!['players','states'].includes(data.kind)||!['week','life',undefined].includes(data.period))return json({error:'Classement invalide'},400);
-  const period=data.period==='week'?'week':'life';const base=period==='week'?'rankAggregatesWeekly/'+weekKey():'rankAggregates';
+  await settleClosedWeeks(env);
+  const period=data.period==='week'?'week':'life';
+  const base=period==='week'?'rankAggregatesWeekly/'+weekKey():'rankAggregates';
   const stats=(await db(env,base+'/'+data.kind)).value||{};
   const profiles=data.kind==='players'?(await db(env,'rankProfiles')).value||{}:{};
-  return json({rows:leaderboardRows(stats,profiles,data.kind),period});
+  return json({rows:rankingRows(stats,profiles,data.kind).slice(0,100),period});
  }
  const uid=await token(request);
  if(action==='me')return json({profile:(await db(env,'rankProfiles/'+uid)).value||null});
@@ -29,5 +56,6 @@ export async function onRequestPost({request,env}){try{
  if(record.host!==roomData.host||record.guest!==roomData.guest)return json({error:'Résultat incohérent'},409);
  const aggregate=await atomic(env,'rankAggregates',old=>{const a=old||{};if(a.matches?.[key])return undefined;addToAggregate(a,record,key);return a});
  const weekly=await atomic(env,'rankAggregatesWeekly/'+weekKey(record.at),old=>{const a=old||{};if(a.matches?.[key])return undefined;addToAggregate(a,record,key);return a});
+ await settleClosedWeeks(env);
  return json({ok:true,recorded:aggregate.committed||!!aggregate.value?.matches?.[key],weeklyRecorded:weekly.committed||!!weekly.value?.matches?.[key],scoreB,scoreR});
  }catch(e){return error(e)}}
