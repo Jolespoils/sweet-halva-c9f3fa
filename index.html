@@ -3472,11 +3472,11 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <button id="ksRankClose" type="button" aria-label="Fermer le classement">×</button>
 <h2 id="ksRankTitle">🏆 Classement KardShot</h2><button id="ksRankInfoButton" type="button" aria-label="Explication du classement" title="Règles du classement">!</button>
 <div id="ksRankInfoOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="ksRankInfoTitle"><div class="ks-info-sheet"><button id="ksRankInfoClose" type="button" aria-label="Fermer">✕ Fermer</button><h2 id="ksRankInfoTitle">❕ Règlement du championnat</h2>
-<h3>Classement individuel</h3><p>Les <b>parties multijoueurs terminées normalement</b>, y compris entre amis et entre joueurs du même État, comptent pour les statistiques individuelles : victoires, défaites et égalités. Les revanches sont comptabilisées sans limite. Pour les matchs admissibles, le score personnel suit le barème du championnat : <b>victoires − défaites + primes validées</b>. Le Top 100 présente pseudo, État, victoires, défaites et total.</p>
+<h3>Classement individuel</h3><p>Les <b>parties multijoueurs terminées normalement</b>, y compris entre amis et entre joueurs du même État, comptent pour les statistiques individuelles : victoires, défaites et égalités. Les revanches sont comptabilisées sans limite. Pour les matchs admissibles, le score personnel suit le barème du championnat : <b>3 points par victoire, 1 par égalité, 0 par défaite, plus les récompenses validées</b>. Le Top 100 présente pseudo, État, victoires, défaites et total.</p>
 <h3>Conquête des États</h3><p>Chaque État est identifié par son numéro. <b>Seuls les matchs terminés entre joueurs de deux États différents</b> peuvent contribuer au classement des États. Une victoire inter-États apporte une victoire à l'État gagnant ; une défaite et une égalité sont enregistrées dans les statistiques correspondantes. Les matchs entre membres du même État n'affectent jamais le classement des États. Le tableau peut afficher victoires, défaites, égalités, matchs joués et taux de victoire ; les éventuelles primes de podium sont distinctes des victoires.</p>
 <h3>Quels matchs comptent ?</h3><p>Les parties multijoueurs entre amis sont officielles dès lors qu'elles sont <b>terminées normalement et validées</b>. Il n'y a <b>aucune limite</b> au nombre de matchs ou de revanches entre les mêmes adversaires. Les matchs contre l'IA sont des entraînements et ne comptent dans aucun classement.</p>
 <h3>Parties interrompues ou inachevées</h3><p><b>Aucun résultat n'est comptabilisé</b> lorsqu'une partie est arrêtée avant sa fin : abandon, fermeture du navigateur, déconnexion ou match non terminé. Il n'y a alors ni victoire, ni défaite, ni égalité attribuée au classement. Une partie terminée doit être enregistrée <b>une seule fois</b>, après vérification automatique de son résultat.</p>
-<h3>Hebdomadaire et historique</h3><p>Le classement hebdomadaire présente les résultats de la semaine en cours ; l’historique conserve les résultats enregistrés.</p>
+<h3>Hebdomadaire et historique</h3><p>Le classement hebdomadaire présente les résultats de la semaine en cours ; l’historique conserve les résultats enregistrés. En cas d’égalité de points : plus de victoires, puis plus d’égalités, puis moins de défaites, puis plus de matchs joués. Les récompenses hebdomadaires sont attribuées aux joueurs ayant joué au moins un match : 1er +10, 2e +7, 3e +5, 4e à 10e +3, 11e à 25e +2, 26e à 50e +1 point au général. Dès 5 matchs dans la semaine : +1 point supplémentaire au général.</p>
 
 <h3>Contrôles anti-triche</h3><p>Les résultats sont vérifiés automatiquement. Les parties contre l’IA et les duels sans deux identifiants Kingshot vérifiés ne comptent pas.</p>
 <h3>Version bêta actuelle</h3><p>Les classements visibles sont encore des simulations. Le laboratoire local et l'archivage Firebase ne constituent pas encore un championnat officiel sécurisé. L'accès anonyme au classement est provisoire pour les tests.</p></div></div>
@@ -3484,7 +3484,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <div class="ks-rank-stats"><div class="ks-rank-stat">Mon rang<strong id="ksRankPlace">—</strong></div><div class="ks-rank-stat">Victoires<strong id="ksRankWins">—</strong></div><div class="ks-rank-stat">Défaites<strong id="ksRankLosses">—</strong></div><div class="ks-rank-stat">Points<strong id="ksRankPoints">—</strong></div></div>
 <div class="ks-rank-tabs"><button id="ksRankTabGlobal" class="active" type="button">🌍 Top 100 joueurs</button><button id="ksRankTabState" type="button">🏰 Classement des États</button></div>
 <div class="ks-period-tabs"><button id="ksRankWeek" class="active" type="button">📅 Hebdomadaire</button><button id="ksRankLife" type="button">🏛️ Historique</button></div>
-<div class="ks-muted" id="ksRankExplanation">Match terminé = résultat individuel ; seuls les matchs entre États différents comptent pour les États. Revanches illimitées. Partie interrompue = aucun résultat. Podium : +100 / +50 / +20 après validation.</div>
+<div class="ks-muted" id="ksRankExplanation">Match terminé = résultat individuel ; seuls les matchs entre États différents comptent pour les États. Revanches illimitées. Partie interrompue = aucun résultat. Récompenses hebdomadaires : +10 / +7 / +5 / +3 / +2 / +1 selon le rang, et +1 dès 5 matchs.</div>
 <h3 id="ksRankListTitle" style="margin:9px 0 6px;font-size:14px">Top 100 joueurs — Semaine en cours</h3>
 <div class="ks-rank-scroll"><table><thead id="ksRankHead"></thead><tbody id="ksRankRows"></tbody></table></div>
 
@@ -3517,13 +3517,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   $('ksRankPlace').textContent=mine?String(myIndex+1):'—';
   $('ksRankWins').textContent=mine?number(mine.wins):'—';
   $('ksRankLosses').textContent=mine?number(mine.losses):'—';
-  $('ksRankPoints').textContent=mine?number(mine.points??((Number(mine.wins)||0)-(Number(mine.losses)||0))):'—';
+  $('ksRankPoints').textContent=mine?number(mine.points??(3*(Number(mine.wins)||0)+(Number(mine.draws)||0))):'—';
   $('ksRankExplanation').textContent='Seuls les duels terminés normalement entre deux joueurs ayant un ID Kingshot vérifié sont comptabilisés. Les parties contre l’IA et les duels amicaux sans ID ne comptent pas.';
   $('ksRankHead').innerHTML=mode==='players'?'<tr><th>#</th><th>Joueur</th><th>État</th><th>Victoires</th><th>Défaites</th><th>Égalités</th><th>Points</th></tr>':'<tr><th>#</th><th>État</th><th>Victoires</th><th>Défaites</th><th>Égalités</th><th>Points</th></tr>';
   const colspan=mode==='players'?7:6;
   const msg=loading?'Chargement…':error?'Classement temporairement indisponible':period==='week'?'Aucun résultat hebdomadaire pour le moment':'Aucun résultat pour le moment';
   const data=!error?rows:[];
-  $('ksRankRows').innerHTML=data.length?data.map((p,i)=>'<tr><td>'+(i+1)+'</td>'+(mode==='players'?'<td>'+esc(p.name||'Joueur')+'</td><td>'+esc(p.state||'—')+'</td>':'<td>🏰 État '+esc(p.state||p.id||'—')+'</td>')+'<td>'+number(p.wins)+'</td><td>'+number(p.losses)+'</td><td>'+number(p.draws)+'</td><td><b>'+number(p.points??((Number(p.wins)||0)-(Number(p.losses)||0)))+'</b></td></tr>').join(''):'<tr><td colspan="'+colspan+'" style="text-align:center;padding:22px">'+msg+'</td></tr>';
+  $('ksRankRows').innerHTML=data.length?data.map((p,i)=>'<tr><td>'+(i+1)+'</td>'+(mode==='players'?'<td>'+esc(p.name||'Joueur')+'</td><td>'+esc(p.state||'—')+'</td>':'<td>🏰 État '+esc(p.state||p.id||'—')+'</td>')+'<td>'+number(p.wins)+'</td><td>'+number(p.losses)+'</td><td>'+number(p.draws)+'</td><td><b>'+number(p.points??(3*(Number(p.wins)||0)+(Number(p.draws)||0)))+'</b></td></tr>').join(''):'<tr><td colspan="'+colspan+'" style="text-align:center;padding:22px">'+msg+'</td></tr>';
  }
  async function load(){loading=true;error=false;render();try{const r=await fetch((location.hostname.endsWith('.pages.dev')?'/api/kingshot-results':'/.netlify/functions/kingshot-results'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'leaderboard',kind:mode,period})});if(!r.ok)throw Error('Service indisponible');const j=await r.json();rows=Array.isArray(j.rows)?j.rows:[];}catch(e){error=true;rows=[];}finally{loading=false;render()}}
  window.addEventListener('ksKingshotProfileReady',()=>{if(!modal.hidden)render()});
@@ -4318,14 +4318,14 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   const resultReturn=document.getElementById('ksResultReturn');
   if(resultReturn)resultReturn.style.display='none';
  });
- const badge=document.getElementById('ksVersionBadge');if(badge)badge.textContent='V417';
+ const badge=document.getElementById('ksVersionBadge');if(badge)badge.textContent='V418';
 })();
 </script>
 
 <!-- V390 TEST : images Défaite et Égalité nettoyées, sans masquage des anciens boutons. -->
 
 <script id="ks-v385-version">
-(function(){const b=document.getElementById('ksVersionBadge');if(b)b.textContent='V417';})();
+(function(){const b=document.getElementById('ksVersionBadge');if(b)b.textContent='V418';})();
 </script>
 
 <style id="ks-collection-portrait-style">
