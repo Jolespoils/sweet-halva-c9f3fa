@@ -8,7 +8,7 @@
   const BASE = new URL('./', document.currentScript?.src || new URL('langues/', location.href));
   const STORAGE_KEY = 'kardshot.language';
   const DEFAULT_LANGUAGE = 'fr';
-  const SUPPORTED = ['fr', 'en'];
+  const SUPPORTED = ["fr", "en", "de", "es", "it", "pt", "pl", "ru", "tr"];
   const dictionaries = Object.create(null);
   let current = DEFAULT_LANGUAGE;
 
