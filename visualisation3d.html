@@ -6,8 +6,9 @@
 (function(){
 'use strict';
 const KEY='kardshot_v400_test_lang';
+const URL_LANGUAGE=new URLSearchParams(location.search).get('lang');
 let lang='fr';
-try{const saved=localStorage.getItem('kardshot.language')||localStorage.getItem(KEY);lang=(['fr','en','de','es','it','pt','pl','ru','tr'].includes(String(saved||'').toLowerCase().split('-')[0])?String(saved).toLowerCase().split('-')[0]:(['fr','en','de','es','it','pt','pl','ru','tr'].includes((navigator.language||'fr').toLowerCase().split('-')[0])?(navigator.language||'fr').toLowerCase().split('-')[0]:'fr'));}catch(e){}
+try{const saved=URL_LANGUAGE||localStorage.getItem('kardshot.language')||localStorage.getItem(KEY);lang=(['fr','en','de','es','it','pt','pl','ru','tr'].includes(String(saved||'').toLowerCase().split('-')[0])?String(saved).toLowerCase().split('-')[0]:(['fr','en','de','es','it','pt','pl','ru','tr'].includes((navigator.language||'fr').toLowerCase().split('-')[0])?(navigator.language||'fr').toLowerCase().split('-')[0]:'fr'));}catch(e){}
 let translations=new Map([
 ['Édition Origine ·','Origin Edition ·'],['cartes · Base universelle ·','cards · Universal base ·'],
 ['Fermer le visualiseur','Close viewer'],
@@ -84,7 +85,7 @@ async function ksLoadBoosterLanguage(code){
 }
 async function syncBoosterLanguage(){
  try{
-  if(window.KardShotI18n){await window.KardShotI18n.init();lang=window.KardShotI18n.getLanguage();}
+  if(window.KardShotI18n){await window.KardShotI18n.init();if(!URL_LANGUAGE)lang=window.KardShotI18n.getLanguage();}
   await ksLoadBoosterLanguage(lang);
  }catch(error){console.warn('KardShot booster: traduction indisponible',error)}
 }
