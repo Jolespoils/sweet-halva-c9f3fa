@@ -2802,19 +2802,9 @@ document.getElementById("ksChatForm").onsubmit=async e=>{e.preventDefault();cons
    return;
  }
  input.value="";try{await push(ref(db,"rooms/"+code+"/chat"),{uid,body:body.slice(0,240),at:Date.now()});}catch(err){input.value=body;say("Chat : "+err.message);}};
-function watchChat(c){if(unsubChat)unsubChat();seenChat.clear();chatMessages.replaceChildren();unread=0;chatUnread.style.display="none";chatToggle.style.display="block";unsubChat=onValue(query(ref(db,"rooms/"+c+"/chat"),limitToLast(80)),snap=>{const messages=snap.val()||{};let added=false;for(const [key,m] of Object.entries(messages)){if(seenChat.has(key))continue;seenChat.add(key);if(!m||typeof m.body!=="string")continue;const line=document.createElement("div");line.className="ksLine"+(m.uid===uid?" ksMine":"");const who=document.createElement("small");who.textContent=m.uid===uid?"Moi":"Adversaire";const txt=document.createElement("span");txt.textContent=m.body;line.append(who,txt);chatMessages.append(line);added=true;if(m.uid!==uid&&chatBox.style.display!=="flex")unread++;}while(chatMessages.children.length>80)chatMessages.firstChild.remove();if(added)chatMessages.scrollTop=chatMessages.scrollHeight;chatUnread.textContent="";chatUnread.style.display=unread?"block":"none";},e=>say("Chat : "+e.message));}
+function watchChat(c){if(unsubChat)unsubChat();seenChat.clear();chatMessages.replaceChildren();unread=0;chatUnread.style.display="none";chatToggle.style.setProperty('display','flex','important');unsubChat=onValue(query(ref(db,"rooms/"+c+"/chat"),limitToLast(80)),snap=>{const messages=snap.val()||{};let added=false;for(const [key,m] of Object.entries(messages)){if(seenChat.has(key))continue;seenChat.add(key);if(!m||typeof m.body!=="string")continue;const line=document.createElement("div");line.className="ksLine"+(m.uid===uid?" ksMine":"");const who=document.createElement("small");who.textContent=m.uid===uid?"Moi":"Adversaire";const txt=document.createElement("span");txt.textContent=m.body;line.append(who,txt);chatMessages.append(line);added=true;if(m.uid!==uid&&chatBox.style.display!=="flex")unread++;}while(chatMessages.children.length>80)chatMessages.firstChild.remove();if(added)chatMessages.scrollTop=chatMessages.scrollHeight;chatUnread.textContent="";chatUnread.style.display=unread?"block":"none";},e=>say("Chat : "+e.message));}
 
 const O=window.KSOnline={active:false,ready:false,busy:false,submit,leave,notice:say,updateTimer:updateOnlineTimer};
-// Chat multijoueur : maintenir le bouton visible lorsque le salon en ligne est actif.
-// Ne modifie ni le mode solo, ni les autres commandes.
-setInterval(()=>{
- if(!O.active)return;
- chatToggle.style.setProperty('display','flex','important');
- chatToggle.style.setProperty('visibility','visible','important');
- chatToggle.style.setProperty('opacity','1','important');
- chatToggle.style.setProperty('z-index','99999','important');
-},350);
-
 const onlineChoice=document.getElementById('useTimer');
 let onlineTimeoutBusy=false;
 function onlineModeMatched(room){return room?.choices?.B!=null&&room?.choices?.R!=null&&room.choices.B===room.choices.R;}
@@ -3197,7 +3187,7 @@ async function submit(action,card,index){
  finally{O.busy=false;}
 }
 
-function leave(){ksOnlineDeckConfirmedFor='';const deckOverlay=document.getElementById('ks-online-deck-choice');if(deckOverlay)deckOverlay.style.display='none';autoPassToken='';window.KSMulligan.close();mulliganShownKey='';if(unsubChat)unsubChat();unsubChat=null;chatToggle.style.removeProperty('display');chatToggle.style.removeProperty('visibility');chatToggle.style.removeProperty('opacity');chatToggle.style.removeProperty('z-index');chatToggle.style.display="none";chatVisible(false);O.active=false;O.ready=false;if(unsubscribe)unsubscribe();unsubscribe=null;code=null;side=null;latest=null;lastMatchError='';matchStarting=false;}
+function leave(){ksOnlineDeckConfirmedFor='';const deckOverlay=document.getElementById('ks-online-deck-choice');if(deckOverlay)deckOverlay.style.display='none';autoPassToken='';window.KSMulligan.close();mulliganShownKey='';if(unsubChat)unsubChat();unsubChat=null;chatToggle.style.display="none";chatVisible(false);O.active=false;O.ready=false;if(unsubscribe)unsubscribe();unsubscribe=null;code=null;side=null;latest=null;lastMatchError='';matchStarting=false;}
 document.getElementById('mpCreate').addEventListener('click',async()=>{
  if(!uid){say('Connexion en cours…');return;}
  for(let i=0;i<5;i++){
@@ -3239,7 +3229,7 @@ refresh();
 function updateSoloChat(){
  const solo=typeof started!=='undefined'&&started&&!O.active;
  if(solo)chatToggle.style.display='block';
- else if(!O.active){chatToggle.style.display='none';chatVisible(false);}
+ else if(!O.active && !(mode.value==='multiplayer' && typeof started!=='undefined' && started)){chatToggle.style.display='none';chatVisible(false);}
 }
 const soloBoard=document.getElementById('board');
 if(soloBoard)new MutationObserver(updateSoloChat).observe(soloBoard,{childList:true});
@@ -3267,6 +3257,10 @@ updateSoloChat();
  function refresh(){
   if(solo()){
    toggle.style.setProperty('display','block','important');
+   toggle.style.setProperty('visibility','visible','important');
+   toggle.style.setProperty('opacity','1','important');
+  }else if(window.KSOnline?.active || (document.getElementById('gameMode')?.value==='multiplayer' && typeof started!=='undefined' && started)){
+   toggle.style.setProperty('display','flex','important');
    toggle.style.setProperty('visibility','visible','important');
    toggle.style.setProperty('opacity','1','important');
   }else{
