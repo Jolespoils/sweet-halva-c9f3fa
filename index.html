@@ -2041,12 +2041,12 @@ function mark(n,k,side='B'){
  if(d.buff.some(a=>a[0]===y&&a[1]===x))return ['buff','+'+d.plus];
  if(d.inf.some(a=>a[0]===y&&a[1]===x))return ['inf',''];return ['',''];
 }
-const rankColor=n=>({R:'#64c9f2',SR:'#8548bd',SSR:'#e5bc39',REM:'#b72e40'})[cards[n].rarity];
+const rankColor=n=>({R:'#64c9f2',SR:'#8548bd',SSR:'#e5bc39',REM:'#b72e40'})[cards[n]?.rarity]||'#b9c1d1';
 const costLabel=n=>cards[n].rep?'REM':cards[n].cost===3?'●●●':'●'.repeat(cards[n].cost);
 const kind=n=>cards[n].rep?(cards[n].rep==='ally'?'🔵 Allié':cards[n].rep==='enemy'?'🔴 Ennemi':'🟣 Tous'):'';
 const animalArt={'Loup gris':'🐻','Lynx':'🐻','Bison':'🐻','Guépard':'🐻','Élan':'🐻','Ours grizzly':'🐻','Lion':'🦁','Rhinocéros géant':'🦁','Bison puissant':'🦁','Grand élan':'🦁','Panthère noire alpha':'🦁','Lion blanc royal':'🦁'};
 function cardIdentity(n){return rarityBadge(n)}
-function rarityBadge(n){let b=el('span','rarity',cards[n].rarity);b.style.color=rankColor(n);return b}
+function rarityBadge(n){let b=el('span','rarity',cards[n]?.rarity||'');b.style.color=rankColor(n);return b}
 function fresh(num=1){if(window.KSScoreFX229?.reset)window.KSScoreFX229.reset();let a=window.KS271Dev?.enabled?(ksPlayerDeck20()||ksRandomDeck20()):ksDraw15(ksRandomDeck20()),b=ksDraw15(ksRandomDeck20());if(!window.KS271Dev?.enabled&&settings.customDeck&&ksPlayerDeck20()){a=ksDraw15(ksPlayerDeck20());}return {b:initialBoard(),hand:window.KS271Dev?.enabled?[...a]:a.slice(0,5),deck:window.KS271Dev?.enabled?[]:a.slice(5),eh:b.slice(0,5),ed:b.slice(5),sel:a[0],log:[],passes:0,ended:false,forfeit:false,overruns:0,penalty:0,penalizedThisTurn:false,num}}
 let settings={level:'hard',timer:false,customDeck:false};
 let deckCounts=Object.fromEntries(pool.map(n=>[n,0]));
@@ -2296,8 +2296,18 @@ let ksAiWaitGeneration=0;
 function resetQuickTurn(){
  const generation=++ksAiWaitGeneration;
  aiPending=true;quickDeadline=0;updateQuickTurn();
+ // Le comptage reste normalement intact. En cas de promesse bloquée,
+ // annuler proprement ses effets avant de reprendre (aucun coup Firebase envoyé).
  const wait=window.KSScoreFX229?.whenIdle?.()||Promise.resolve();
- Promise.resolve(wait).then(()=>{
+ let safetyTimer;
+ Promise.race([
+  Promise.resolve(wait).then(()=>false,()=>true),
+  new Promise(resolve=>{safetyTimer=setTimeout(()=>resolve(true),30000);})
+ ]).then(expired=>{
+  clearTimeout(safetyTimer);
+  if(generation!==ksAiWaitGeneration||!started||tutorial||g.ended||!aiPending||window.KSOnline?.active)return;
+  if(expired){console.warn('KardShot : comptage interrompu après attente excessive');window.KSScoreFX229?.reset?.();}
+
   if(generation!==ksAiWaitGeneration||!started||tutorial||g.ended||!aiPending||window.KSOnline?.active)return;
   quickDeadline=Date.now()+5000;updateQuickTurn();
   aiTimeout=setTimeout(()=>{
@@ -3948,6 +3958,7 @@ window.KS229PlayDebitSound=function(){
   setTimeout(()=>playSound(false),650);
   if(rem){
    setTimeout(()=>{
+    if(!wrap.isConnected)return;
     const fire=document.createElement('div');fire.className='ks243-fire';fire.dataset.kind=kind;
     for(const direction of ['n','s','e','w']){
       const edge=document.createElement('div');edge.className='ks244-edge '+direction;
@@ -3968,7 +3979,13 @@ window.KS229PlayDebitSound=function(){
     scorch(index,kind);if(!forcedKind)ks250BurnAdjacent(index,kind);playSound(true);
    },1020);
   }
-  return new Promise(resolve=>setTimeout(()=>{wrap.remove();resolve()},rem?2550:1350));
+  return new Promise(resolve=>{
+   let settled=false;
+   const finish=()=>{if(settled)return;settled=true;document.removeEventListener('visibilitychange',onVisibility);wrap.remove();resolve();};
+   const onVisibility=()=>{if(document.hidden)finish();};
+   document.addEventListener('visibilitychange',onVisibility);
+   setTimeout(finish,rem?2550:1350);
+  });
  }
  window.KS241={
   before(state){const next=Array.isArray(state)?state.map(x=>x?.n||''):[];
@@ -4123,6 +4140,51 @@ function paint(root){
 }
 function init(){paint(document.body);const obs=new MutationObserver(records=>{for(const r of records)for(const n of r.addedNodes)paint(n)});obs.observe(document.body,{childList:true,subtree:true});}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>
+<script id="ks423-art-recovery">
+/* V423: vérification non bloquante des illustrations externes spécifiques.
+   Ne touche ni aux règles, ni aux animations, ni au rendu des cartes valides. */
+(function(){
+ 'use strict';
+ const entries=Object.assign({},window.KS262_IMAGES||{},window.KS263_IMAGES||{});
+ const checked=new Map();
+ const failed=new Map();
+ const prefix='linear-gradient(180deg,#08122242 0%,#09132420 40%,#06101bc0 100%),url("';
+ function apply(name,url){
+  document.querySelectorAll('.card.ks262-custom-art,.slot.ks262-custom-art').forEach(el=>{
+   if(el.dataset.ks262Art!==name)return;
+   el.style.setProperty('background-image',prefix+url+'")','important');
+  });
+ }
+ function verify(name){
+  const path=entries[name];if(!path||checked.has(name))return;
+  let url;try{url=new URL(path,document.baseURI)}catch(_){return}
+  if(!/^https?:$/.test(url.protocol))return;
+  const img=new Image();checked.set(name,img);
+  img.onload=function(){failed.delete(name);checked.set(name,true)};
+  img.onerror=function(){
+   if(failed.has(name)){checked.set(name,false);console.warn('[KardShot] Illustration indisponible',name,path);return}
+   failed.set(name,true);
+   // Une seule nouvelle requête pour éviter une boucle en cas de fichier absent.
+   const retry=new URL(url.href);retry.searchParams.set('ks_art_retry','1');
+   const probe=new Image();checked.set(name,probe);
+   probe.onload=function(){checked.set(name,true);apply(name,retry.href)};
+   probe.onerror=function(){checked.set(name,false);console.warn('[KardShot] Échec image',name,path)};
+   probe.src=retry.href;
+  };
+  img.src=url.href;
+ }
+ function scan(){
+  document.querySelectorAll('.card.ks262-custom-art,.slot.ks262-custom-art').forEach(el=>{
+   const name=el.dataset.ks262Art;if(name&&entries[name]){
+    if(checked.get(name)===true&&failed.has(name))return;
+    verify(name);
+   }
+  });
+ }
+ function init(){scan();document.addEventListener('visibilitychange',()=>{if(!document.hidden)scan()});window.addEventListener('pageshow',scan);}
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
 </script>
 <script id="ks263-descriptions">window.ksCardDescriptions=Object.assign(window.ksCardDescriptions||{},{"Kragna":{"need":"3 pions ou plus","gain":"1 point","cap":"Inflige −2 points aux cartes adverses situées sur les cases violettes."},"Morgha":{"need":"1 pion ou plus","gain":"8 points","cap":"Étend le territoire selon sa grille tactique 5×5."},"Sylvara":{"need":"3 pions ou plus","gain":"3 points","cap":"Inflige −6 points à toutes les cartes, alliées comme adverses, situées sur les cases violettes."},"Vargul":{"need":"3 pions ou plus","gain":"1 point","cap":"Étend le territoire selon sa grille tactique 5×5."},"Thorgar":{"need":"3 pions ou plus","gain":"3 points","cap":"Inflige −3 points aux cartes adverses situées sur les cases violettes."},"Kenshiro":{"need":"3 pions ou plus","gain":"2 points","cap":"Gagne +1 point à chaque carte posée après lui, quel que soit le camp."},"Amara":{"need":"3 pions ou plus","gain":"1 point","cap":"Gagne +1 point à chaque carte posée après elle, quel que soit le camp."},"Rashan":{"need":"3 pions ou plus","gain":"6 points","cap":"Dernier souffle : lorsqu’il est détruit, inflige −3 points aux cartes adverses situées sur les cases ciblées par sa capacité."}});</script>
@@ -4321,7 +4383,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <!-- V390 TEST : images Défaite et Égalité nettoyées, sans masquage des anciens boutons. -->
 
 <script id="ks-v385-version">
-(function(){const b=document.getElementById('ksVersionBadge');if(b)b.textContent='V420';})();
+(function(){const b=document.getElementById('ksVersionBadge');if(b)b.textContent='V423';})();
 </script>
 
 <style id="ks-collection-portrait-style">
@@ -5201,14 +5263,34 @@ window.ksCardDescriptions = Object.assign(window.ksCardDescriptions || {}, {"Bri
 .actions #pass{display:flex!important;align-items:center!important;justify-content:center!important;width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;max-width:36px!important;max-height:36px!important;box-sizing:border-box!important;margin:0!important;padding:0!important;flex:none!important;background:#28435c!important;border:2px solid #e0b96a!important;border-radius:9px!important;box-shadow:none!important;color:#f2f5fb!important;font-size:0!important;line-height:0!important;overflow:hidden!important;}
 .actions #pass svg{width:24px!important;height:24px!important;display:block!important;flex:none!important;margin:0!important;pointer-events:none!important;}
 </style>
-<script id="ks-v360-align-pass">
+<script id="ks-v422-align-controls">
 (function(){
- const gear=document.getElementById('quickHelp'),pass=document.getElementById('pass');
- if(!gear||!pass)return;
- const actions=pass.closest('.actions');
- function align(){const r=gear.getBoundingClientRect();actions.style.setProperty('left',r.left+'px','important');actions.style.setProperty('top',(r.top-42)+'px','important');}
- align();window.addEventListener('resize',align);window.addEventListener('orientationchange',align);
- if(window.ResizeObserver)new ResizeObserver(align).observe(gear);
+ const gear=document.getElementById('quickHelp');
+ const pass=document.getElementById('pass');
+ const timerBox=document.querySelector('.turnbar');
+ const actions=pass&&pass.closest('.actions');
+ if(!gear||!pass||!timerBox||!actions)return;
+ let frame=0;
+ function align(){
+  frame=0;
+  if(!gear.isConnected||!pass.isConnected)return;
+  const r=gear.getBoundingClientRect();
+  if(!r.width||!r.height)return;
+  const left=r.left, top=r.top;
+  actions.style.setProperty('left',left+'px','important');
+  actions.style.setProperty('top',(top-42)+'px','important');
+  timerBox.style.setProperty('left',left+'px','important');
+  timerBox.style.setProperty('top',(top-84)+'px','important');
+ }
+ function schedule(){if(frame)return;frame=requestAnimationFrame(align)}
+ schedule();
+ window.addEventListener('resize',schedule);
+ window.addEventListener('orientationchange',schedule);
+ window.addEventListener('pageshow',schedule);
+ document.addEventListener('visibilitychange',()=>{if(!document.hidden)schedule()});
+ if(window.visualViewport){visualViewport.addEventListener('resize',schedule);visualViewport.addEventListener('scroll',schedule)}
+ if(window.ResizeObserver)new ResizeObserver(schedule).observe(gear);
+ setTimeout(schedule,150);setTimeout(schedule,500);
 })();
 </script>
 
@@ -5219,21 +5301,7 @@ window.ksCardDescriptions = Object.assign(window.ksCardDescriptions || {}, {"Bri
 .turnbar.ks-clock-warning #timer{border:0!important;outline:0!important;box-shadow:none!important;}
 .turnbar:has(#timer) #timer:not(:empty){font-variant-numeric:tabular-nums!important;}
 </style>
-<script id="ks-v361-align-timer">
-(function(){
- const timerBox=document.querySelector('.turnbar'),pass=document.getElementById('pass');
- if(!timerBox||!pass)return;
- function alignTimer(){
-  const r=pass.getBoundingClientRect();
-  timerBox.style.setProperty('left',r.left+'px','important');
-  timerBox.style.setProperty('top',(r.top-42)+'px','important');
- }
- alignTimer();
- window.addEventListener('resize',alignTimer);
- window.addEventListener('orientationchange',alignTimer);
- if(window.ResizeObserver)new ResizeObserver(alignTimer).observe(pass);
-})();
-</script>
+
 
 
 <style id="ks-v362-options-css">
